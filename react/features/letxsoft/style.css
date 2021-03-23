@@ -1,0 +1,8 @@
+.layout-1 .type-1, .layout-2 .type-1 {
+    margin-left: 3% !important;
+    top: 0;
+}
+
+.layout-1 #remoteVideos, .layout-2 #remoteVideos {
+    margin-left: calc(53vw);
+}

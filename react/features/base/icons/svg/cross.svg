@@ -1,0 +1,11 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 172 172">
+    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+        <path d="M0,172v-172h172v172z" fill="none"></path>
+        <path d="M86,172c-47.49649,0 -86,-38.50351 -86,-86v0c0,-47.49649 38.50351,-86 86,-86v0c47.49649,0 86,38.50351 86,86v0c0,47.49649 -38.50351,86 -86,86z" fill="#e91414"></path>
+        <g id="original-icon" fill="#283447">
+            <path d="M86,-10.32c-53.19272,0 -96.32,43.12728 -96.32,96.32c0,53.19272 43.12728,96.32 96.32,96.32c53.19272,0 96.32,-43.12728 96.32,-96.32c0,-53.19272 -43.12728,-96.32 -96.32,-96.32zM124.07048,126.13333h-22.97232l-15.24264,-25.42045h-1.05952l-15.34699,25.42045h-21.69608l24.64187,-40.49453l-24.58568,-39.77213h23.80709l14.40787,26.58432h1.05952l14.51221,-26.58432h22.69139l-25.6452,39.99688z"></path>
+        </g>
+        <path d="" fill="none"></path>
+        <path d="" fill="none"></path>
+    </g>
+</svg>
