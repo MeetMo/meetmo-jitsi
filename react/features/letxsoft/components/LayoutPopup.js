@@ -64,7 +64,7 @@ class LayoutPopup extends Component<Props, *> {
     _renderLayouts() {
         const layouts = [];
 
-        for (let index = 1; index < 11; index++) {
+        for (let index = 1; index < 16; index++) {
             const selected = document.body ? document.body.classList.contains(`layout-${index}`) : false;
 
             layouts.push(

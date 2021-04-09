@@ -63,7 +63,7 @@ body, #react > div {
     }
 
 }
-.layout-1, .layout-2, .layout-5, .layout-7, .layout-8, .layout-10 {
+.layout-1, .layout-2, .layout-5, .layout-7, .layout-8, .layout-10, .layout-11, .layout-12, .layout-13, .layout-14, .layout-15 {
     #videoconference_page.tile-view {
         #remoteVideos {
             width: 50%;
@@ -84,7 +84,7 @@ body, #react > div {
         }
     }
 }
-.layout-7 {
+.layout-7, .layout-8, .layout-10, .layout-11, .layout-12, .layout-13 {
     #videoconference_page.tile-view {
         #filmstripRemoteVideos {
             height: 100%;
@@ -134,42 +134,12 @@ body, #react > div {
     }
 }
 
-.layout-8 {
+.layout-5, .layout-14, .layout-15 {
     #videoconference_page.tile-view {
         #filmstripRemoteVideos {
             height: 100%;
-            width: 100%;
             margin: 0;
         }
-        #remoteVideos {
-            width: 75%;
-            margin-left: calc(28vw);
-        }
-        &.shift-right #remoteVideos {
-            margin-left: calc(75vw - 162.5px);
-        }
-    }
-}
-
-.layout-10 {
-    #videoconference_page.tile-view {
-        #filmstripRemoteVideos {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-        }
-        #remoteVideos {
-            width: 75%;
-            margin-left: calc(28vw);
-        }
-        &.shift-right #remoteVideos {
-            margin-left: calc(75vw - 162.5px);
-        }
-    }
-}
-
-.layout-5 {
-    #videoconference_page.tile-view {
         #remoteVideos {
             width: 60%;
             margin-left: calc(43vw);
@@ -184,6 +154,7 @@ body, #react > div {
         }
     }
 }
+
 .layout-3 {
     #videoconference_page.tile-view {
         #filmstripRemoteVideos {
@@ -220,7 +191,7 @@ body, #react > div {
     }
 }
 
-.layout-1, .layout-2, .layout-3, .layout-4, .layout-5, .layout-6, .layout-7, .layout-8, .layout-10 {
+.layout-1, .layout-2, .layout-3, .layout-4, .layout-5, .layout-6, .layout-7, .layout-8, .layout-10, .layout-11, .layout-12, .layout-13, .layout-14, .layout-15 {
     #videoconference_page.tile-view {
         div#filmstripRemoteVideosContainer {
             width: 100%;
