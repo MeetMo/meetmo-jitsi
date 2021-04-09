@@ -1,9 +1,15 @@
 // @flow
 
+import React from 'react';
+
+import { ReactSVG } from 'react-svg';
+
 import { IconCamera, IconCameraDisabled } from '../../icons';
 
 import AbstractButton from './AbstractButton';
 import type { Props } from './AbstractButton';
+
+declare var interfaceConfig: Object;
 
 /**
  * An abstract implementation of a button for toggling video mute.
@@ -11,8 +17,11 @@ import type { Props } from './AbstractButton';
 export default class AbstractVideoMuteButton<P : Props, S : *>
     extends AbstractButton<P, S> {
 
-    icon = IconCamera;
-    toggledIcon = IconCameraDisabled;
+    // icon = IconCamera;
+    // toggledIcon = IconCameraDisabled;
+    icon = <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.video_button.svg} />;
+    toggledIcon = <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.video_button.svg_muted} />;
+    iconFromURL = !!interfaceConfig.video_button.svg;
 
     /**
      * Handles clicking / pressing the button, and toggles the video mute state

@@ -577,7 +577,7 @@ export function updateLocalControls() {
         switch (tierType) {
         case 'tier-0':
             toolbox = [
-                'fullscreen',
+                //'fullscreen',
 
                 // 'microphone',
                 'profile',
@@ -611,7 +611,7 @@ export function updateLocalControls() {
             break;
         case 'tier-1':
             toolbox = [
-                'fullscreen',
+                //'fullscreen',
                 'microphone',
 
                 // 'hangup',
@@ -628,7 +628,7 @@ export function updateLocalControls() {
             break;
         case 'tier-2':
             toolbox = [
-                'fullscreen',
+                //'fullscreen',
                 'microphone',
 
                 // 'hangup',
@@ -646,7 +646,7 @@ export function updateLocalControls() {
         case 'tier-3':
         default:
             toolbox = [
-                'fullscreen',
+                //'fullscreen',
 
                 // 'hangup',
                 'chat',
