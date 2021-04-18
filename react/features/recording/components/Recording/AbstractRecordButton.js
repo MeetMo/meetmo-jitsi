@@ -1,5 +1,9 @@
 // @flow
 
+import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
+
 import {
     createToolbarEvent,
     sendAnalytics
@@ -15,6 +19,8 @@ import { AbstractButton, type AbstractButtonProps } from '../../../base/toolbox/
 import { getActiveSession } from '../../functions';
 
 import { StartRecordingDialog, StopRecordingDialog } from './_';
+
+declare var interfaceConfig: Object;
 
 /**
  * The type of the React {@code Component} props of
@@ -53,9 +59,22 @@ export type Props = AbstractButtonProps & {
  */
 export default class AbstractRecordButton<P: Props> extends AbstractButton<P, *> {
     accessibilityLabel = 'toolbar.accessibilityLabel.recording';
-    icon = IconToggleRecording;
     label = 'dialog.startRecording';
     toggledLabel = 'dialog.stopRecording';
+    iconData = get(interfaceConfig, ["meetmoIcons", "customlivestreaming"], {});
+
+    icon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.active_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                }}
+            />
+        : IconToggleRecording;
+    iconFromURL = !isEmpty(this.iconData);
 
     /**
      * Returns the tooltip that should be displayed when the button is disabled.

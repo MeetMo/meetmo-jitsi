@@ -1,5 +1,9 @@
 // @flow
 
+import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
+
 import { createToolbarEvent, sendAnalytics } from '../../../analytics';
 import { translate } from '../../../base/i18n';
 import { IconSettings } from '../../../base/icons';
@@ -36,10 +40,23 @@ type Props = AbstractButtonProps & {
  * An abstract implementation of a button for accessing settings.
  */
 class SettingsButton extends AbstractButton<Props, *> {
-    accessibilityLabel = 'toolbar.accessibilityLabel.Settings';
-    icon = IconSettings;
-    label = 'toolbar.Settings';
-    tooltip = 'toolbar.Settings';
+    accessibilityLabel = "toolbar.accessibilityLabel.Settings";
+    label = "toolbar.Settings";
+    tooltip = "toolbar.Settings";
+    iconData = get(interfaceConfig, ["meetmoIcons", "settings"], {});
+
+    icon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.active_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                }}
+            />
+        : IconSettings;
+    iconFromURL = !isEmpty(this.iconData);
 
     /**
      * Handles clicking / pressing the button, and opens the appropriate dialog.

@@ -1,5 +1,9 @@
 // @flow
 
+import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
+
 import { openDialog } from '../../../base/dialog';
 import { IconLiveStreaming } from '../../../base/icons';
 import { JitsiRecordingConstants } from '../../../base/lib-jitsi-meet';
@@ -11,6 +15,8 @@ import {
     StartLiveStreamDialog,
     StopLiveStreamDialog
 } from './_';
+
+declare var interfaceConfig: Object;
 
 /**
  * The type of the React {@code Component} props of
@@ -49,9 +55,22 @@ export type Props = AbstractButtonProps & {
  */
 export default class AbstractLiveStreamButton<P: Props> extends AbstractButton<P, *> {
     accessibilityLabel = 'dialog.accessibilityLabel.liveStreaming';
-    icon = IconLiveStreaming;
     label = 'dialog.startLiveStreaming';
     toggledLabel = 'dialog.stopLiveStreaming';
+    iconData = get(interfaceConfig, ["meetmoIcons", "livestreaming"], {});
+
+    icon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.active_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                }}
+            />
+        : IconLiveStreaming;
+    iconFromURL = !isEmpty(this.iconData);
 
     /**
      * Returns the tooltip that should be displayed when the button is disabled.

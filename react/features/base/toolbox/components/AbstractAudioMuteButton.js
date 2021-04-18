@@ -69,7 +69,7 @@ export default class AbstractAudioMuteButton<P: Props, S: *>
         }
     }
     /> : IconMicDisabled;
-    iconFromURL = !isEmpty(iconData);
+    iconFromURL = !isEmpty(this.iconData);
 
 
     /**

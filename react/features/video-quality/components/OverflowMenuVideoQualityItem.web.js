@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
 
 import { VIDEO_QUALITY_LEVELS } from '../../base/conference/constants';
 import { translate } from '../../base/i18n';
@@ -12,6 +14,8 @@ import {
     IconVideoQualitySD
 } from '../../base/icons';
 import { connect } from '../../base/redux';
+
+declare var interfaceConfig: Object;
 
 /**
  * A map of of selectable receive resolutions to corresponding icons.
@@ -69,9 +73,24 @@ class OverflowMenuVideoQualityItem extends Component<Props> {
      */
     render() {
         const { _audioOnly, _videoQuality } = this.props;
-        const icon = _audioOnly || !_videoQuality
-            ? IconVideoQualityAudioOnly
-            : VIDEO_QUALITY_TO_ICON[_videoQuality];
+        const iconData = get(interfaceConfig, ["meetmoIcons", "videoquality"], {});
+        const VideoQualityIcon = !isEmpty(iconData)
+            ? <ReactSVG
+                    style={{ width: "24px", height: "24px" }}
+                    src={iconData.active_svg}
+                    beforeInjection={(svg) => {
+                        svg.classList.add("mic-icon-active");
+                        svg.classList.add(iconData.hover_effect);
+                        svg.setAttribute("fill", iconData.button_active_color);
+                    }}
+                />
+            : <Icon
+                src = {
+                    _audioOnly || !_videoQuality
+                        ? IconVideoQualityAudioOnly
+                        : VIDEO_QUALITY_TO_ICON[_videoQuality]
+                }
+            />;
 
         return (
             <li
@@ -80,7 +99,7 @@ class OverflowMenuVideoQualityItem extends Component<Props> {
                 className = 'overflow-menu-item'
                 onClick = { this.props.onClick }>
                 <span className = 'overflow-menu-item-icon'>
-                    <Icon src = { icon } />
+                    {VideoQualityIcon}
                 </span>
                 <span className = 'profile-text'>
                     { this.props.t('toolbar.callQuality') }

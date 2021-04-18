@@ -1,5 +1,9 @@
 // @flow
 
+import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
+
 import { createToolbarEvent, sendAnalytics } from '../../../analytics';
 import { translate } from '../../../base/i18n';
 import { IconSecurityOff, IconSecurityOn } from '../../../base/icons';
@@ -7,6 +11,7 @@ import { connect } from '../../../base/redux';
 import { AbstractButton, type AbstractButtonProps } from '../../../base/toolbox/components';
 import { toggleSecurityDialog } from '../../actions';
 
+declare var interfaceConfig: Object;
 
 type Props = AbstractButtonProps & {
 
@@ -28,10 +33,47 @@ type Props = AbstractButtonProps & {
  */
 class SecurityDialogButton extends AbstractButton<Props, *> {
     accessibilityLabel = 'toolbar.accessibilityLabel.security';
-    icon = IconSecurityOff;
     label = 'toolbar.security';
-    toggledIcon = IconSecurityOn;
     tooltip = 'toolbar.security';
+    iconData = get(interfaceConfig, ["meetmoIcons", "security_options"], {});
+
+    icon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.active_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                    const circle = window.document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+                    circle.setAttributeNS(null, 'class', 'cls-1');
+                    circle.setAttributeNS(null, 'cx', 25);
+                    circle.setAttributeNS(null, 'cy', 25);
+                    circle.setAttributeNS(null, 'r', 25);
+                    circle.setAttributeNS(null, 'style', `fill:${this.iconData.svg_active_color}` );
+                    svg.prepend(circle);
+                }}
+            />
+        : IconSecurityOff;
+    toggledIcon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.inactive_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                    const circle = window.document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+                    circle.setAttributeNS(null, 'class', 'cls-1');
+                    circle.setAttributeNS(null, 'cx', 25);
+                    circle.setAttributeNS(null, 'cy', 25);
+                    circle.setAttributeNS(null, 'r', 25);
+                    circle.setAttributeNS(null, 'style', `fill:${this.iconData.svg_active_color}` );
+                    svg.prepend(circle);
+                }}
+            />
+        : IconSecurityOn;
+    iconFromURL = !isEmpty(this.iconData);
 
     /**
      * Handles clicking / pressing the button, and opens / closes the appropriate dialog.

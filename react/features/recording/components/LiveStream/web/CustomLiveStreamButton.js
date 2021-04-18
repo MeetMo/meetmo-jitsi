@@ -1,5 +1,9 @@
 // @flow
 
+import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
+
 import { openDialog } from '../../../../base/dialog';
 import { translate } from '../../../../base/i18n';
 import { IconLiveStreaming } from '../../../../base/icons';
@@ -19,9 +23,22 @@ declare var interfaceConfig: Object;
  */
 class CustomLiveStreamButton<P: Props> extends AbstractLiveStreamButton<P> {
     accessibilityLabel = 'dialog.accessibilityLabel.liveStreaming';
-    icon = IconLiveStreaming;
     label = 'dialog.startCustomLiveStreaming';
     toggledLabel = 'dialog.stopCustomLiveStreaming';
+    iconData = get(interfaceConfig, ["meetmoIcons", "customlivestreaming"], {});
+
+    icon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.active_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                }}
+            />
+        : IconLiveStreaming;
+    iconFromURL = !isEmpty(this.iconData);
 
     /**
      * Returns the tooltip that should be displayed when the button is disabled.
