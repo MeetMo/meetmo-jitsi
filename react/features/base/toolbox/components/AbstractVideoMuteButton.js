@@ -19,9 +19,36 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
 
     // icon = IconCamera;
     // toggledIcon = IconCameraDisabled;
-    icon = <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.video_button.svg} />;
-    toggledIcon = <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.video_button.svg_muted} />;
-    iconFromURL = !!interfaceConfig.video_button.svg;
+    // icon = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.camera) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.camera.active_svg} /> : IconCamera;
+    // toggledIcon = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.camera) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.camera.inactive_svg} /> : IconCameraDisabled;
+    // iconFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.camera);
+    
+    icon = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.camera) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.camera.active_svg} beforeInjection={(svg) => {
+            svg.classList.add('mic-icon-active')
+            svg.classList.add(interfaceConfig.meetmoIcons.camera.hover_effect)
+            svg.setAttribute('fill', interfaceConfig.meetmoIcons.camera.button_active_color)
+            var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
+            circle.setAttributeNS(null, 'class', 'cls-1');
+            circle.setAttributeNS(null, 'cx', 25);
+            circle.setAttributeNS(null, 'cy', 25);
+            circle.setAttributeNS(null, 'r', 25);
+            circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.camera.svg_active_color}` );
+            svg.prepend(circle);
+        }}/> : IconCamera;
+    toggledIcon = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.camera) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.camera.inactive_svg} beforeInjection={(svg) => {
+        svg.classList.add('mic-icon-inactive')
+        svg.classList.add(interfaceConfig.meetmoIcons.camera.hover_effect)
+        svg.setAttribute('fill', interfaceConfig.meetmoIcons.camera.button_active_color)
+        var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
+        circle.setAttributeNS(null, 'class', 'cls-1');
+        circle.setAttributeNS(null, 'cx', 25);
+        circle.setAttributeNS(null, 'cy', 25);
+        circle.setAttributeNS(null, 'r', 25);
+        circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.camera.svg_active_color}` );
+        svg.prepend(circle);
+    }}/> : IconCameraDisabled;
+    iconFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.camera);
+
 
     /**
      * Handles clicking / pressing the button, and toggles the video mute state

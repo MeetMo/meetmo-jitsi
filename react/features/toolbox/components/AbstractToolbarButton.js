@@ -19,6 +19,8 @@ export type Props = {
      */
     icon: Object,
 
+    iconFromURL: Boolean,
+
     /**
      * The style of the Icon of this {@code AbstractToolbarButton}.
      */

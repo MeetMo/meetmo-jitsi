@@ -1,0 +1,12 @@
+svg.lighter {
+    filter: brightness(50%);
+}
+svg.lighter:hover {
+    filter: brightness(100%);
+}
+svg.darker {
+    filter: brightness(100%);
+}
+svg.darker:hover {
+    filter: brightness(50%);
+}

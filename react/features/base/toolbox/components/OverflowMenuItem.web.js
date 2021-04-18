@@ -81,11 +81,13 @@ class OverflowMenuItem extends Component<Props> {
      * @returns {ReactElement}
      */
     render() {
-        const { accessibilityLabel, disabled, elementAfter, icon, iconId, onClick } = this.props;
+        const { accessibilityLabel, disabled, elementAfter, icon, iconId, onClick, iconFromURL } = this.props;
 
         let className = 'overflow-menu-item';
 
         className += this.props.disabled ? ' disabled' : '';
+
+        if (iconFromURL) return icon;
 
         return (
             <li
