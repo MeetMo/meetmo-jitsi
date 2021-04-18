@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
 
 import {
     ACTION_SHORTCUT_TRIGGERED,
@@ -229,147 +230,226 @@ const visibleButtons = new Set(interfaceConfig.TOOLBAR_BUTTONS);
 /**
  * Icon fetch if passed in configuration through the admin panel.
  */
+
 //  CHAT: Chat ICON
- const iconChat = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.chat) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.chat.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('chat-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.chat.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.chat.button_active_color)
-    svg.setAttribute('stroke', interfaceConfig.meetmoIcons.chat.svg_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-2');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.chat.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconChat;
+const iconDataForChat = get(interfaceConfig, ["meetmoIcons", "chat"]);
+const iconChat = !isEmpty(iconDataForChat) ? ( < ReactSVG style = {
+            {
+                width: '50px',
+                height: '50px'
+            }
+        }
+        src = {
+            iconDataForChat.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('chat-icon-active')
+                svg.classList.add(iconDataForChat.hover_effect)
+                svg.setAttribute('fill', iconDataForChat.button_active_color)
+                svg.setAttribute('stroke', iconDataForChat.svg_active_color)
+            }
+        }
+        />) : (IconChat);
+const iconChatFromURL = !isEmpty(iconDataForChat);
 
 // RAISE HAND
-const iconRaisedHand = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.chat) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.chat.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('raise-hand-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.chat.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.chat.button_active_color)
-    svg.setAttribute('stroke', interfaceConfig.meetmoIcons.chat.svg_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-2');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.chat.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconRaisedHand;
+const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"]);
+const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? ( < ReactSVG style = {
+            {
+                width: '50px',
+                height: '50px'
+            }
+        }
+        src = {
+            iconDataRaisedHand.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('raise-hand-icon-active')
+                svg.classList.add(iconDataRaisedHand
+                    .hover_effect)
+                svg.setAttribute('fill', iconDataRaisedHand.button_active_color)
+                svg.setAttribute('stroke', iconDataRaisedHand.svg_active_color)
+            }
+        }
+        />) : (IconRaisedHand);
+        let iconRaiseHandFromURL = !isEmpty(iconDataRaisedHand);
 
 //SCREEN SHARE
-const iconShareDesktop = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.chat) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.chat.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('screen-share-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.chat.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.chat.button_active_color)
-    svg.setAttribute('stroke', interfaceConfig.meetmoIcons.chat.svg_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-2');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.chat.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconShareDesktop;
+const iconDataShareDesktop = get(interfaceConfig, ["meetmoIcons",
+    "screen_share"]);
+const iconShareDesktop = !isEmpty(iconDataShareDesktop) ? ( < ReactSVG style = {
+            {
+                width: '50px',
+                height: '50px'
+            }
+        }
+        src = {
+            iconDataShareDesktop.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('screen-share-icon-active')
+                svg.classList.add(iconDataShareDesktop.hover_effect)
+                svg.setAttribute('fill', iconDataShareDesktop
+                    .button_active_color)
+                svg.setAttribute('stroke', iconDataShareDesktop
+                    .svg_active_color)
+            }
+        }
+        />) : (IconShareDesktop);
+        let iconShareDesktopFromURL = !isEmpty(iconDataShareDesktop)
 
 //FullScreen & ExitFullScreen
-const iconFullScreen = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.fullscreen) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.fullscreen.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('fullscreen-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.fullscreen.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.fullscreen.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.fullscreen.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconFullScreen;
+const iconDataFullscreen = get(interfaceConfig, ["meetmoIcons", "fullscreen"]);
+const iconFullScreen = !isEmpty(iconDataFullscreen) ? < ReactSVG style = {
+    {
+        width: '50px',
+        height: '50px'
+    }
+}
+src = {
+    iconDataFullscreen.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('fullscreen-icon-active')
+        svg.classList.add(iconDataFullscreen.hover_effect)
+        svg.setAttribute('fill', iconDataFullscreen.button_active_color)
+    }
+}
+/> : IconFullScreen;
 
-const iconExitFullScreen = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.fullscreen) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.fullscreen.inactive_svg} beforeInjection={(svg) => {
-    svg.classList.add('fullscreen-icon-inactive')
-    svg.classList.add(interfaceConfig.meetmoIcons.fullscreen.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.fullscreen.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circ0le.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.fullscreen.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconExitFullScreen;
+const iconExitFullScreen = !isEmpty(iconDataFullscreen) ? ( < ReactSVG style = {
+            {
+                width: '50px',
+                height: '50px'
+            }
+        }
+        src = {
+            iconDataFullscreen.inactive_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('fullscreen-icon-inactive')
+                svg.classList.add(iconDataFullscreen.hover_effect)
+                svg.setAttribute('fill', iconDataFullscreen.button_active_color)
+            }
+        }
+        />) : (IconExitFullScreen);
+        const iconFSFromURL = !isEmpty(iconDataFullscreen);
 
 // Invite People
-const iconInviteMore  = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.invite_people) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.invite_people.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('invite-more-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.invite_people.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.invite_people.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.invite_people.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconInviteMore;
+const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons",
+    "invite_people"
+]);
+const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
+    {
+        width: '50px',
+        height: '50px'
+    }
+}
+src = {
+    iconDataInvitePeople.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataInvitePeople.hover_effect)
+        svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+    }
+}
+/> : IconInviteMore;
+const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
 
 // Local Recording
-const iconRec  = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.local_record) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.local_record.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('invite-more-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.local_record.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.local_record.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.local_record.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconRec;
+const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"]);
+const iconRec = !isEmpty(iconDataLocalRec) ? < ReactSVG style = {
+    {
+        width: '50px',
+        height: '50px'
+    }
+}
+src = {
+    iconDataLocalRec.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataLocalRec.hover_effect)
+        svg.setAttribute('fill', iconDataLocalRec.button_active_color)
+    }
+}
+/> : IconRec;
+const iconLRecFromURL = !isEmpty(iconDataLocalRec);
 
 // Share Video
-const iconShareVideo  = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.share_video) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.share_video.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('invite-more-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.share_video.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.share_video.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.share_video.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconShareVideo;
+const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"]);
+const iconShareVideo = !isEmpty(iconDataShareVideo) ? < ReactSVG style = {
+    {
+        width: '50px',
+        height: '50px'
+    }
+}
+src = {
+    iconDataShareVideo.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataShareVideo.hover_effect)
+        svg.setAttribute('fill', iconDataShareVideo.button_active_color)
+    }
+}
+/> : IconShareVideo;
+const iconShareVideoFromURL = !isEmpty(iconDataShareVideo);
 
 // Share Video
-const iconLayoutChange  = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.change_layout) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.change_layout.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('invite-more-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.change_layout.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.change_layout.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.change_layout.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconLayoutChange;
+const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons",
+    "change_layout"
+]);
+const iconLayoutChange = !isEmpty(iconDataChangeLayout) ? < ReactSVG style = {
+    {
+        width: '50px',
+        height: '50px'
+    }
+}
+src = {
+    iconDataChangeLayout.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataChangeLayout.hover_effect)
+        svg.setAttribute('fill', iconDataChangeLayout.button_active_color)
+    }
+}
+/> : IconLayoutChange;
+let iconLayoutFromURL = !isEmpty(iconDataChangeLayout);
 
 // Background Image
-const iconBackgroundChange  = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.background_change) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.background_change.active_svg} beforeInjection={(svg) => {
-    svg.classList.add('invite-more-icon-active')
-    svg.classList.add(interfaceConfig.meetmoIcons.background_change.hover_effect)
-    svg.setAttribute('fill', interfaceConfig.meetmoIcons.background_change.button_active_color)
-    var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    circle.setAttributeNS(null, 'class', 'cls-1');
-    circle.setAttributeNS(null, 'cx', 25);
-    circle.setAttributeNS(null, 'cy', 25);
-    circle.setAttributeNS(null, 'r', 25);
-    circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.background_change.svg_active_color}` );
-    svg.prepend(circle);
-}}/> : IconBackgroundChange;
+const iconDataBgChange = get(interfaceConfig, ["meetmoIcons",
+    "background_change"
+]);
+const iconBackgroundChange = !isEmpty(iconDataBgChange) ? < ReactSVG style = {
+    {
+        width: '50px',
+        height: '50px'
+    }
+}
+src = {
+    iconDataBgChange.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataBgChange.hover_effect)
+        svg.setAttribute('fill', iconDataBgChange.button_active_color)
+    }
+}
+/> : IconBackgroundChange;
+let iconBackgroundFromURL = !isEmpty(iconDataBgChange);
 
 /**
  * Implements the conference toolbox on React/Web.
@@ -504,7 +584,7 @@ class Toolbox extends Component<Props, State> {
      * @returns {void}
      */
     componentWillUnmount() {
-        [ 'A', 'C', 'D', 'R', 'S' ].forEach(letter =>
+        ['A', 'C', 'D', 'R', 'S'].forEach(letter =>
             APP.keyboardshortcut.unregisterShortcut(letter));
 
         window.removeEventListener('resize', this._onResize);
@@ -523,12 +603,12 @@ class Toolbox extends Component<Props, State> {
 
         return (
             <div
-                className = { rootClassNames }
-                id = 'new-toolbox'
-                onMouseOut = { this._onMouseOut }
-                onMouseOver = { this._onMouseOver }>
-                <div className = 'toolbox-background' />
-                { this._renderToolboxContent() }
+                className={rootClassNames}
+                id='new-toolbox'
+                onMouseOut={this._onMouseOut}
+                onMouseOver={this._onMouseOver}>
+                <div className='toolbox-background' />
+                {this._renderToolboxContent()}
             </div>
         );
     }
@@ -982,9 +1062,9 @@ class Toolbox extends Component<Props, State> {
     _onToolbarToggleFullScreen() {
         sendAnalytics(createToolbarEvent(
             'toggle.fullscreen',
-                {
-                    enable: !this.props._fullScreen
-                }));
+            {
+                enable: !this.props._fullScreen
+            }));
 
         this._doToggleFullScreen();
     }
@@ -1127,19 +1207,18 @@ class Toolbox extends Component<Props, State> {
         if (!this._isDesktopSharingButtonVisible()) {
             return null;
         }
-        let iconShareDesktopFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.screen_share)
         if (isInOverflowMenu) {
             return (
                 <OverflowMenuItem
                     accessibilityLabel
-                        = { t('toolbar.accessibilityLabel.shareYourScreen') }
-                    disabled = { _desktopSharingEnabled }
-                    icon = { iconShareDesktop }
-                    iconFromURL = { iconShareDesktopFromURL }
-                    iconId = 'share-desktop'
-                    key = 'desktop'
-                    onClick = { this._onToolbarToggleScreenshare }
-                    text = {
+                    ={t('toolbar.accessibilityLabel.shareYourScreen')}
+                    disabled={_desktopSharingEnabled}
+                    icon={iconShareDesktop}
+                    iconFromURL={iconShareDesktopFromURL}
+                    iconId='share-desktop'
+                    key='desktop'
+                    onClick={this._onToolbarToggleScreenshare}
+                    text={
                         t(`toolbar.${
                             _screensharing
                                 ? 'stopScreenSharing' : 'startScreenSharing'}`
@@ -1155,13 +1234,13 @@ class Toolbox extends Component<Props, State> {
         return (
             <ToolbarButton
                 accessibilityLabel
-                    = { t('toolbar.accessibilityLabel.shareYourScreen') }
-                disabled = { !_desktopSharingEnabled }
-                icon = { iconShareDesktop }
-                iconFromURL = { iconShareDesktopFromURL }
-                onClick = { this._onToolbarToggleScreenshare }
-                toggled = { _screensharing }
-                tooltip = { tooltip } />
+                ={t('toolbar.accessibilityLabel.shareYourScreen')}
+                disabled={!_desktopSharingEnabled}
+                icon={iconShareDesktop}
+                iconFromURL={iconShareDesktopFromURL}
+                onClick={this._onToolbarToggleScreenshare}
+                toggled={_screensharing}
+                tooltip={tooltip} />
         );
     }
 
@@ -1190,109 +1269,107 @@ class Toolbox extends Component<Props, State> {
             t
         } = this.props;
 
-        let iconFSFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.fullscreen);
-        let iconShareVideoFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.share_video);
         return [
             this._isProfileVisible()
-                && <OverflowMenuProfileItem
-                    key = 'profile'
-                    onClick = { this._onToolbarToggleProfile } />,
+            && <OverflowMenuProfileItem
+                key='profile'
+                onClick={this._onToolbarToggleProfile} />,
             this._shouldShowButton('videoquality')
-                && <OverflowMenuVideoQualityItem
-                    key = 'videoquality'
-                    onClick = { this._onToolbarOpenVideoQuality } />,
+            && <OverflowMenuVideoQualityItem
+                key='videoquality'
+                onClick={this._onToolbarOpenVideoQuality} />,
             this._shouldShowButton('fullscreen')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.fullScreen') }
-                    icon = { _fullScreen ? iconExitFullScreen : iconFullScreen }
-                    iconFromURL = { iconFSFromURL }
-                    key = 'fullscreen'
-                    onClick = { this._onToolbarToggleFullScreen }
-                    text = { _fullScreen ? t('toolbar.exitFullScreen') : t('toolbar.enterFullScreen') } />,
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.fullScreen')}
+                icon={_fullScreen ? iconExitFullScreen : iconFullScreen}
+                iconFromURL={iconFSFromURL}
+                key='fullscreen'
+                onClick={this._onToolbarToggleFullScreen}
+                text={_fullScreen ? t('toolbar.exitFullScreen') : t('toolbar.enterFullScreen')} />,
             <LiveStreamButton
-                key = 'livestreaming'
-                showLabel = { true } />,
+                key='livestreaming'
+                showLabel={true} />,
             <CustomLiveStreamButton
-                key = 'customlivestreaming'
-                showLabel = { true } />,
+                key='customlivestreaming'
+                showLabel={true} />,
             <RecordButton
-                key = 'record'
-                showLabel = { true } />,
+                key='record'
+                showLabel={true} />,
             this._renderLayoutButton(),
             this._renderBackgroundButton(),
             this._shouldShowButton('sharedvideo')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.sharedvideo') }
-                    disabled = { _sharingVimeoVideo }
-                    icon = { iconShareVideo }
-                    iconFromURL = { iconShareVideoFromURL }
-                    key = 'sharedvideo'
-                    onClick = { this._onToolbarToggleSharedVideo }
-                    text = { _sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo') } />,
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.sharedvideo')}
+                disabled={_sharingVimeoVideo}
+                icon={iconShareVideo}
+                iconFromURL={iconShareVideoFromURL}
+                key='sharedvideo'
+                onClick={this._onToolbarToggleSharedVideo}
+                text={_sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo')} />,
             this._shouldShowButton('sharedvideo')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.vimeoSharedvideo') }
-                    disabled = { _sharingVideo }
-                    icon = { iconShareVideo }
-                    iconFromURL = { iconShareVideoFromURL }
-                    key = 'vimeoSharedvideo'
-                    onClick = { this._onToolbarToggleVimeoSharedVideo }
-                    text = { _sharingVimeoVideo
-                        ? t('toolbar.stopVimeoSharedVideo')
-                        : t('toolbar.vimeoSharedvideo') } />,
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.vimeoSharedvideo')}
+                disabled={_sharingVideo}
+                icon={iconShareVideo}
+                iconFromURL={iconShareVideoFromURL}
+                key='vimeoSharedvideo'
+                onClick={this._onToolbarToggleVimeoSharedVideo}
+                text={_sharingVimeoVideo
+                    ? t('toolbar.stopVimeoSharedVideo')
+                    : t('toolbar.vimeoSharedvideo')} />,
             this._shouldShowButton('etherpad')
-                && <SharedDocumentButton
-                    key = 'etherpad'
-                    showLabel = { true } />,
+            && <SharedDocumentButton
+                key='etherpad'
+                showLabel={true} />,
             <VideoBlurButton
-                key = 'videobackgroundblur'
-                showLabel = { true }
-                visible = { this._shouldShowButton('videobackgroundblur') && !_screensharing } />,
+                key='videobackgroundblur'
+                showLabel={true}
+                visible={this._shouldShowButton('videobackgroundblur') && !_screensharing} />,
             <SettingsButton
-                key = 'settings'
-                showLabel = { true }
-                visible = { this._shouldShowButton('settings') } />,
+                key='settings'
+                showLabel={true}
+                visible={this._shouldShowButton('settings')} />,
             <MuteEveryoneButton
-                key = 'mute-everyone'
-                showLabel = { true }
-                visible = { this._shouldShowButton('mute-everyone') } />,
+                key='mute-everyone'
+                showLabel={true}
+                visible={this._shouldShowButton('mute-everyone')} />,
             this._shouldShowButton('stats')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.speakerStats') }
-                    icon = { IconPresentation }
-                    key = 'stats'
-                    onClick = { this._onToolbarOpenSpeakerStats }
-                    text = { t('toolbar.speakerStats') } />,
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.speakerStats')}
+                icon={IconPresentation}
+                key='stats'
+                onClick={this._onToolbarOpenSpeakerStats}
+                text={t('toolbar.speakerStats')} />,
             this._shouldShowButton('embedmeeting')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.embedMeeting') }
-                    icon = { IconCodeBlock }
-                    key = 'embed'
-                    onClick = { this._onToolbarOpenEmbedMeeting }
-                    text = { t('toolbar.embedMeeting') } />,
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.embedMeeting')}
+                icon={IconCodeBlock}
+                key='embed'
+                onClick={this._onToolbarOpenEmbedMeeting}
+                text={t('toolbar.embedMeeting')} />,
             this._shouldShowButton('feedback')
-                && _feedbackConfigured
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.feedback') }
-                    icon = { IconFeedback }
-                    key = 'feedback'
-                    onClick = { this._onToolbarOpenFeedback }
-                    text = { t('toolbar.feedback') } />,
+            && _feedbackConfigured
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.feedback')}
+                icon={IconFeedback}
+                key='feedback'
+                onClick={this._onToolbarOpenFeedback}
+                text={t('toolbar.feedback')} />,
             this._shouldShowButton('shortcuts')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.shortcuts') }
-                    icon = { IconOpenInNew }
-                    key = 'shortcuts'
-                    onClick = { this._onToolbarOpenKeyboardShortcuts }
-                    text = { t('toolbar.shortcuts') } />,
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.shortcuts')}
+                icon={IconOpenInNew}
+                key='shortcuts'
+                onClick={this._onToolbarOpenKeyboardShortcuts}
+                text={t('toolbar.shortcuts')} />,
             this._shouldShowButton('download')
-                && <DownloadButton
-                    key = 'download'
-                    showLabel = { true } />,
+            && <DownloadButton
+                key='download'
+                showLabel={true} />,
             this._shouldShowButton('help')
-                && <HelpButton
-                    key = 'help'
-                    showLabel = { true } />
+            && <HelpButton
+                key='help'
+                showLabel={true} />
         ];
     }
 
@@ -1303,15 +1380,14 @@ class Toolbox extends Component<Props, State> {
      */
     _renderLayoutButton() {
         const { _isModerator, t } = this.props;
-        let iconLayoutFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.change_layout);
         return this._shouldShowButton('layout') && _isModerator
             ? <OverflowMenuItem
-                accessibilityLabel = { t('toolbar.accessibilityLabel.changeLayout') }
-                icon = { iconLayoutChange }
-                iconFromURL = { iconLayoutFromURL }
-                key = 'changeLayout'
-                onClick = { this._onToggleLayoutPopup }
-                text = { t('toolbar.changeLayout') } />
+                accessibilityLabel={t('toolbar.accessibilityLabel.changeLayout')}
+                icon={iconLayoutChange}
+                iconFromURL={iconLayoutFromURL}
+                key='changeLayout'
+                onClick={this._onToggleLayoutPopup}
+                text={t('toolbar.changeLayout')} />
             : null;
     }
 
@@ -1322,15 +1398,14 @@ class Toolbox extends Component<Props, State> {
      */
     _renderBackgroundButton() {
         const { _isModerator, t } = this.props;
-        let iconBackgroundFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.background_change);
         return this._shouldShowButton('background') && _isModerator
             ? <OverflowMenuItem
-                accessibilityLabel = { t('toolbar.accessibilityLabel.changeBackground') }
-                icon = { iconBackgroundChange }
-                iconFromURL = { iconBackgroundFromURL }
-                key = 'changeBackground'
-                onClick = { this._onToggleBackgroundPopup }
-                text = { t('toolbar.changeBackground') } />
+                accessibilityLabel={t('toolbar.accessibilityLabel.changeBackground')}
+                icon={iconBackgroundChange}
+                iconFromURL={iconBackgroundFromURL}
+                key='changeBackground'
+                onClick={this._onToggleBackgroundPopup}
+                text={t('toolbar.changeBackground')} />
             : null;
     }
 
@@ -1372,80 +1447,76 @@ class Toolbox extends Component<Props, State> {
         } = this.props;
         return movedButtons.map(buttonName => {
             switch (buttonName) {
-            case 'desktop':
-                return this._renderDesktopSharingButton(true);
-            case 'raisehand':
-                let iconRaiseHandFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.raise_hand)
-                return (
-                    <OverflowMenuItem
-                        accessibilityLabel =
-                            { t('toolbar.accessibilityLabel.raiseHand') }
-                        icon = { iconRaisedHand }
-                        iconFromURL = { iconRaiseHandFromURL}
-                        key = 'raisedHand'
-                        onClick = { this._onToolbarToggleRaiseHand }
-                        text = {
-                            t(`toolbar.${
-                                _raisedHand
-                                    ? 'lowerYourHand' : 'raiseYourHand'}`
-                            )
-                        } />
-                );
-            case 'chat':
-                let iconChatFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.chat);
-                return (
-                    
-                    <OverflowMenuItem
-                        accessibilityLabel =
-                            { t('toolbar.accessibilityLabel.chat') }
-                        icon = { iconChat }
-                        iconFromURL = { iconChatFromURL }
-                        key = 'chat'
-                        onClick = { this._onToolbarToggleChat }
-                        text = {
-                            t(`toolbar.${
-                                _chatOpen ? 'closeChat' : 'openChat'}`
-                            )
-                        } />
-                );
-            case 'closedcaptions':
-                return (
-                    <ClosedCaptionButton
-                        key = 'closed-captions'
-                        showLabel = { true } />
-                );
-            case 'security':
-                return (
-                    <SecurityDialogButton
-                        key = 'security'
-                        showLabel = { true } />
-                );
-            case 'invite':
-                let iconInvitePeopleFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.invite_people);
-                return (
-                    <OverflowMenuItem
-                        accessibilityLabel = { t('toolbar.accessibilityLabel.invite') }
-                        icon = { iconInviteMore }
-                        iconFromURL = { iconInvitePeopleFromURL }
-                        key = 'invite'
-                        onClick = { this._onToolbarOpenInvite }
-                        text = { t('toolbar.invite') } />
-                );
-            case 'tileview':
-                return <TileViewButton showLabel = { true } />;
-            case 'localrecording':
-                let iconLRecFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.local_record);
-                return (
-                    <OverflowMenuItem
-                        accessibilityLabel = { t('toolbar.accessibilityLabel.localRecording') }
-                        icon = { iconRec }
-                        iconFromURL = { iconLRecFromURL }
-                        key = 'localrecording'
-                        onClick = { this._onToolbarOpenLocalRecordingInfoDialog }
-                        text = { t('localRecording.dialogTitle') } />
-                );
-            default:
-                return null;
+                case 'desktop':
+                    return this._renderDesktopSharingButton(true);
+                case 'raisehand':
+                    return (
+                        <OverflowMenuItem
+                            accessibilityLabel=
+                            {t('toolbar.accessibilityLabel.raiseHand')}
+                            icon={iconRaisedHand}
+                            iconFromURL={iconRaiseHandFromURL}
+                            key='raisedHand'
+                            onClick={this._onToolbarToggleRaiseHand}
+                            text={
+                                t(`toolbar.${
+                                    _raisedHand
+                                        ? 'lowerYourHand' : 'raiseYourHand'}`
+                                )
+                            } />
+                    );
+                case 'chat':
+                    return (
+
+                        <OverflowMenuItem
+                            accessibilityLabel=
+                            {t('toolbar.accessibilityLabel.chat')}
+                            icon={iconChat}
+                            iconFromURL={iconChatFromURL}
+                            key='chat'
+                            onClick={this._onToolbarToggleChat}
+                            text={
+                                t(`toolbar.${
+                                    _chatOpen ? 'closeChat' : 'openChat'}`
+                                )
+                            } />
+                    );
+                case 'closedcaptions':
+                    return (
+                        <ClosedCaptionButton
+                            key='closed-captions'
+                            showLabel={true} />
+                    );
+                case 'security':
+                    return (
+                        <SecurityDialogButton
+                            key='security'
+                            showLabel={true} />
+                    );
+                case 'invite':
+                    return (
+                        <OverflowMenuItem
+                            accessibilityLabel={t('toolbar.accessibilityLabel.invite')}
+                            icon={iconInviteMore}
+                            iconFromURL={iconInvitePeopleFromURL}
+                            key='invite'
+                            onClick={this._onToolbarOpenInvite}
+                            text={t('toolbar.invite')} />
+                    );
+                case 'tileview':
+                    return <TileViewButton showLabel={true} />;
+                case 'localrecording':
+                    return (
+                        <OverflowMenuItem
+                            accessibilityLabel={t('toolbar.accessibilityLabel.localRecording')}
+                            icon={iconRec}
+                            iconFromURL={iconLRecFromURL}
+                            key='localrecording'
+                            onClick={this._onToolbarOpenLocalRecordingInfoDialog}
+                            text={t('localRecording.dialogTitle')} />
+                    );
+                default:
+                    return null;
             }
         });
     }
@@ -1458,8 +1529,8 @@ class Toolbox extends Component<Props, State> {
     _renderAudioButton() {
         return this._shouldShowButton('microphone')
             ? <AudioSettingsButton
-                key = 'asb'
-                visible = { true } />
+                key='asb'
+                visible={true} />
             : null;
     }
 
@@ -1471,8 +1542,8 @@ class Toolbox extends Component<Props, State> {
     _renderVideoButton() {
         return this._shouldShowButton('camera')
             ? <VideoSettingsButton
-                key = 'vsb'
-                visible = { true } />
+                key='vsb'
+                visible={true} />
             : null;
     }
 
@@ -1511,8 +1582,8 @@ class Toolbox extends Component<Props, State> {
         const maxNumberOfButtonsPerGroup = Math.floor(
             (
                 this.state.windowWidth
-                    - 168 // the width of the central group by design
-                    - minSpaceBetweenButtons // the minimum space between the button groups
+                - 168 // the width of the central group by design
+                - minSpaceBetweenButtons // the minimum space between the button groups
             )
             / widthPlusPaddingOfButton // the width + padding of a button
             / 2 // divide by the number of groups(left and right group)
@@ -1524,7 +1595,7 @@ class Toolbox extends Component<Props, State> {
             buttonsLeft.push('chat');
         }
         if (this._shouldShowButton('desktop')
-                && this._isDesktopSharingButtonVisible()) {
+            && this._isDesktopSharingButtonVisible()) {
             buttonsLeft.push('desktop');
         }
         if (this._shouldShowButton('raisehand')) {
@@ -1585,72 +1656,70 @@ class Toolbox extends Component<Props, State> {
         /**
          * Changes the ICONS
         */
-        let iconChatFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.chat),
-            iconRaiseHandFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.raise_hand);
 
         return (
-            <div className = 'toolbox-content'>
-                <div className = 'button-group-left'>
-                    { buttonsLeft.indexOf('chat') !== -1
-                        && <div className = 'toolbar-button-with-badge'>
+            <div className='toolbox-content'>
+                <div className='button-group-left'>
+                    {buttonsLeft.indexOf('chat') !== -1
+                        && <div className='toolbar-button-with-badge'>
                             <ToolbarButton
-                                accessibilityLabel = { t('toolbar.accessibilityLabel.chat') }
-                                icon = { iconChat }
-                                iconFromURL = { iconChatFromURL}
-                                onClick = { this._onToolbarToggleChat }
-                                toggled = { _chatOpen }
-                                tooltip = { t('toolbar.chat') } />
+                                accessibilityLabel={t('toolbar.accessibilityLabel.chat')}
+                                icon={iconChat}
+                                iconFromURL={iconChatFromURL}
+                                onClick={this._onToolbarToggleChat}
+                                toggled={_chatOpen}
+                                tooltip={t('toolbar.chat')} />
                             <ChatCounter />
-                        </div> }
-                    { buttonsLeft.indexOf('desktop') !== -1
-                        && this._renderDesktopSharingButton() }
-                    { buttonsLeft.indexOf('raisehand') !== -1
+                        </div>}
+                    {buttonsLeft.indexOf('desktop') !== -1
+                        && this._renderDesktopSharingButton()}
+                    {buttonsLeft.indexOf('raisehand') !== -1
                         && <ToolbarButton
-                            accessibilityLabel = { t('toolbar.accessibilityLabel.raiseHand') }
-                            icon = { iconRaisedHand }
-                            iconFromURL = { iconRaiseHandFromURL}
-                            onClick = { this._onToolbarToggleRaiseHand }
-                            toggled = { _raisedHand }
-                            tooltip = { t('toolbar.raiseHand') } /> }
+                            accessibilityLabel={t('toolbar.accessibilityLabel.raiseHand')}
+                            icon={iconRaisedHand}
+                            iconFromURL={iconRaiseHandFromURL}
+                            onClick={this._onToolbarToggleRaiseHand}
+                            toggled={_raisedHand}
+                            tooltip={t('toolbar.raiseHand')} />}
                     {
                         buttonsLeft.indexOf('closedcaptions') !== -1
-                            && <ClosedCaptionButton />
+                        && <ClosedCaptionButton />
                     }
                 </div>
-                <div className = 'button-group-center'>
-                    { this._renderAudioButton() }
+                <div className='button-group-center'>
+                    {this._renderAudioButton()}
                     <HangupButton
-                        visible = { this._shouldShowButton('hangup') } />
-                    { this._renderVideoButton() }
+                        visible={this._shouldShowButton('hangup')} />
+                    {this._renderVideoButton()}
                 </div>
-                <div className = 'button-group-right'>
-                    { buttonsRight.indexOf('localrecording') !== -1
+                <div className='button-group-right'>
+                    {buttonsRight.indexOf('localrecording') !== -1
                         && <LocalRecordingButton
-                            onClick = {
+                            onClick={
                                 this._onToolbarOpenLocalRecordingInfoDialog
                             } />
                     }
-                    { buttonsRight.indexOf('tileview') !== -1
-                        && <TileViewButton /> }
-                    { buttonsRight.indexOf('invite') !== -1
+                    {buttonsRight.indexOf('tileview') !== -1
+                        && <TileViewButton />}
+                    {buttonsRight.indexOf('invite') !== -1
                         && <ToolbarButton
-                            accessibilityLabel =
-                                { t('toolbar.accessibilityLabel.invite') }
-                            icon = { IconInviteMore }
-                            onClick = { this._onToolbarOpenInvite }
-                            tooltip = { t('toolbar.invite') } /> }
-                    { buttonsRight.indexOf('security') !== -1
-                        && <SecurityDialogButton customClass = 'security-toolbar-button' /> }
-                    { buttonsRight.indexOf('overflowmenu') !== -1
+                            accessibilityLabel=
+                            {t('toolbar.accessibilityLabel.invite')}
+                            icon={IconInviteMore}
+                            onClick={this._onToolbarOpenInvite}
+                            tooltip={t('toolbar.invite')} />}
+                    {buttonsRight.indexOf('security') !== -1
+                        && <SecurityDialogButton customClass='security-toolbar-button' />}
+                    {buttonsRight.indexOf('overflowmenu') !== -1
                         && <OverflowMenuButton
-                            isOpen = { _overflowMenuVisible }
-                            onVisibilityChange = { this._onSetOverflowVisible }>
+                            isOpen={_overflowMenuVisible}
+                            onVisibilityChange={this._onSetOverflowVisible}>
                             <ul
-                                aria-label = { t(toolbarAccLabel) }
-                                className = 'overflow-menu'>
-                                { overflowMenuContent }
+                                aria-label={t(toolbarAccLabel)}
+                                className='overflow-menu'>
+                                {overflowMenuContent}
                             </ul>
-                        </OverflowMenuButton> }
+                        </OverflowMenuButton>}
                 </div>
             </div>);
     }

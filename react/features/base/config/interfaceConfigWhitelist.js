@@ -57,5 +57,6 @@ export default [
     'VIDEO_QUALITY_LABEL_DISABLED',
     'filmStripOnly',
     'microphone_button',
-    'video_button'
+    'video_button',
+    'meetmoIcons'
 ];

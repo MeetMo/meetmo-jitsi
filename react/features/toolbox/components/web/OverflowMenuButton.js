@@ -2,6 +2,7 @@
 
 import InlineDialog from '@atlaskit/inline-dialog';
 import React, { Component } from 'react';
+import { get, isEmpty } from 'lodash';
 
 import { createToolbarEvent, sendAnalytics } from '../../../analytics';
 import { translate } from '../../../base/i18n';
@@ -64,19 +65,26 @@ class OverflowMenuButton extends Component<Props> {
      */
     render() {
         const { children, isOpen, t } = this.props;
-        let iconMoreActionFromURL = !!(interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.more_actions);
-        let iconMenuThumb = (interfaceConfig.meetmoIcons && interfaceConfig.meetmoIcons.more_actions) ? <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.meetmoIcons.more_actions.active_svg} beforeInjection={(svg) => {
-            svg.classList.add('more-action-icon-active')
-            svg.classList.add(interfaceConfig.meetmoIcons.more_actions.hover_effect)
-            svg.setAttribute('fill', interfaceConfig.meetmoIcons.more_actions.button_active_color)
-            var circle = window.document.createElementNS("http://www.w3.org/2000/svg",'circle');
-            circle.setAttributeNS(null, 'class', 'cls-1');
-            circle.setAttributeNS(null, 'cx', 25);
-            circle.setAttributeNS(null, 'cy', 25);
-            circle.setAttributeNS(null, 'r', 25);
-            circle.setAttributeNS(null, 'style', `fill:${interfaceConfig.meetmoIcons.more_actions.svg_active_color}` );
-            svg.prepend(circle);
-        }}/> : IconMenuThumb;
+        let iconData = get(interfaceConfig, ["meetmoIcons", "more_actions"]);
+        let iconMoreActionFromURL = !isEmpty(iconData);
+        let iconMenuThumb = !isEmpty(iconData) ? < ReactSVG style = {
+            {
+                width: '50px',
+                height: '50px'
+            }
+        }
+        src = {
+            iconData.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('more-action-icon-active')
+                svg.classList.add(iconData.hover_effect)
+                svg.setAttribute('fill', iconData.button_active_color)
+            }
+        }
+        /> : IconMenuThumb;
+        
         return (
             <div className = 'toolbox-button-wth-dialog'>
                 <InlineDialog
