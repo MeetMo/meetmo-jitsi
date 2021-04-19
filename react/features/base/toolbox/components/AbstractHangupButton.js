@@ -1,4 +1,7 @@
 // @flow
+
+import React from 'react';
+import { ReactSVG } from 'react-svg';
 import { get, isEmpty } from 'lodash';
 
 import { IconHangup } from '../../icons';

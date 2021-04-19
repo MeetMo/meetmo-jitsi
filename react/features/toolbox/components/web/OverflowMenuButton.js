@@ -2,6 +2,7 @@
 
 import InlineDialog from '@atlaskit/inline-dialog';
 import React, { Component } from 'react';
+import { ReactSVG } from 'react-svg';
 import { get, isEmpty } from 'lodash';
 
 import { createToolbarEvent, sendAnalytics } from '../../../analytics';
