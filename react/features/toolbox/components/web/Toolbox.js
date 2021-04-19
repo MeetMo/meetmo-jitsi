@@ -305,8 +305,8 @@ const iconShareDesktop = !isEmpty(iconDataShareDesktop) ? ( < ReactSVG style = {
 const iconDataFullscreen = get(interfaceConfig, ["meetmoIcons", "fullscreen"]);
 const iconFullScreen = !isEmpty(iconDataFullscreen) ? < ReactSVG style = {
     {
-        width: '50px',
-        height: '50px'
+        width: '24px',
+        height: '24px'
     }
 }
 src = {
@@ -323,8 +323,8 @@ beforeInjection = {
 
 const iconExitFullScreen = !isEmpty(iconDataFullscreen) ? ( < ReactSVG style = {
             {
-                width: '50px',
-                height: '50px'
+                width: '24px',
+                height: '24px'
             }
         }
         src = {
@@ -367,8 +367,8 @@ const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
 const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"]);
 const iconRec = !isEmpty(iconDataLocalRec) ? < ReactSVG style = {
     {
-        width: '50px',
-        height: '50px'
+        width: '24px',
+        height: '24px'
     }
 }
 src = {
@@ -388,8 +388,8 @@ const iconLRecFromURL = !isEmpty(iconDataLocalRec);
 const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"]);
 const iconShareVideo = !isEmpty(iconDataShareVideo) ? < ReactSVG style = {
     {
-        width: '50px',
-        height: '50px'
+        width: '24px',
+        height: '24px'
     }
 }
 src = {
@@ -411,8 +411,8 @@ const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons",
 ]);
 const iconLayoutChange = !isEmpty(iconDataChangeLayout) ? < ReactSVG style = {
     {
-        width: '50px',
-        height: '50px'
+        width: '24px',
+        height: '24px'
     }
 }
 src = {
@@ -434,8 +434,8 @@ const iconDataBgChange = get(interfaceConfig, ["meetmoIcons",
 ]);
 const iconBackgroundChange = !isEmpty(iconDataBgChange) ? < ReactSVG style = {
     {
-        width: '50px',
-        height: '50px'
+        width: '24px',
+        height: '24px'
     }
 }
 src = {
@@ -450,6 +450,79 @@ beforeInjection = {
 }
 /> : IconBackgroundChange;
 let iconBackgroundFromURL = !isEmpty(iconDataBgChange);
+
+
+// Embeded Meeting : Code block
+const iconDataEmbedMeeting = get(interfaceConfig, ["meetmoIcons",
+    "embed_meeting"
+]);
+const iconEmbedMeeting = !isEmpty(iconDataEmbedMeeting) ? < ReactSVG style = {
+    {
+        width: '24px',
+        height: '24px'
+    }
+}
+src = {
+    iconDataEmbedMeeting.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataEmbedMeeting.hover_effect)
+        svg.setAttribute('fill', iconDataEmbedMeeting.button_active_color)
+    }
+}
+/> : IconCodeBlock;
+let iconEmbedMeetingFromURL = !isEmpty(iconDataEmbedMeeting);
+
+
+// Feedback
+const iconDataFeedback = get(interfaceConfig, ["meetmoIcons",
+    "feedback"
+]);
+const iconFeedback = !isEmpty(iconDataFeedback) ? < ReactSVG style = {
+    {
+        width: '24px',
+        height: '24px'
+    }
+}
+src = {
+    iconDataFeedback.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataFeedback.hover_effect)
+        svg.setAttribute('fill', iconDataFeedback.button_active_color)
+    }
+}
+/> : IconFeedback;
+let iconFeedbackFromURL = !isEmpty(iconDataFeedback);
+
+
+// Short cuts
+const iconDataShortcuts = get(interfaceConfig, ["meetmoIcons",
+    "short_cuts"
+]);
+const iconShortcuts = !isEmpty(iconDataShortcuts) ? < ReactSVG style = {
+    {
+        width: '24px',
+        height: '24px'
+    }
+}
+src = {
+    iconDataShortcuts.active_svg
+}
+beforeInjection = {
+    (svg) => {
+        svg.classList.add('invite-more-icon-active')
+        svg.classList.add(iconDataShortcuts.hover_effect)
+        svg.setAttribute('fill', iconDataShortcuts.button_active_color)
+    }
+}
+/> : IconOpenInNew;
+let iconShortcutsFromURL = !isEmpty(iconDataShortcuts);
+
 
 /**
  * Implements the conference toolbox on React/Web.
@@ -1343,7 +1416,8 @@ class Toolbox extends Component<Props, State> {
             this._shouldShowButton('embedmeeting')
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.embedMeeting')}
-                icon={IconCodeBlock}
+                icon={iconEmbedMeeting}
+                iconFromURL={iconEmbedMeetingFromURL}
                 key='embed'
                 onClick={this._onToolbarOpenEmbedMeeting}
                 text={t('toolbar.embedMeeting')} />,
@@ -1351,14 +1425,16 @@ class Toolbox extends Component<Props, State> {
             && _feedbackConfigured
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.feedback')}
-                icon={IconFeedback}
+                icon={iconFeedback}
+                iconFromURL={iconFeedbackFromURL}
                 key='feedback'
                 onClick={this._onToolbarOpenFeedback}
                 text={t('toolbar.feedback')} />,
             this._shouldShowButton('shortcuts')
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.shortcuts')}
-                icon={IconOpenInNew}
+                icon={iconShortcuts}
+                iconFromURL={iconShortcutsFromURL}
                 key='shortcuts'
                 onClick={this._onToolbarOpenKeyboardShortcuts}
                 text={t('toolbar.shortcuts')} />,

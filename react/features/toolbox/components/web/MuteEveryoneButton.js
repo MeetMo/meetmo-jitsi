@@ -1,4 +1,6 @@
 // @flow
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
 
 import { createToolbarEvent, sendAnalytics } from '../../../analytics';
 import { openDialog } from '../../../base/dialog';
@@ -33,9 +35,22 @@ type Props = AbstractButtonProps & {
  */
 class MuteEveryoneButton extends AbstractButton<Props, *> {
     accessibilityLabel = 'toolbar.accessibilityLabel.muteEveryone';
-    icon = IconMuteEveryone;
     label = 'toolbar.muteEveryone';
     tooltip = 'toolbar.muteEveryone';
+    iconData = get(interfaceConfig, ["meetmoIcons", "mute-everyone"], {});
+
+    icon = !isEmpty(this.iconData) 
+        ? <ReactSVG
+                style={{ width: "24px", height: "24px" }}
+                src={this.iconData.active_svg}
+                beforeInjection={(svg) => {
+                    svg.classList.add("mic-icon-active");
+                    svg.classList.add(this.iconData.hover_effect);
+                    svg.setAttribute("fill", this.iconData.button_active_color);
+                }}
+            />
+        : IconMuteEveryone;
+    iconFromURL = !isEmpty(this.iconData);
 
     /**
      * Handles clicking / pressing the button, and opens a confirmation dialog.

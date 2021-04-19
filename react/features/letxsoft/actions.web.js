@@ -195,14 +195,13 @@ export function conferenceWillJoinTier(store: Store<*, *>, next: Dispatch<any>, 
 	// Mobile fix: Currently we don't have any tier feature in mobile jitsi sdk and all the users from mobile
 	// Connects to the conference and appears in a web app as a hidden domain.
         // We are making them visible as tier-2 and will remove this fix later .
-        let userType = type !== undefined && type.childNodes[0] !== undefined
-            ? type.childNodes[0].nodeValue : 'tier-2'; // Replace tier-2 with tier-3
+        let userType = type !== undefined && type.childNodes[0] !== undefined 
+                ? type.childNodes[0].nodeValue : 'tier-2'; // Replace tier-2 with tier-3
 
         // make the SIP call to tier-2 by checking the jid
         if (jid.includes(`jigasi@auth.${config.hosts.domain}`)) {
             userType = 'tier-2';
         }
-
         // member.affiliation
         //     = mucUserItem && mucUserItem.getAttribute('affiliation');
         // member.role = mucUserItem && mucUserItem.getAttribute('role');

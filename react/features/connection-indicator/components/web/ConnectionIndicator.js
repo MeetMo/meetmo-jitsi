@@ -1,6 +1,8 @@
 // @flow
 
 import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
 
 import { translate } from '../../../base/i18n';
 import { Icon, IconConnectionActive, IconConnectionInactive } from '../../../base/icons';
@@ -279,14 +281,29 @@ class ConnectionIndicator extends AbstractConnectionIndicator<Props, State> {
      * @returns {ReactElement}
      */
     _renderIcon() {
+        let iconData = get(interfaceConfig, ["meetmoIcons", "speaker-stats"], {});
+
         if (this.props.connectionStatus
             === JitsiParticipantConnectionStatus.INACTIVE) {
             return (
                 <span className = 'connection_ninja'>
-                    <Icon
-                        className = 'icon-ninja'
-                        size = '1.5em'
-                        src = { IconConnectionInactive } />
+                    {
+                        !isEmpty(this.iconData) 
+                        ? <ReactSVG
+                                style={{ width: "24px", height: "24px" }}
+                                src={this.iconData.active_svg}
+                                beforeInjection={(svg) => {
+                                    svg.classList.add("mic-icon-active");
+                                    svg.classList.add(this.iconData.hover_effect);
+                                    svg.setAttribute("fill", this.iconData.button_active_color);
+                                }}
+                            />
+                            : 
+                            <Icon
+                                className = 'icon-ninja'
+                                size = '1.5em'
+                                src = { IconConnectionInactive } />
+                    }
                 </span>
             );
         }
@@ -313,19 +330,45 @@ class ConnectionIndicator extends AbstractConnectionIndicator<Props, State> {
             <span
                 className = { emptyIconWrapperClassName }
                 key = 'icon-empty'>
-                <Icon
-                    className = 'icon-gsm-bars'
-                    size = '1em'
-                    src = { IconConnectionActive } />
+                    {
+                        !isEmpty(this.iconData) 
+                        ? <ReactSVG
+                                style={{ width: "24px", height: "24px" }}
+                                src={this.iconData.active_svg}
+                                beforeInjection={(svg) => {
+                                    svg.classList.add("mic-icon-active");
+                                    svg.classList.add(this.iconData.hover_effect);
+                                    svg.setAttribute("fill", this.iconData.button_active_color);
+                                }}
+                            />
+                            : 
+                            <Icon
+                                className = 'icon-gsm-bars'
+                                size = '1em'
+                                src = { IconConnectionActive } />
+                    }
             </span>,
             <span
                 className = 'connection_full'
                 key = 'icon-full'
                 style = {{ width: iconWidth }}>
-                <Icon
-                    className = 'icon-gsm-bars'
-                    size = '1em'
-                    src = { IconConnectionActive } />
+                {
+                    !isEmpty(this.iconData) 
+                    ? <ReactSVG
+                            style={{ width: "24px", height: "24px" }}
+                            src={this.iconData.active_svg}
+                            beforeInjection={(svg) => {
+                                svg.classList.add("mic-icon-active");
+                                svg.classList.add(this.iconData.hover_effect);
+                                svg.setAttribute("fill", this.iconData.button_active_color);
+                            }}
+                        />
+                        : 
+                        <Icon
+                            className = 'icon-gsm-bars'
+                            size = '1em'
+                            src = { IconConnectionActive } />
+                }
             </span>
         ];
     }
