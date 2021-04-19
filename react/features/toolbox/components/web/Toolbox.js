@@ -232,7 +232,7 @@ const visibleButtons = new Set(interfaceConfig.TOOLBAR_BUTTONS);
  */
 
 //  CHAT: Chat ICON
-const iconDataForChat = get(interfaceConfig, ["meetmoIcons", "chat"]);
+const iconDataForChat = get(interfaceConfig, ["meetmoIcons", "chat"], {});
 const iconChat = !isEmpty(iconDataForChat) ? ( < ReactSVG style = {
             {
                 width: '50px',
@@ -254,7 +254,7 @@ const iconChat = !isEmpty(iconDataForChat) ? ( < ReactSVG style = {
 const iconChatFromURL = !isEmpty(iconDataForChat);
 
 // RAISE HAND
-const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"]);
+const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"], {});
 const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? ( < ReactSVG style = {
             {
                 width: '50px',
@@ -277,8 +277,7 @@ const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? ( < ReactSVG style = {
         let iconRaiseHandFromURL = !isEmpty(iconDataRaisedHand);
 
 //SCREEN SHARE
-const iconDataShareDesktop = get(interfaceConfig, ["meetmoIcons",
-    "screen_share"]);
+const iconDataShareDesktop = get(interfaceConfig, ["meetmoIcons", "screen_share"], {});
 const iconShareDesktop = !isEmpty(iconDataShareDesktop) ? ( < ReactSVG style = {
             {
                 width: '50px',
@@ -302,7 +301,7 @@ const iconShareDesktop = !isEmpty(iconDataShareDesktop) ? ( < ReactSVG style = {
         let iconShareDesktopFromURL = !isEmpty(iconDataShareDesktop)
 
 //FullScreen & ExitFullScreen
-const iconDataFullscreen = get(interfaceConfig, ["meetmoIcons", "fullscreen"]);
+const iconDataFullscreen = get(interfaceConfig, ["meetmoIcons", "fullscreen"], {});
 const iconFullScreen = !isEmpty(iconDataFullscreen) ? < ReactSVG style = {
     {
         width: '24px',
@@ -341,9 +340,7 @@ const iconExitFullScreen = !isEmpty(iconDataFullscreen) ? ( < ReactSVG style = {
         const iconFSFromURL = !isEmpty(iconDataFullscreen);
 
 // Invite People
-const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons",
-    "invite_people"
-]);
+const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons", "invite_people"], {});
 const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
     {
         width: '50px',
@@ -364,7 +361,7 @@ beforeInjection = {
 const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
 
 // Local Recording
-const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"]);
+const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"], {});
 const iconRec = !isEmpty(iconDataLocalRec) ? < ReactSVG style = {
     {
         width: '24px',
@@ -385,7 +382,7 @@ beforeInjection = {
 const iconLRecFromURL = !isEmpty(iconDataLocalRec);
 
 // Share Video
-const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"]);
+const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"], {});
 const iconShareVideo = !isEmpty(iconDataShareVideo) ? < ReactSVG style = {
     {
         width: '24px',
@@ -406,9 +403,7 @@ beforeInjection = {
 const iconShareVideoFromURL = !isEmpty(iconDataShareVideo);
 
 // Share Video
-const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons",
-    "change_layout"
-]);
+const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons", "change_layout"], {});
 const iconLayoutChange = !isEmpty(iconDataChangeLayout) ? < ReactSVG style = {
     {
         width: '24px',
@@ -429,9 +424,7 @@ beforeInjection = {
 let iconLayoutFromURL = !isEmpty(iconDataChangeLayout);
 
 // Background Image
-const iconDataBgChange = get(interfaceConfig, ["meetmoIcons",
-    "background_change"
-]);
+const iconDataBgChange = get(interfaceConfig, ["meetmoIcons", "background_change"], {});
 const iconBackgroundChange = !isEmpty(iconDataBgChange) ? < ReactSVG style = {
     {
         width: '24px',
@@ -453,9 +446,7 @@ let iconBackgroundFromURL = !isEmpty(iconDataBgChange);
 
 
 // Embeded Meeting : Code block
-const iconDataEmbedMeeting = get(interfaceConfig, ["meetmoIcons",
-    "embed_meeting"
-]);
+const iconDataEmbedMeeting = get(interfaceConfig, ["meetmoIcons", "embed_meeting"], {});
 const iconEmbedMeeting = !isEmpty(iconDataEmbedMeeting) ? < ReactSVG style = {
     {
         width: '24px',
@@ -477,9 +468,7 @@ let iconEmbedMeetingFromURL = !isEmpty(iconDataEmbedMeeting);
 
 
 // Feedback
-const iconDataFeedback = get(interfaceConfig, ["meetmoIcons",
-    "feedback"
-]);
+const iconDataFeedback = get(interfaceConfig, ["meetmoIcons", "feedback"], {});
 const iconFeedback = !isEmpty(iconDataFeedback) ? < ReactSVG style = {
     {
         width: '24px',
@@ -501,9 +490,7 @@ let iconFeedbackFromURL = !isEmpty(iconDataFeedback);
 
 
 // Short cuts
-const iconDataShortcuts = get(interfaceConfig, ["meetmoIcons",
-    "short_cuts"
-]);
+const iconDataShortcuts = get(interfaceConfig, ["meetmoIcons", "short_cuts"], {});
 const iconShortcuts = !isEmpty(iconDataShortcuts) ? < ReactSVG style = {
     {
         width: '24px',

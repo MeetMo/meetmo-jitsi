@@ -66,7 +66,8 @@ class OverflowMenuButton extends Component<Props> {
      */
     render() {
         const { children, isOpen, t } = this.props;
-        let iconData = get(interfaceConfig, ["meetmoIcons", "more_actions"]);
+        
+        let iconData = get(interfaceConfig, ["meetmoIcons", "more_actions"], {});
         let iconMoreActionFromURL = !isEmpty(iconData);
         let iconMenuThumb = !isEmpty(iconData) ? < ReactSVG style = {
             {

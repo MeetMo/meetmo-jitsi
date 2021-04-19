@@ -18,7 +18,7 @@ declare var interfaceConfig: Object;
 export default class AbstractVideoMuteButton<P : Props, S : *>
     extends AbstractButton<P, S> {
     
-    iconData = get(interfaceConfig, ["meetmoIcons", "camera"]);
+    iconData = get(interfaceConfig, ["meetmoIcons", "camera"], {});
     icon = !isEmpty(this.iconData) ? < ReactSVG style = {
         {
             width: '50px',

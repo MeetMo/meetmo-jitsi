@@ -15,7 +15,7 @@ export default class AbstractHangupButton<P : Props, S: *>
     extends AbstractButton<P, S> {
 
     // icon = IconHangup;
-    iconData = get(interfaceConfig, ["meetmoIcons", "hangup"])
+    iconData = get(interfaceConfig, ["meetmoIcons", "hangup"], {})
     icon = !isEmpty(this.iconData) ? < ReactSVG style = {
         {
             width: '50px',
