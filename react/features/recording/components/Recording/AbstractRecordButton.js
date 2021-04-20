@@ -61,7 +61,7 @@ export default class AbstractRecordButton<P: Props> extends AbstractButton<P, *>
     accessibilityLabel = 'toolbar.accessibilityLabel.recording';
     label = 'dialog.startRecording';
     toggledLabel = 'dialog.stopRecording';
-    iconData = get(interfaceConfig, ["meetmoIcons", "customlivestreaming"], {});
+    iconData = get(interfaceConfig, ["meetmoIcons", "record"], {});
 
     icon = !isEmpty(this.iconData) 
         ? <ReactSVG

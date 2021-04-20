@@ -3,179 +3,158 @@
         "microphone": {
             "active_svg": "https://test.meetmo.io/images/assets/microphone.svg",
             "inactive_svg": "https://test.meetmo.io/images/assets/mic-disabled.svg",
-            "svg_active_color": "#008000",
-            "svg_inactive_color": "#008000",
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_inactive_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",
+            "svg_inactive_color": "#ff9900",
+            "button_active_color": "#ff9900",
+            "button_inactive_color": "#ff9900",
+            "hover_effect": "darker"
         },
        "camera": {
            "active_svg": "https://test.meetmo.io/images/assets/camera.svg",
            "inactive_svg": "https://test.meetmo.io/images/assets/camera-disabled.svg",
-           "svg_active_color": "#008000",
-           "svg_inactive_color": "#008000",
-           "svg_hover_color": "#008000",
-           "button_active_color": "#008000",
-           "button_inactive_color": "#008000",
-           "button_hover_color": "#008000"
+           "svg_active_color": "#ff9900",
+           "svg_inactive_color": "#ff9900",
+           "button_active_color": "#ff9900",
+           "button_inactive_color": "#ff9900",
+           "hover_effect": "darker"
        },
        "chat": {
             "active_svg": "https://test.meetmo.io/images/assets/chat.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "hangup": {
             "active_svg": "https://test.meetmo.io/images/assets/hangup.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "raise_hand": {
             "active_svg": "https://test.meetmo.io/images/assets/raised-hand.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "screen_share": {
             "active_svg": "https://test.meetmo.io/images/assets/share-desktop.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "fullscreen": {
             "active_svg": "https://test.meetmo.io/images/assets/full-screen.svg",
             "inactive_svg": "https://test.meetmo.io/images/assets/exit-full-screen.svg",
-            "svg_active_color": "#008000",
-            "svg_inactive_color": "#008000",
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_inactive_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",
+            "svg_inactive_color": "#ff9900",
+            "button_active_color": "#ff9900",
+            "button_inactive_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "invite_people": {
             "active_svg": "https://test.meetmo.io/images/assets/user-plus.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "local_record": {
             "active_svg": "https://test.meetmo.io/images/assets/rec.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "share_video": {
             "active_svg": "https://test.meetmo.io/images/assets/shared-video.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "change_layout": {
-            "active_svg": "https://test.meetmo.io/images/assets/raised-hand.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "active_svg": "https://test.meetmo.io/images/assets/layout-change.svg",
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "background_change": {
             "active_svg": "https://test.meetmo.io/images/assets/raised-hand.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "more_actions": {
             "active_svg": "https://test.meetmo.io/images/assets/thumb-menu.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "settings": {
             "active_svg": "https://test.meetmo.io/images/assets/settings.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "videoquality": {
             "active_svg": "https://test.meetmo.io/images/assets/HD.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "security_options": {
             "active_svg": "https://test.meetmo.io/images/assets/security-on.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "inactive_svg": "https://test.meetmo.io/images/assets/security-off.svg",
+            "svg_active_color": "#ff9900",
+            "svg_inactive_color": "#ff9900",
+            "button_active_color": "#ff9900",
+            "button_inactive_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "livestreaming": {
             "active_svg": "https://test.meetmo.io/images/assets/public.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "customlivestreaming": {
             "active_svg": "https://test.meetmo.io/images/assets/public.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "record": {
             "active_svg": "https://test.meetmo.io/images/assets/rec.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "mute-everyone": {
             "active_svg": "https://test.meetmo.io/images/assets/mute-everyone.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "speaker-stats": {
             "active_svg": "https://test.meetmo.io/images/assets/gsm-bars.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "embed_meeting": {
             "active_svg": "https://test.meetmo.io/images/assets/code-block.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "short_cuts": {
             "active_svg": "https://test.meetmo.io/images/assets/open_in_new.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         },
         "feedback": {
             "active_svg": "https://test.meetmo.io/images/assets/feedback.svg",
-            "svg_active_color": "#008000",           
-            "svg_hover_color": "#008000",
-            "button_active_color": "#008000",
-            "button_hover_color": "#008000"
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         }
     }
 }

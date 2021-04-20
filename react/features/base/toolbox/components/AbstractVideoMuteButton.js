@@ -33,15 +33,7 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
             svg.classList.add('mic-icon-active')
             svg.classList.add(this.iconData.hover_effect)
             svg.setAttribute('fill', this.iconData.button_active_color)
-            var circle = window.document.createElementNS(
-                "http://www.w3.org/2000/svg", 'circle');
-            circle.setAttributeNS(null, 'class', 'cls-1');
-            circle.setAttributeNS(null, 'cx', 25);
-            circle.setAttributeNS(null, 'cy', 25);
-            circle.setAttributeNS(null, 'r', 25);
-            circle.setAttributeNS(null, 'style',
-                `fill:${this.iconData.svg_active_color}`);
-            svg.prepend(circle);
+            svg.setAttribute('stroke', this.iconData.button_active_color)
         }
     }
     /> : IconCamera;
@@ -59,15 +51,7 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
             svg.classList.add('mic-icon-inactive')
             svg.classList.add(this.iconData.hover_effect)
             svg.setAttribute('fill', this.iconData.button_active_color)
-            var circle = window.document.createElementNS(
-                "http://www.w3.org/2000/svg", 'circle');
-            circle.setAttributeNS(null, 'class', 'cls-1');
-            circle.setAttributeNS(null, 'cx', 25);
-            circle.setAttributeNS(null, 'cy', 25);
-            circle.setAttributeNS(null, 'r', 25);
-            circle.setAttributeNS(null, 'style',
-                `fill:${this.iconData.svg_active_color}`);
-            svg.prepend(circle);
+            svg.setAttribute('stroke', this.iconData.button_active_color)
         }
     }
     /> : IconCameraDisabled;
