@@ -82,6 +82,7 @@ class OverflowMenuVideoQualityItem extends Component<Props> {
                         svg.classList.add("mic-icon-active");
                         svg.classList.add(iconData.hover_effect);
                         svg.setAttribute("fill", iconData.button_active_color);
+                        svg.setAttribute("stroke", this.iconData.button_active_color);
                     }}
                 />
             : <Icon

@@ -48,6 +48,7 @@ class MuteEveryoneButton extends AbstractButton<Props, *> {
                     svg.classList.add("mic-icon-active");
                     svg.classList.add(this.iconData.hover_effect);
                     svg.setAttribute("fill", this.iconData.button_active_color);
+                    svg.setAttribute("stroke", this.iconData.button_active_color);
                 }}
             />
         : IconMuteEveryone;

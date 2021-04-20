@@ -83,6 +83,7 @@ class OverflowMenuButton extends Component<Props> {
                 svg.classList.add('more-action-icon-active')
                 svg.classList.add(iconData.hover_effect)
                 svg.setAttribute('fill', iconData.button_active_color)
+                svg.setAttribute('stroke', iconData.button_active_color)
             }
         }
         /> : IconMenuThumb;

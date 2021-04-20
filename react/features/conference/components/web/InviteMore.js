@@ -1,6 +1,8 @@
 // @flow
 
 import React from 'react';
+import { ReactSVG } from 'react-svg';
+import { get, isEmpty } from 'lodash';
 
 import { translate } from '../../../base/i18n';
 import { Icon, IconInviteMore } from '../../../base/icons';
@@ -49,6 +51,27 @@ function InviteMore({
     onClick,
     t
 }: Props) {
+    
+    const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons", "invite_people"], {});
+    const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
+        {
+            width: '50px',
+            height: '50px'
+        }
+    }
+    src = {
+        iconDataInvitePeople.active_svg
+    }
+    beforeInjection = {
+        (svg) => {
+            svg.classList.add('invite-more-icon-active')
+            svg.classList.add(iconDataInvitePeople.hover_effect)
+            svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+            svg.setAttribute('stroke', iconDataInvitePeople.button_active_color)
+        }
+    }
+    /> : IconInviteMore;
+    const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
     return (
         _visible
             ? <div className = { `invite-more-container${_tileViewEnabled ? ' elevated' : ''}` }>
@@ -58,7 +81,10 @@ function InviteMore({
                 <div
                     className = 'invite-more-button'
                     onClick = { onClick }>
-                    <Icon src = { IconInviteMore } />
+                        {
+                            iconInvitePeopleFromURL ? 
+                            iconInviteMore : <Icon src = { IconInviteMore } />
+                        }
                     <div className = 'invite-more-button-text'>
                         {t('addPeople.inviteMorePrompt')}
                     </div>

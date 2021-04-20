@@ -1084,6 +1084,7 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('fullscreen-icon-active')
                 svg.classList.add(iconDataFullscreen.hover_effect)
                 svg.setAttribute('fill', iconDataFullscreen.button_active_color)
+                svg.setAttribute('stroke', iconDataFullscreen.button_active_color)
             }
         }
         /> : IconFullScreen;
@@ -1102,6 +1103,7 @@ class Toolbox extends Component<Props, State> {
                         svg.classList.add('fullscreen-icon-inactive')
                         svg.classList.add(iconDataFullscreen.hover_effect)
                         svg.setAttribute('fill', iconDataFullscreen.button_active_color)
+                        svg.setAttribute('stroke', iconDataFullscreen.button_active_color)
                     }
                 }
                 />) : (IconExitFullScreen);
@@ -1122,6 +1124,7 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataShareVideo.hover_effect)
                 svg.setAttribute('fill', iconDataShareVideo.button_active_color)
+                svg.setAttribute('stroke', iconDataShareVideo.button_active_color)
             }
         }
         /> : IconShareVideo;
@@ -1141,7 +1144,7 @@ class Toolbox extends Component<Props, State> {
             (svg) => {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataEmbedMeeting.hover_effect)
-                svg.setAttribute('fill', iconDataEmbedMeeting.button_active_color)
+                svg.setAttribute('stroke', iconDataEmbedMeeting.button_active_color)
             }
         }
         /> : IconCodeBlock;
@@ -1162,6 +1165,7 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataFeedback.hover_effect)
                 svg.setAttribute('fill', iconDataFeedback.button_active_color)
+                svg.setAttribute('stroke', iconDataFeedback.button_active_color)
             }
         }
         /> : IconFeedback;
@@ -1182,10 +1186,32 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataShortcuts.hover_effect)
                 svg.setAttribute('fill', iconDataShortcuts.button_active_color)
+                svg.setAttribute('stroke', iconDataShortcuts.button_active_color)
             }
         }
         /> : IconOpenInNew;
         let iconShortcutsFromURL = !isEmpty(iconDataShortcuts);
+        // Short cuts
+        const iconDataSpeakerstat = get(interfaceConfig, ["meetmoIcons", "speaker_stats"], {});
+        const iconSpeakerStat = !isEmpty(iconDataSpeakerstat) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataSpeakerstat.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataSpeakerstat.hover_effect)
+                svg.setAttribute('fill', iconDataSpeakerstat.button_active_color)
+                svg.setAttribute('stroke', iconDataSpeakerstat.button_active_color)
+            }
+        }
+        /> : IconOpenInNew;
+        let iconSpeakerStatFromURL = !isEmpty(iconDataSpeakerstat);
         
         return [
             this._isProfileVisible()
@@ -1254,7 +1280,8 @@ class Toolbox extends Component<Props, State> {
             this._shouldShowButton('stats')
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.speakerStats')}
-                icon={IconPresentation}
+                icon={iconSpeakerStat}
+                iconFromURL={iconSpeakerStatFromURL}
                 key='stats'
                 onClick={this._onToolbarOpenSpeakerStats}
                 text={t('toolbar.speakerStats')} />,
@@ -1317,6 +1344,7 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataChangeLayout.hover_effect)
                 svg.setAttribute('fill', iconDataChangeLayout.button_active_color)
+                svg.setAttribute('stroke', iconDataChangeLayout.button_active_color)
             }
         }
         /> : IconLayoutChange;
@@ -1357,6 +1385,7 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataBgChange.hover_effect)
                 svg.setAttribute('fill', iconDataBgChange.button_active_color)
+                svg.setAttribute('stroke', iconDataBgChange.button_active_color)
             }
         }
         /> : IconBackgroundChange;
@@ -1516,6 +1545,7 @@ class Toolbox extends Component<Props, State> {
                             svg.classList.add('invite-more-icon-active')
                             svg.classList.add(iconDataInvitePeople.hover_effect)
                             svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+                            svg.setAttribute('stroke', iconDataInvitePeople.button_active_color)
                         }
                     }
                     /> : IconInviteMore;
@@ -1548,6 +1578,7 @@ class Toolbox extends Component<Props, State> {
                             svg.classList.add('invite-more-icon-active')
                             svg.classList.add(iconDataLocalRec.hover_effect)
                             svg.setAttribute('fill', iconDataLocalRec.button_active_color)
+                            svg.setAttribute('stroke', iconDataLocalRec.button_active_color)
                         }
                     }
                     /> : IconRec;
@@ -1763,6 +1794,7 @@ class Toolbox extends Component<Props, State> {
                 svg.classList.add('invite-more-icon-active')
                 svg.classList.add(iconDataInvitePeople.hover_effect)
                 svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+                svg.setAttribute('stroke', iconDataInvitePeople.button_active_color)
             }
         }
         /> : IconInviteMore;

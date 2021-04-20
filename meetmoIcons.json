@@ -155,6 +155,12 @@
             "svg_active_color": "#ff9900",           
             "button_active_color": "#ff9900",
             "hover_effect": "darker"
+        },
+        "speaker_stats": {
+            "active_svg": "https://test.meetmo.io/images/assets/presentation.svg",
+            "svg_active_color": "#ff9900",           
+            "button_active_color": "#ff9900",
+            "hover_effect": "darker"
         }
     }
 }
