@@ -228,290 +228,6 @@ declare var interfaceConfig: Object;
 const visibleButtons = new Set(interfaceConfig.TOOLBAR_BUTTONS);
 
 /**
- * Icon fetch if passed in configuration through the admin panel.
- */
-
-//  CHAT: Chat ICON
-const iconDataForChat = get(interfaceConfig, ["meetmoIcons", "chat"], {});
-const iconChat = !isEmpty(iconDataForChat) ? ( < ReactSVG style = {
-            {
-                width: '50px',
-                height: '50px'
-            }
-        }
-        src = {
-            iconDataForChat.active_svg
-        }
-        beforeInjection = {
-            (svg) => {
-                svg.classList.add('chat-icon-active')
-                svg.classList.add(iconDataForChat.hover_effect)
-                svg.setAttribute('fill', iconDataForChat.button_active_color)
-                svg.setAttribute('stroke', iconDataForChat.svg_active_color)
-            }
-        }
-        />) : (IconChat);
-const iconChatFromURL = !isEmpty(iconDataForChat);
-
-// RAISE HAND
-const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"], {});
-const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? ( < ReactSVG style = {
-            {
-                width: '50px',
-                height: '50px'
-            }
-        }
-        src = {
-            iconDataRaisedHand.active_svg
-        }
-        beforeInjection = {
-            (svg) => {
-                svg.classList.add('raise-hand-icon-active')
-                svg.classList.add(iconDataRaisedHand
-                    .hover_effect)
-                svg.setAttribute('fill', iconDataRaisedHand.button_active_color)
-                svg.setAttribute('stroke', iconDataRaisedHand.svg_active_color)
-            }
-        }
-        />) : (IconRaisedHand);
-        let iconRaiseHandFromURL = !isEmpty(iconDataRaisedHand);
-
-//SCREEN SHARE
-const iconDataShareDesktop = get(interfaceConfig, ["meetmoIcons", "screen_share"], {});
-const iconShareDesktop = !isEmpty(iconDataShareDesktop) ? ( < ReactSVG style = {
-            {
-                width: '50px',
-                height: '50px'
-            }
-        }
-        src = {
-            iconDataShareDesktop.active_svg
-        }
-        beforeInjection = {
-            (svg) => {
-                svg.classList.add('screen-share-icon-active')
-                svg.classList.add(iconDataShareDesktop.hover_effect)
-                svg.setAttribute('fill', iconDataShareDesktop
-                    .button_active_color)
-                svg.setAttribute('stroke', iconDataShareDesktop
-                    .svg_active_color)
-            }
-        }
-        />) : (IconShareDesktop);
-        let iconShareDesktopFromURL = !isEmpty(iconDataShareDesktop)
-
-//FullScreen & ExitFullScreen
-const iconDataFullscreen = get(interfaceConfig, ["meetmoIcons", "fullscreen"], {});
-const iconFullScreen = !isEmpty(iconDataFullscreen) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataFullscreen.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('fullscreen-icon-active')
-        svg.classList.add(iconDataFullscreen.hover_effect)
-        svg.setAttribute('fill', iconDataFullscreen.button_active_color)
-    }
-}
-/> : IconFullScreen;
-
-const iconExitFullScreen = !isEmpty(iconDataFullscreen) ? ( < ReactSVG style = {
-            {
-                width: '24px',
-                height: '24px'
-            }
-        }
-        src = {
-            iconDataFullscreen.inactive_svg
-        }
-        beforeInjection = {
-            (svg) => {
-                svg.classList.add('fullscreen-icon-inactive')
-                svg.classList.add(iconDataFullscreen.hover_effect)
-                svg.setAttribute('fill', iconDataFullscreen.button_active_color)
-            }
-        }
-        />) : (IconExitFullScreen);
-        const iconFSFromURL = !isEmpty(iconDataFullscreen);
-
-// Invite People
-const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons", "invite_people"], {});
-const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
-    {
-        width: '50px',
-        height: '50px'
-    }
-}
-src = {
-    iconDataInvitePeople.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataInvitePeople.hover_effect)
-        svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
-    }
-}
-/> : IconInviteMore;
-const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
-
-// Local Recording
-const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"], {});
-const iconRec = !isEmpty(iconDataLocalRec) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataLocalRec.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataLocalRec.hover_effect)
-        svg.setAttribute('fill', iconDataLocalRec.button_active_color)
-    }
-}
-/> : IconRec;
-const iconLRecFromURL = !isEmpty(iconDataLocalRec);
-
-// Share Video
-const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"], {});
-const iconShareVideo = !isEmpty(iconDataShareVideo) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataShareVideo.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataShareVideo.hover_effect)
-        svg.setAttribute('fill', iconDataShareVideo.button_active_color)
-    }
-}
-/> : IconShareVideo;
-const iconShareVideoFromURL = !isEmpty(iconDataShareVideo);
-
-// Share Video
-const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons", "change_layout"], {});
-const iconLayoutChange = !isEmpty(iconDataChangeLayout) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataChangeLayout.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataChangeLayout.hover_effect)
-        svg.setAttribute('fill', iconDataChangeLayout.button_active_color)
-    }
-}
-/> : IconLayoutChange;
-let iconLayoutFromURL = !isEmpty(iconDataChangeLayout);
-
-// Background Image
-const iconDataBgChange = get(interfaceConfig, ["meetmoIcons", "background_change"], {});
-const iconBackgroundChange = !isEmpty(iconDataBgChange) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataBgChange.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataBgChange.hover_effect)
-        svg.setAttribute('fill', iconDataBgChange.button_active_color)
-    }
-}
-/> : IconBackgroundChange;
-let iconBackgroundFromURL = !isEmpty(iconDataBgChange);
-
-
-// Embeded Meeting : Code block
-const iconDataEmbedMeeting = get(interfaceConfig, ["meetmoIcons", "embed_meeting"], {});
-const iconEmbedMeeting = !isEmpty(iconDataEmbedMeeting) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataEmbedMeeting.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataEmbedMeeting.hover_effect)
-        svg.setAttribute('fill', iconDataEmbedMeeting.button_active_color)
-    }
-}
-/> : IconCodeBlock;
-let iconEmbedMeetingFromURL = !isEmpty(iconDataEmbedMeeting);
-
-
-// Feedback
-const iconDataFeedback = get(interfaceConfig, ["meetmoIcons", "feedback"], {});
-const iconFeedback = !isEmpty(iconDataFeedback) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataFeedback.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataFeedback.hover_effect)
-        svg.setAttribute('fill', iconDataFeedback.button_active_color)
-    }
-}
-/> : IconFeedback;
-let iconFeedbackFromURL = !isEmpty(iconDataFeedback);
-
-
-// Short cuts
-const iconDataShortcuts = get(interfaceConfig, ["meetmoIcons", "short_cuts"], {});
-const iconShortcuts = !isEmpty(iconDataShortcuts) ? < ReactSVG style = {
-    {
-        width: '24px',
-        height: '24px'
-    }
-}
-src = {
-    iconDataShortcuts.active_svg
-}
-beforeInjection = {
-    (svg) => {
-        svg.classList.add('invite-more-icon-active')
-        svg.classList.add(iconDataShortcuts.hover_effect)
-        svg.setAttribute('fill', iconDataShortcuts.button_active_color)
-    }
-}
-/> : IconOpenInNew;
-let iconShortcutsFromURL = !isEmpty(iconDataShortcuts);
-
-
-/**
  * Implements the conference toolbox on React/Web.
  *
  * @extends Component
@@ -1267,6 +983,29 @@ class Toolbox extends Component<Props, State> {
         if (!this._isDesktopSharingButtonVisible()) {
             return null;
         }
+        //SCREEN SHARE
+        const iconDataShareDesktop = get(interfaceConfig, ["meetmoIcons", "screen_share"], {});
+        const iconShareDesktop = !isEmpty(iconDataShareDesktop) ? ( < ReactSVG style = {
+                    {
+                        width: '50px',
+                        height: '50px'
+                    }
+                }
+                src = {
+                    iconDataShareDesktop.active_svg
+                }
+                beforeInjection = {
+                    (svg) => {
+                        svg.classList.add('screen-share-icon-active')
+                        svg.classList.add(iconDataShareDesktop.hover_effect)
+                        svg.setAttribute('fill', iconDataShareDesktop
+                            .button_active_color)
+                        svg.setAttribute('stroke', iconDataShareDesktop
+                            .svg_active_color)
+                    }
+                }
+                />) : (IconShareDesktop);
+        let iconShareDesktopFromURL = !isEmpty(iconDataShareDesktop)
         if (isInOverflowMenu) {
             return (
                 <OverflowMenuItem
@@ -1328,7 +1067,126 @@ class Toolbox extends Component<Props, State> {
             _sharingVimeoVideo,
             t
         } = this.props;
+        
+        //FullScreen & ExitFullScreen
+        const iconDataFullscreen = get(interfaceConfig, ["meetmoIcons", "fullscreen"], {});
+        const iconFullScreen = !isEmpty(iconDataFullscreen) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataFullscreen.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('fullscreen-icon-active')
+                svg.classList.add(iconDataFullscreen.hover_effect)
+                svg.setAttribute('fill', iconDataFullscreen.button_active_color)
+            }
+        }
+        /> : IconFullScreen;
 
+        const iconExitFullScreen = !isEmpty(iconDataFullscreen) ? ( < ReactSVG style = {
+                    {
+                        width: '24px',
+                        height: '24px'
+                    }
+                }
+                src = {
+                    iconDataFullscreen.inactive_svg
+                }
+                beforeInjection = {
+                    (svg) => {
+                        svg.classList.add('fullscreen-icon-inactive')
+                        svg.classList.add(iconDataFullscreen.hover_effect)
+                        svg.setAttribute('fill', iconDataFullscreen.button_active_color)
+                    }
+                }
+                />) : (IconExitFullScreen);
+        const iconFSFromURL = !isEmpty(iconDataFullscreen);
+        // Share Video
+        const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"], {});
+        const iconShareVideo = !isEmpty(iconDataShareVideo) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataShareVideo.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataShareVideo.hover_effect)
+                svg.setAttribute('fill', iconDataShareVideo.button_active_color)
+            }
+        }
+        /> : IconShareVideo;
+        const iconShareVideoFromURL = !isEmpty(iconDataShareVideo);
+        // Embeded Meeting : Code block
+        const iconDataEmbedMeeting = get(interfaceConfig, ["meetmoIcons", "embed_meeting"], {});
+        const iconEmbedMeeting = !isEmpty(iconDataEmbedMeeting) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataEmbedMeeting.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataEmbedMeeting.hover_effect)
+                svg.setAttribute('fill', iconDataEmbedMeeting.button_active_color)
+            }
+        }
+        /> : IconCodeBlock;
+        let iconEmbedMeetingFromURL = !isEmpty(iconDataEmbedMeeting); 
+        // Feedback
+        const iconDataFeedback = get(interfaceConfig, ["meetmoIcons", "feedback"], {});
+        const iconFeedback = !isEmpty(iconDataFeedback) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataFeedback.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataFeedback.hover_effect)
+                svg.setAttribute('fill', iconDataFeedback.button_active_color)
+            }
+        }
+        /> : IconFeedback;
+        let iconFeedbackFromURL = !isEmpty(iconDataFeedback);
+        // Short cuts
+        const iconDataShortcuts = get(interfaceConfig, ["meetmoIcons", "short_cuts"], {});
+        const iconShortcuts = !isEmpty(iconDataShortcuts) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataShortcuts.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataShortcuts.hover_effect)
+                svg.setAttribute('fill', iconDataShortcuts.button_active_color)
+            }
+        }
+        /> : IconOpenInNew;
+        let iconShortcutsFromURL = !isEmpty(iconDataShortcuts);
+        
         return [
             this._isProfileVisible()
             && <OverflowMenuProfileItem
@@ -1443,8 +1301,30 @@ class Toolbox extends Component<Props, State> {
      */
     _renderLayoutButton() {
         const { _isModerator, t } = this.props;
+        // Change Layout
+        const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons", "change_layout"], {});
+        const iconLayoutChange = !isEmpty(iconDataChangeLayout) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataChangeLayout.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataChangeLayout.hover_effect)
+                svg.setAttribute('fill', iconDataChangeLayout.button_active_color)
+            }
+        }
+        /> : IconLayoutChange;
+        let iconLayoutFromURL = !isEmpty(iconDataChangeLayout);
+        
         return this._shouldShowButton('layout') && _isModerator
-            ? <OverflowMenuItem
+            ? 
+            <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.changeLayout')}
                 icon={iconLayoutChange}
                 iconFromURL={iconLayoutFromURL}
@@ -1461,6 +1341,27 @@ class Toolbox extends Component<Props, State> {
      */
     _renderBackgroundButton() {
         const { _isModerator, t } = this.props;
+        // Background Image
+        const iconDataBgChange = get(interfaceConfig, ["meetmoIcons", "background_change"], {});
+        const iconBackgroundChange = !isEmpty(iconDataBgChange) ? < ReactSVG style = {
+            {
+                width: '24px',
+                height: '24px'
+            }
+        }
+        src = {
+            iconDataBgChange.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataBgChange.hover_effect)
+                svg.setAttribute('fill', iconDataBgChange.button_active_color)
+            }
+        }
+        /> : IconBackgroundChange;
+        let iconBackgroundFromURL = !isEmpty(iconDataBgChange);
+        
         return this._shouldShowButton('background') && _isModerator
             ? <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.changeBackground')}
@@ -1513,6 +1414,28 @@ class Toolbox extends Component<Props, State> {
                 case 'desktop':
                     return this._renderDesktopSharingButton(true);
                 case 'raisehand':
+                    // RAISE HAND
+                    const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"], {});
+                    const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? ( < ReactSVG style = {
+                                {
+                                    width: '50px',
+                                    height: '50px'
+                                }
+                            }
+                            src = {
+                                iconDataRaisedHand.active_svg
+                            }
+                            beforeInjection = {
+                                (svg) => {
+                                    svg.classList.add('raise-hand-icon-active')
+                                    svg.classList.add(iconDataRaisedHand
+                                        .hover_effect)
+                                    svg.setAttribute('fill', iconDataRaisedHand.button_active_color)
+                                    svg.setAttribute('stroke', iconDataRaisedHand.svg_active_color)
+                                }
+                            }
+                            />) : (IconRaisedHand);
+                    let iconRaiseHandFromURL = !isEmpty(iconDataRaisedHand);
                     return (
                         <OverflowMenuItem
                             accessibilityLabel=
@@ -1529,8 +1452,28 @@ class Toolbox extends Component<Props, State> {
                             } />
                     );
                 case 'chat':
+                    //  CHAT: Chat ICON
+                    const iconDataForChat = get(interfaceConfig, ["meetmoIcons", "chat"], {});
+                    const iconChat = !isEmpty(iconDataForChat) ? ( < ReactSVG style = {
+                                {
+                                    width: '50px',
+                                    height: '50px'
+                                }
+                            }
+                            src = {
+                                iconDataForChat.active_svg
+                            }
+                            beforeInjection = {
+                                (svg) => {
+                                    svg.classList.add('chat-icon-active')
+                                    svg.classList.add(iconDataForChat.hover_effect)
+                                    svg.setAttribute('fill', iconDataForChat.button_active_color)
+                                    svg.setAttribute('stroke', iconDataForChat.svg_active_color)
+                                }
+                            }
+                            />) : (IconChat);
+                    const iconChatFromURL = !isEmpty(iconDataForChat);
                     return (
-
                         <OverflowMenuItem
                             accessibilityLabel=
                             {t('toolbar.accessibilityLabel.chat')}
@@ -1557,6 +1500,26 @@ class Toolbox extends Component<Props, State> {
                             showLabel={true} />
                     );
                 case 'invite':
+                    // Invite People
+                    const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons", "invite_people"], {});
+                    const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
+                        {
+                            width: '50px',
+                            height: '50px'
+                        }
+                    }
+                    src = {
+                        iconDataInvitePeople.active_svg
+                    }
+                    beforeInjection = {
+                        (svg) => {
+                            svg.classList.add('invite-more-icon-active')
+                            svg.classList.add(iconDataInvitePeople.hover_effect)
+                            svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+                        }
+                    }
+                    /> : IconInviteMore;
+                    const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
                     return (
                         <OverflowMenuItem
                             accessibilityLabel={t('toolbar.accessibilityLabel.invite')}
@@ -1569,6 +1532,27 @@ class Toolbox extends Component<Props, State> {
                 case 'tileview':
                     return <TileViewButton showLabel={true} />;
                 case 'localrecording':
+                    // Local Recording
+                    const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"], {});
+                    const iconRec = !isEmpty(iconDataLocalRec) ? < ReactSVG style = {
+                        {
+                            width: '24px',
+                            height: '24px'
+                        }
+                    }
+                    src = {
+                        iconDataLocalRec.active_svg
+                    }
+                    beforeInjection = {
+                        (svg) => {
+                            svg.classList.add('invite-more-icon-active')
+                            svg.classList.add(iconDataLocalRec.hover_effect)
+                            svg.setAttribute('fill', iconDataLocalRec.button_active_color)
+                        }
+                    }
+                    /> : IconRec;
+                    const iconLRecFromURL = !isEmpty(iconDataLocalRec);
+                    
                     return (
                         <OverflowMenuItem
                             accessibilityLabel={t('toolbar.accessibilityLabel.localRecording')}
@@ -1719,7 +1703,70 @@ class Toolbox extends Component<Props, State> {
         /**
          * Changes the ICONS
         */
-
+        
+        //  CHAT: Chat ICON
+        const iconDataForChat = get(interfaceConfig, ["meetmoIcons", "chat"], {});
+        const iconChat = !isEmpty(iconDataForChat) ? ( < ReactSVG style = {
+                    {
+                        width: '50px',
+                        height: '50px'
+                    }
+                }
+                src = {
+                    iconDataForChat.active_svg
+                }
+                beforeInjection = {
+                    (svg) => {
+                        svg.classList.add('chat-icon-active')
+                        svg.classList.add(iconDataForChat.hover_effect)
+                        svg.setAttribute('fill', iconDataForChat.button_active_color)
+                        svg.setAttribute('stroke', iconDataForChat.svg_active_color)
+                    }
+                }
+                />) : (IconChat);
+        const iconChatFromURL = !isEmpty(iconDataForChat);
+        // RAISE HAND
+        const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"], {});
+        const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? ( < ReactSVG style = {
+                    {
+                        width: '50px',
+                        height: '50px'
+                    }
+                }
+                src = {
+                    iconDataRaisedHand.active_svg
+                }
+                beforeInjection = {
+                    (svg) => {
+                        svg.classList.add('raise-hand-icon-active')
+                        svg.classList.add(iconDataRaisedHand
+                            .hover_effect)
+                        svg.setAttribute('fill', iconDataRaisedHand.button_active_color)
+                        svg.setAttribute('stroke', iconDataRaisedHand.svg_active_color)
+                    }
+                }
+                />) : (IconRaisedHand);
+        let iconRaiseHandFromURL = !isEmpty(iconDataRaisedHand);
+        // Invite People
+        const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons", "invite_people"], {});
+        const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
+            {
+                width: '50px',
+                height: '50px'
+            }
+        }
+        src = {
+            iconDataInvitePeople.active_svg
+        }
+        beforeInjection = {
+            (svg) => {
+                svg.classList.add('invite-more-icon-active')
+                svg.classList.add(iconDataInvitePeople.hover_effect)
+                svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+            }
+        }
+        /> : IconInviteMore;
+        const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
         return (
             <div className='toolbox-content'>
                 <div className='button-group-left'>
@@ -1769,6 +1816,7 @@ class Toolbox extends Component<Props, State> {
                             accessibilityLabel=
                             {t('toolbar.accessibilityLabel.invite')}
                             icon={IconInviteMore}
+                            iconFromURL={iconInvitePeopleFromURL}
                             onClick={this._onToolbarOpenInvite}
                             tooltip={t('toolbar.invite')} />}
                     {buttonsRight.indexOf('security') !== -1

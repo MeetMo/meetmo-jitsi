@@ -24,7 +24,7 @@ import {
 class ClosedCaptionButton
 extends AbstractClosedCaptionButton {
 
-    iconData = get(interfaceConfig, ["meetmoIcons", "closed_caption"]);
+    iconData = get(interfaceConfig, ["meetmoIcons", "closed_caption"], {});
     iconCCFromURL = !isEmpty(this.iconData);
     iconClosedCaption = !isEmpty(this.iconData) ? < ReactSVG style = {
         {

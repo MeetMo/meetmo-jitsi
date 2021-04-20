@@ -86,18 +86,19 @@ class OverflowMenuItem extends Component<Props> {
         let className = 'overflow-menu-item';
 
         className += this.props.disabled ? ' disabled' : '';
-
-        if (iconFromURL) return icon;
-
         return (
             <li
                 aria-label = { accessibilityLabel }
                 className = { className }
                 onClick = { disabled ? null : onClick }>
                 <span className = 'overflow-menu-item-icon'>
-                    <Icon
-                        id = { iconId }
-                        src = { icon } />
+                    {
+                        iconFromURL ?
+                            icon : 
+                            <Icon
+                                id = { iconId }
+                                src = { icon } />
+                    }
                 </span>
                 { this._renderText() }
                 {
