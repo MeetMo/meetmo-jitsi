@@ -53,24 +53,6 @@ function InviteMore({
 }: Props) {
     
     const iconDataInvitePeople = get(interfaceConfig, ["meetmoIcons", "invite_people"], {});
-    const iconInviteMore = !isEmpty(iconDataInvitePeople) ? < ReactSVG style = {
-        {
-            width: '50px',
-            height: '50px'
-        }
-    }
-    src = {
-        iconDataInvitePeople.active_svg
-    }
-    beforeInjection = {
-        (svg) => {
-            svg.classList.add('invite-more-icon-active')
-            svg.classList.add(iconDataInvitePeople.hover_effect)
-            svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
-            svg.setAttribute('stroke', iconDataInvitePeople.button_active_color)
-        }
-    }
-    /> : IconInviteMore;
     const iconInvitePeopleFromURL = !isEmpty(iconDataInvitePeople);
     return (
         _visible
@@ -83,7 +65,24 @@ function InviteMore({
                     onClick = { onClick }>
                         {
                             iconInvitePeopleFromURL ? 
-                            iconInviteMore : <Icon src = { IconInviteMore } />
+                                <ReactSVG style = {
+                                    {
+                                        width: '50px',
+                                        height: '50px'
+                                    }
+                                }
+                                src = {
+                                    iconDataInvitePeople.active_svg
+                                }
+                                beforeInjection = {
+                                    (svg) => {
+                                        svg.classList.add('invite-more-icon-active')
+                                        svg.classList.add(iconDataInvitePeople.hover_effect)
+                                        svg.setAttribute('fill', iconDataInvitePeople.button_active_color)
+                                        svg.setAttribute('stroke', iconDataInvitePeople.button_active_color)
+                                    }
+                                }
+                                /> : <Icon src = { IconInviteMore } />
                         }
                     <div className = 'invite-more-button-text'>
                         {t('addPeople.inviteMorePrompt')}

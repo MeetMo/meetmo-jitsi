@@ -40,6 +40,7 @@ extends AbstractClosedCaptionButton {
             svg.classList.add('more-action-icon-active')
             svg.classList.add(this.iconData.hover_effect)
             svg.setAttribute('fill', this.iconData.button_active_color)
+            svg.setAttribute('stroke', this.iconData.button_active_color)
         }
     }
     /> : IconClosedCaption;
