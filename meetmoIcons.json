@@ -1,4 +1,54 @@
 {
+    APP_NAME: 'MeetMo',
+    CONNECTION_INDICATOR_AUTO_HIDE_ENABLED: true,
+    CONNECTION_INDICATOR_AUTO_HIDE_TIMEOUT: 5000,
+    CONNECTION_INDICATOR_DISABLED: false,
+    DISABLE_DOMINANT_SPEAKER_INDICATOR: true,
+    DISABLE_FOCUS_INDICATOR: true,
+    DISPLAY_WELCOME_PAGE_CONTENT: false,
+    DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
+    DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+    DISABLE_VIDEO_BACKGROUND: true,
+    HIDE_INVITE_MORE_HEADER: true,
+    HIDE_DEEP_LINKING_LOGO: true,
+    LANG_DETECTION: true,
+    TILE_VIEW_MAX_COLUMNS: 5,
+    LOCAL_THUMBNAIL_RATIO: 16 / 9,
+    MAXIMUM_ZOOMING_COEFFICIENT: 1,
+    MOBILE_APP_PROMO: false,
+    PROVIDER_NAME: 'MeetMo.io',
+    REMOTE_THUMBNAIL_RATIO: 1,
+    SHOW_CHROME_EXTENSION_BANNER: false,
+    SHOW_DEEP_LINKING_IMAGE: true,
+    SHOW_JITSI_WATERMARK: false,
+    SHOW_POWERED_BY: false,
+    SHOW_PROMOTIONAL_CLOSE_PAGE: false,
+    SHOW_WATERMARK_FOR_GUESTS: false,
+    SUPPORT_URL: 'https://meetmo.io/',
+    TOOLBAR_ALWAYS_VISIBLE: false,
+    TOOLBAR_TIMEOUT: 2000,
+    VIDEO_LAYOUT_FIT: 'both',
+    VIDEO_QUALITY_LABEL_DISABLED: true,
+    ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 3000,
+    TOOLBAR_BUTTONS:: {
+        T0: {
+                'microphone', 'camera', 'desktop', 'fullscreen',
+                'fodeviceselection', 'hangup', 'profile', 'chat',
+                'sharedvideo', 'settings',
+                'videoquality', 'filmstrip', 'invite', 'shortcuts',
+                'tileview', 'download', 'help', 'mute-everyone', 'security'
+        },
+        T2: {
+                'microphone', 'camera', 'desktop', 'fullscreen',
+                'fodeviceselection', 'hangup', 'profile', 'chat',
+                'sharedvideo', 'settings',
+                'videoquality', 'filmstrip', 'invite', 'shortcuts',
+                'tileview', 'download', 'mute-everyone'
+        },
+        T3: {
+                'microphone', 'camera', 'hangup'
+        }
+    },
     "meetmoIcons":{
         "microphone": {
             "active_svg": "https://test.meetmo.io/images/assets/microphone.svg",
@@ -152,12 +202,6 @@
         },
         "feedback": {
             "active_svg": "https://test.meetmo.io/images/assets/feedback.svg",
-            "svg_active_color": "#ff9900",           
-            "button_active_color": "#ff9900",
-            "hover_effect": "darker"
-        },
-        "speaker_stats": {
-            "active_svg": "https://test.meetmo.io/images/assets/presentation.svg",
             "svg_active_color": "#ff9900",           
             "button_active_color": "#ff9900",
             "hover_effect": "darker"
