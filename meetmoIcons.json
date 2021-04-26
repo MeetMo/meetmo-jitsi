@@ -30,25 +30,14 @@
     VIDEO_LAYOUT_FIT: 'both',
     VIDEO_QUALITY_LABEL_DISABLED: true,
     ENFORCE_NOTIFICATION_AUTO_DISMISS_TIMEOUT: 3000,
-    TOOLBAR_BUTTONS:: {
-        T0: {
+    TOOLBAR_BUTTONS:  {
                 'microphone', 'camera', 'desktop', 'fullscreen',
                 'fodeviceselection', 'hangup', 'profile', 'chat',
                 'sharedvideo', 'settings',
                 'videoquality', 'filmstrip', 'invite', 'shortcuts',
                 'tileview', 'download', 'help', 'mute-everyone', 'security'
         },
-        T2: {
-                'microphone', 'camera', 'desktop', 'fullscreen',
-                'fodeviceselection', 'hangup', 'profile', 'chat',
-                'sharedvideo', 'settings',
-                'videoquality', 'filmstrip', 'invite', 'shortcuts',
-                'tileview', 'download', 'mute-everyone'
-        },
-        T3: {
-                'microphone', 'camera', 'hangup'
-        }
-    },
+  
     "meetmoIcons":{
         "microphone": {
             "active_svg": "https://test.meetmo.io/images/assets/microphone.svg",
