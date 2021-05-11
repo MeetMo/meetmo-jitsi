@@ -638,92 +638,42 @@ export function updateLocalControls() {
         const tierType = getSessionUserType(localId);
 
         switch (tierType) {
-        case 'tier-0':
-            toolbox = [
-                'fullscreen',
+            case 'tier-0':
+                settingsSections = [
+                    'devices',
+                    'language',
+                    'moderator',
+                    'profile',
+                    'calendar'
+                ];
+                break;
+            case 'tier-1':
+                settingsSections = [
+                    'devices'
+                ];
+                break;
+            case 'tier-2':
+                settingsSections = [
+                    'devices'
+                ];
+                break;
+            case 'tier-3':
+            default:
+                settingsSections = [
+                    'devices'
+                ];
+                break;
+            }
 
-                // 'microphone',
-                'profile',
-
-                // 'hangup',
-                // 'camera',
-                'recording',
-                'desktop',
-                'chat',
-                'security',
-                'background',
-                'layout',
-                'videoquality',
-                'livestreaming',
-                'sharedvideo',
-                'settings',
-                'mute-everyone',
-                'shortcuts',
-                'stats',
-                'embedmeeting',
-                'tileview',
-                'invite'
-            ];
-            settingsSections = [
-                'devices',
-                'language',
-                'moderator',
-                'profile',
-                'calendar'
-            ];
-            break;
-        case 'tier-1':
-            toolbox = [
-                'fullscreen',
-                'microphone',
-
-                // 'hangup',
-                'camera',
-                'chat',
-                'desktop',
-                'settings',
-                'tileview',
-                'videoquality'
-            ];
-            settingsSections = [
-                'devices'
-            ];
-            break;
-        case 'tier-2':
-            toolbox = [
-                'fullscreen',
-                'microphone',
-
-                // 'hangup',
-                'camera',
-                'chat',
-                'desktop',
-                'settings',
-                'tileview',
-                'videoquality'
-            ];
-            settingsSections = [
-                'devices'
-            ];
-            break;
-        case 'tier-3':
-        default:
-            toolbox = [
-                'fullscreen',
-
-                // 'hangup',
-                'chat',
-                'settings',
-                'tileview',
-                'videoquality'
-            ];
-            settingsSections = [
-                'devices'
-            ];
-            break;
-        }
-
-        interfaceConfig.TOOLBAR_BUTTONS = toolbox;
+        interfaceConfig.TOOLBAR_BUTTONS = interfaceConfig.TOOLBAR_BUTTONS ? 
+                                interfaceConfig.TOOLBAR_BUTTONS : [
+                                    'microphone', 'camera', 'hangup',
+                                    'chat', 'tileview', 'invite', 'security',
+                                    'recording', 'desktop', 'profile', 'livestreaming', 'sharedvideo',
+                                    'background', 'layout', 'videoquality', 'settings', 'mute-everyone',
+                                    'shortcuts', 'stats', 'embedmeeting',
+                                    
+                                ];
         interfaceConfig.SETTINGS_SECTIONS = settingsSections;
     }
 }
