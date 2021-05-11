@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import { ReactSVG } from 'react-svg';
 import { get, isEmpty } from 'lodash';
 
 import { IconMicDisabled, IconMicrophone } from '../../icons';
@@ -17,42 +16,29 @@ declare var interfaceConfig: Object;
 export default class AbstractAudioMuteButton<P: Props, S: *>
     extends AbstractButton<P, S> {
     iconData = get(interfaceConfig, ["meetmoIcons", "microphone"], {});
-    icon = !isEmpty(this.iconData) ? < ReactSVG style = {
-        {
-            width: '50px',
-            height: '50px'
-        }
-    }
-    src = {
-        this.iconData.active_svg
-    }
-    beforeInjection = {
-        (svg) => {
-            svg.classList.add('mic-icon-active')
-            svg.classList.add(this.iconData.hover_effect)
-            svg.setAttribute('fill', this.iconData.button_active_color)
-            svg.setAttribute('stroke', this.iconData.button_active_color)
-        }
-    }
-    /> : IconMicrophone;
-    toggledIcon = !isEmpty(this.iconData) ? < ReactSVG style = {
-        {
-            width: '50px',
-            height: '50px'
-        }
-    }
-    src = {
-        this.iconData.inactive_svg
-    }
-    beforeInjection = {
-        (svg) => {
-            svg.classList.add('mic-icon-inactive')
-            svg.classList.add(this.iconData.hover_effect)
-            svg.setAttribute('fill', this.iconData.button_active_color)
-            svg.setAttribute('stroke', this.iconData.button_active_color)
-        }
-    }
-    /> : IconMicDisabled;
+    icon = !isEmpty(this.iconData) ? (
+        <IconFromConfig
+            configuration={this.iconData}
+            style={{
+                width: "50px",
+                height: "50px",
+            }}
+        />
+    ) : (
+        IconMicrophone
+    );
+    toggledIcon = !isEmpty(this.iconData) ? (
+        <IconFromConfig
+            configuration={this.iconData}
+            iconKey="inactive_svg"
+            style={{
+                width: "50px",
+                height: "50px",
+            }}
+        />
+    ) : (
+        IconMicDisabled
+    );
     iconFromURL = !isEmpty(this.iconData);
 
 
