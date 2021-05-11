@@ -1847,7 +1847,7 @@ class Toolbox extends Component<Props, State> {
                         && <ToolbarButton
                             accessibilityLabel=
                             {t('toolbar.accessibilityLabel.invite')}
-                            icon={IconInviteMore}
+                            icon={iconInviteMore}
                             iconFromURL={iconInvitePeopleFromURL}
                             onClick={this._onToolbarOpenInvite}
                             tooltip={t('toolbar.invite')} />}
