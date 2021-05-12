@@ -667,12 +667,11 @@ export function updateLocalControls() {
 
         interfaceConfig.TOOLBAR_BUTTONS = interfaceConfig.TOOLBAR_BUTTONS ? 
                                 interfaceConfig.TOOLBAR_BUTTONS : [
-                                    'microphone', 'camera', 'hangup',
-                                    'chat', 'tileview', 'invite', 'security',
-                                    'recording', 'desktop', 'profile', 'livestreaming', 'sharedvideo',
-                                    'background', 'layout', 'videoquality', 'settings', 'mute-everyone',
-                                    'shortcuts', 'stats', 'embedmeeting',
-                                    
+                                    'microphone', 'camera', 'hangup', 'closedcaptions',
+                                    'chat', 'tileview', 'invite', 'security', 'fullscreen', 'fodeviceselection', 
+                                    'recording', 'desktop', 'profile', 'livestreaming', 'sharedvideo', 'etherpad',
+                                    'background', 'layout', 'videoquality', 'settings', 'mute-everyone', 'raisehand',
+                                    'shortcuts', 'stats', 'embedmeeting', 'filmstrip', 'feedback', 'stats', 'mute-video-everyone'
                                 ];
         interfaceConfig.SETTINGS_SECTIONS = settingsSections;
     }

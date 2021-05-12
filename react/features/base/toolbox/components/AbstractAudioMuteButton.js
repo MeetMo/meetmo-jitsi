@@ -3,6 +3,8 @@
 import React from 'react';
 import { get, isEmpty } from 'lodash';
 
+import { IconFromConfig } from "../../../base/icons";
+
 import { IconMicDisabled, IconMicrophone } from '../../icons';
 
 import AbstractButton from './AbstractButton';
