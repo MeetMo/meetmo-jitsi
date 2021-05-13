@@ -665,8 +665,10 @@ export function updateLocalControls() {
                 break;
             }
 
-        interfaceConfig.TOOLBAR_BUTTONS = interfaceConfig.TOOLBAR_BUTTONS ? 
-                                interfaceConfig.TOOLBAR_BUTTONS : [
+        let interfaceKeys = Object.keys(interfaceConfig);
+        let matched = interfaceKeys.filter(function(o){ return o.toLowerCase() == "toolbar_buttons"});
+        interfaceConfig.TOOLBAR_BUTTONS = matched && matched.length ? 
+                                interfaceConfig[matched[0]] : [
                                     'microphone', 'camera', 'hangup', 'closedcaptions',
                                     'chat', 'tileview', 'invite', 'security', 'fullscreen', 'fodeviceselection', 
                                     'recording', 'desktop', 'profile', 'livestreaming', 'sharedvideo', 'etherpad',
