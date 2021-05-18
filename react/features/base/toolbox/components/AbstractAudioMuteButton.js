@@ -1,14 +1,9 @@
 // @flow
 
-import React from 'react';
-import { ReactSVG } from 'react-svg';
-
 import { IconMicDisabled, IconMicrophone } from '../../icons';
 
 import AbstractButton from './AbstractButton';
 import type { Props } from './AbstractButton';
-
-declare var interfaceConfig: Object;
 
 /**
  * An abstract implementation of a button for toggling audio mute.
@@ -16,12 +11,8 @@ declare var interfaceConfig: Object;
 export default class AbstractAudioMuteButton<P: Props, S: *>
     extends AbstractButton<P, S> {
 
-    // icon = IconMicrophone;
-    // toggledIcon = IconMicDisabled;
-    icon = <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.microphone_button.svg} />;
-    toggledIcon = <ReactSVG style={{width: '50px', height: '50px'}} src={interfaceConfig.microphone_button.svg_muted} />;
-    iconFromURL = !!interfaceConfig.microphone_button.svg;
-
+    icon = IconMicrophone;
+    toggledIcon = IconMicDisabled;
 
     /**
      * Handles clicking / pressing the button, and toggles the audio mute state

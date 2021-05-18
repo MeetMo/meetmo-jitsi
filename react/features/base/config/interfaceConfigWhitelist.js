@@ -55,7 +55,5 @@ export default [
     'VERTICAL_FILMSTRIP',
     'VIDEO_LAYOUT_FIT',
     'VIDEO_QUALITY_LABEL_DISABLED',
-    'filmStripOnly',
-    'microphone_button',
-    'video_button'
+    'filmStripOnly'
 ];

@@ -36,7 +36,7 @@ function EmbedMeeting({ t, url }: Props) {
      */
     const getEmbedCode = () =>
         `<iframe allow="camera; microphone; display-capture" src="${url}`
-        + 'allowfullscreen="false" style="height: 100%; width: 100%; border: 0px;"></iframe>';
+        + 'allowfullscreen="true" style="height: 100%; width: 100%; border: 0px;"></iframe>';
 
     return (
         <Dialog
