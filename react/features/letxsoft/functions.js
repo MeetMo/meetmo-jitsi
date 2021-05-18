@@ -3,8 +3,8 @@ import { Strophe } from 'strophe.js';
 
 import VideoLayout from '../../../modules/UI/videolayout/VideoLayout';
 import { getLocalParticipant } from '../base/participants';
+import { setTileViewDimensions } from '../filmstrip/actions.web';
 import { setTileView, getCurrentLayout } from '../video-layout';
-
 
 import { getSessionUserType } from './actions.web';
 
@@ -29,8 +29,8 @@ export function changeLayout(layout, dispatch) {
         _b.classList.remove('layout-1', 'layout-2', 'layout-3',
         'layout-4', 'layout-5', 'layout-6', 'layout-7', 'layout-8',
         'layout-9', 'layout-10', 'layout-11', 'layout-12', 'layout-13',
-        'layout-14', 'layout-15');
-        _b.classList.add(layout);
+        'layout-14', 'layout-15', 'layout-16');
+        layout && _b.classList.add(layout);
     }
     dispatch(setTileView(true))
     .then(() => {
@@ -53,34 +53,55 @@ export function updateLayout() {
     if (!document) {
         return;
     }
+    const state = APP.store.getState();
+    const tileView = getCurrentLayout(state) === 'tile-view' ? 1 : 0;
 
     if (document.body.classList.value.indexOf('layout-') === -1) {
         updateYoutubeIframe();
+        if (tileView) {
+            const { gridDimensions } = state['features/filmstrip'].tileViewDimensions;
+            const { clientHeight, clientWidth } = state['features/base/responsive-ui'];
+            const { isOpen } = state['features/chat'];
 
-        return;
+            APP.store.dispatch(
+                setTileViewDimensions(
+                    gridDimensions,
+                    {
+                        clientHeight,
+                        clientWidth
+                    },
+                    isOpen
+                )
+            );
+            addDimensionRemoteContainer([ '', '', '', '', '', '' ]);
+        }
+    } else {
+
+        // Set the margin to 0 for the container
+        const frvc = document.getElementById('filmstripRemoteVideosContainer');
+
+        frvc.style.margin = 0;
+        frvc.style.width = '100%';
+        frvc.style.height = '100%';
     }
-    const localVideo = document.getElementById('localVideoTileViewContainer');
-
-    // Set the margin to 0 for the container
-    const frvc = document.getElementById('filmstripRemoteVideosContainer');
-
-    frvc.style.margin = 0;
-    frvc.style.width = '100%';
-    frvc.style.height = '100%';
 
     // Set the width and height of the span#localVideoContainer
-    const lv = localVideo.children[0];
+    const lv = document.getElementById('localVideoContainer');
 
-    if (lv) {
-        console.log('Update layout =>', localVideo, localVideo.children);
+    if (lv && document.body.classList.value.indexOf('layout-') !== -1) {
+        // console.log('Update layout =>', localVideo, localVideo.children);
         lv.style.width = '100%';
         lv.style.height = '100%';
         lv.style.minWidth = '';
         lv.style.minHeight = '';
     }
 
-    const localParticipant = getLocalParticipant(APP.store.getState());
+    const localParticipant = getLocalParticipant(state);
     const usertypes = getSessionUserType();
+
+    if (!usertypes) {
+        return;
+    }
 
     const videoDimentions = getVideoDimentions();
 
@@ -93,7 +114,6 @@ export function updateLayout() {
     } else if (usertypes[localParticipant.id] === 'tier-2') {
         Tier2Count = 1;
     }
-
     setNewClassDimention(usertypes[localParticipant.id], lv, videoDimentions);
 
     // Get all the participants
@@ -112,26 +132,6 @@ export function updateLayout() {
         }
         setNewClassDimention(usertypes[participant._id], par, videoDimentions);
     });
-
-    // if (document.body.classList.value.indexOf('layout-4') !== -1) {
-    //     const state = APP.store.getState();
-    //     const { gridDimensions } = state['features/filmstrip'].tileViewDimensions;
-    //     const { clientHeight, clientWidth } = state['features/base/responsive-ui'];
-    //     const { isOpen } = state['features/chat'];
-
-    //     APP.store.dispatch(
-    //         setTileViewDimensions(
-    //             gridDimensions,
-    //             {
-    //                 clientHeight,
-    //                 clientWidth
-    //             },
-    //             isOpen
-    //         )
-    //     );
-
-    //     return;
-    // }
 }
 
 /**
@@ -147,6 +147,7 @@ function setNewClassDimention(userType, ele, dim) {
     if (!ele) {
         return;
     }
+    console.log('BOOOOOOO', userType);
     let _dim = dim;
     const state = APP.store.getState();
 
@@ -156,30 +157,38 @@ function setNewClassDimention(userType, ele, dim) {
         return;
     }
     const layout = state['features/letxsoft'].layout;
-    const _layoutNumber = layout.replace('layout-', '');
-    const tileView = getCurrentLayout(state) === 'tile-view' ? 1 : 0;
-
-    console.log('HHHH layout =>>>', layout, userType);
 
     // Remove the top, bottom, left, right property of the element from layout-9
     ele.style.left = ele.style.right = ele.style.top
     = ele.style.bottom = ele.style.marginLeft = ele.style.marginRight
     = ele.style.marginTop = ele.style.marginBottom = '';
+
+    // We don't need to set the heights and widths of the tier types
+    // when the layout is unset.
+    if (layout === '' || layout === undefined) {
+        return;
+    }
+
+    const _layoutNumber = layout.replace('layout-', '');
+    const tileView = getCurrentLayout(state) === 'tile-view' ? 1 : 0;
+
+    // console.log('HHHH layout =>>>', layout, userType);
+
     const { clientHeight, clientWidth } = state['features/base/responsive-ui'];
 
     if (userType === 'tier-1' && tileView) {
 
         const { _halfWidth, _halfHeight, height } = getHalfWidthHeight(_layoutNumber, clientWidth, clientHeight);
 
-        console.log('tier-1 calculations =>',
-            [ clientWidth, clientHeight ],
-            [ _halfWidth, _halfHeight ],
-            height);
+        // console.log('tier-1 calculations =>',
+        //     [ clientWidth, clientHeight ],
+        //     [ _halfWidth, _halfHeight ],
+        //     height);
 
         _dim = [ _halfWidth, height ];
 
         // Set top/left margin according to the layout.
-        console.log('booom layout =>', layout, _dim);
+        // console.log('booom layout =>', layout, _dim);
         if (layout === 'layout-1' || layout === 'layout-2' || layout === undefined
             || layout === 'layout-7' || layout === 'layout-8' || layout === 'layout-10') {
             // Get the top margin.
@@ -187,7 +196,7 @@ function setNewClassDimention(userType, ele, dim) {
 
             ele.style.marginTop = `${marT}px`;
             ele.style.marginLeft = '';
-        } else if (layout === 'layout-3') {
+        } else if (layout === 'layout-3' || layout === 'layout-16') {
             const marL = (clientWidth - _halfWidth) / 2;
             const marT = (_halfHeight - height) / 2;
 
@@ -293,8 +302,17 @@ function setNewClassDimention(userType, ele, dim) {
 
 
         // Apply top margin to only middle columns
+<<<<<<< HEAD
         if (Tier2Count > whDivident[1]) {
             ele.style.marginTop = `${DT_MARGIN}px`;
+=======
+        // This will be applied only for layout 5, 14, 15
+        if ([ '5', '14', '15' ].includes(layout)) {
+            if (Tier2Count > whDivident[1]) {
+                ele.style.marginTop = `${DT_MARGIN}px`;
+            }
+            ele.style.marginBottom = `${DT_MARGIN}px`;
+>>>>>>> letxsoft-1
         }
         ele.style.marginBottom = `${DT_MARGIN}px`;
     } else {
@@ -302,15 +320,13 @@ function setNewClassDimention(userType, ele, dim) {
         ele.style.marginTop = '';
     }
 
-    // if (layout !== 'layout-4' && tileView) {
-    //     addDimensionRemoteContainer([ '', '', '', '', '', '' ]);
-    // }
     const __hi = tileView ? `${_dim[1]}px` : '',
         __wi = tileView ? `${_dim[0]}px` : '';
 
     ele.style.width = __wi;
     ele.style.height = __hi;
-    console.log('setNewClassDimention participant check =>', userType, dim, _dim, ele, __wi, __hi);
+
+    // console.log('setNewClassDimention participant check =>', userType, dim, _dim, ele, __wi, __hi);
 
     // Update the avatar size if the height is less than 100px
     const avaWh = _dim[1] < 100 ? _dim[1] : 100;
@@ -382,11 +398,21 @@ function getVideoDimentions() {
     }
     const layout = state['features/letxsoft'].layout;
 
+<<<<<<< HEAD
+=======
+    if (!layout) {
+        return;
+    }
+
+>>>>>>> letxsoft-1
     // For the layout-5, 14 and 15. We need to keep the videos of tier1
     // tier2 on the same level so we get the height of the tier1 and then
     // set the size of the tier2 parent box for the solution.
     let hei;
+<<<<<<< HEAD
     const wid = frv.offsetWidth;
+=======
+>>>>>>> letxsoft-1
 
     if ([ 'layout-5', 'layout-14', 'layout-15' ].includes(layout)) {
         const { height } = getTier1Dimensions();
@@ -396,6 +422,21 @@ function getVideoDimentions() {
         hei = frv.offsetHeight;
     }
 
+<<<<<<< HEAD
+=======
+    // For the layout-6. We need to keep the videos of tier1
+    // tier2 on the same level so we get the width of the tier1 and then
+    // set the size of the tier2 parent box for the solution.
+    // if ([ 'layout-6'].includes(layout)) {
+    //     const { _halfWidth } = getTier1Dimensions();
+
+    //     wid = (_halfWidth * 4) + 10;
+    // } else {
+    const wid = frv.offsetWidth;
+
+    // }
+
+>>>>>>> letxsoft-1
     const whDivident = getSmallLayoutsNumbers(layout);
 
     // Keep the ratio of video to 16/9
@@ -411,26 +452,41 @@ function getVideoDimentions() {
     console.log('refined width and height', whDivident, [ _w, _h ], _h * whDivident[1], hei, wid);
 
 
+<<<<<<< HEAD
     if ([ 'layout-1', 'layout-2', undefined, 'layout-5', 'layout-7', 'layout-8', 'layout-11',
         'layout-12', 'layout-14', 'layout-15' ].includes(layout)) {
+=======
+    if ([ 'layout-1', 'layout-2', 'layout-3', undefined, 'layout-5', 'layout-6', 'layout-7', 'layout-8', 'layout-11',
+        'layout-12', 'layout-14', 'layout-15', 'layout-16' ].includes(layout)) {
+>>>>>>> letxsoft-1
         // Get the top margin.
         const th = (hei - ((_h + 6) * whDivident[1])) / 2;
         const tw = (wid - ((_w + 10) * whDivident[0])) / 2;
 
-        console.log(' Layout 1', wid, hei, _w, _h, th, whDivident[1]);
+        console.log(' Layout 1', wid, hei, _w, _h, th, tw, whDivident[1]);
 
-        if (th > 0) {
-            frvc.style.marginTop = `${th}px`;
+        // Done' apply margin top to layout-16
+        if (![ 'layout-16' ].includes(layout)) {
+            if (th > 0) {
+                frvc.style.marginTop = `${th}px`;
+            }
         }
-        if (tw > 0) {
-            frvc.style.marginLeft = `${tw}px`;
+
+        // Don't apply marginleft for left facing layouts
+        if (![ 'layout-1', 'layout-2', 'layout-5', 'layout-7',
+            'layout-8', 'layout-10', 'layout-11', 'layout-12',
+            'layout-13', 'layout-14', 'layout-15' ].includes(layout)) {
+            if (tw > 0) {
+                frvc.style.marginLeft = `${tw}px`;
+            }
         }
-    } else if (layout === 'layout-3') {
-        // Get the left margin.
-        frvc.style.marginLeft = '';
-        frvc.style.marginTop = '';
-        frvc.style.width = '';
-        frvc.style.height = '';
+
+    // } else if (layout === 'layout-3') {
+    //     // Get the left margin.
+    //     frvc.style.marginLeft = '';
+    //     frvc.style.marginTop = '';
+    //     frvc.style.width = '';
+    //     frvc.style.height = '';
     } else if (layout === 'layout-4') {
         const _marginW = (wid - (_w * whDivident[0])) / 2;
         const _marginH = (hei - (_h * whDivident[1])) / 2;
@@ -448,13 +504,23 @@ function getVideoDimentions() {
     } else if ([ 'layout-5', 'layout-14', 'layout-15' ].includes(layout)) {
         // For layout 5, 14 and 15 We need to set the height of tier 2 box
         // same as the tier one box, Adding margin dynamically will resolve the issue
+<<<<<<< HEAD
         frvc.style.width = `${wid}px`;
         frvc.style.height = `${hei}px`;
+=======
+        // frvc.style.width = `${wid}px`;
+        frvc.style.width = `${((_w + 10) * whDivident[0]) + 4}px`;
+        frvc.style.height = `${hei}px`;
+        DT_MARGIN = (frvc.offsetHeight - (whDivident[1] * _h)) / ((whDivident[1] * 2) - 2);
+>>>>>>> letxsoft-1
     }
     console.log('width and height of the container ', (_w + 5) * whDivident[0], (_h + 5) * whDivident[1]);
 
     // Set the dynamic margin top for tier 2 users
+<<<<<<< HEAD
     DT_MARGIN = (frvc.offsetHeight - (whDivident[1] * _h)) / ((whDivident[1] * 2) - 2);
+=======
+>>>>>>> letxsoft-1
 
     // alert('Width and Height '+_w+' --- '+_h);
     return [ _w, _h ];
@@ -507,6 +573,10 @@ function getSmallLayoutsNumbers(layout) {
         w = 4;
         h = 6;
         break;
+    case 'layout-16':
+        w = 7;
+        h = 1;
+        break;
     case 'layout-1':
     default:
         w = 3;
@@ -556,6 +626,13 @@ function getHalfWidthHeight(_layoutNumber, clientWidth, clientHeight) {
         _wMultiplier = 0.3;
         _hMultiplier = 0.5;
         break;
+<<<<<<< HEAD
+=======
+    case '16':
+        _wMultiplier = 1;
+        _hMultiplier = 0.78;
+        break;
+>>>>>>> letxsoft-1
     case '1':
     case '2':
     case '3':
@@ -638,6 +715,7 @@ export function updateLocalControls() {
         const tierType = getSessionUserType(localId);
 
         switch (tierType) {
+<<<<<<< HEAD
             case 'tier-0':
                 settingsSections = [
                     'devices',
@@ -664,6 +742,89 @@ export function updateLocalControls() {
                 ];
                 break;
             }
+=======
+        case 'tier-0':
+            toolbox = [
+                'fullscreen',
+
+                // 'microphone',
+                'profile',
+
+                // 'hangup',
+                // 'camera',
+                'recording',
+                'desktop',
+                'security',
+                'background',
+                'layout',
+                'videoquality',
+                'livestreaming',
+                'sharedvideo',
+                'settings',
+                'mute-everyone',
+                'shortcuts',
+                'stats',
+                'embedmeeting',
+                'tileview',
+                'invite'
+            ];
+            settingsSections = [
+                'devices',
+                'language',
+                'moderator',
+                'profile',
+                'calendar'
+            ];
+            break;
+        case 'tier-1':
+            toolbox = [
+                'fullscreen',
+                'microphone',
+
+                // 'hangup',
+                'camera',
+                'settings',
+
+                'tileview',
+                'videoquality'
+            ];
+            settingsSections = [
+                'devices'
+            ];
+            break;
+        case 'tier-2':
+            toolbox = [
+                'fullscreen',
+                'microphone',
+
+                // 'hangup',
+                'camera',
+                'settings',
+
+                'tileview',
+                'videoquality'
+            ];
+            settingsSections = [
+                'devices'
+            ];
+            break;
+        case 'tier-3':
+        default:
+            toolbox = [
+                'fullscreen',
+
+                // 'hangup',
+                'settings',
+
+                'tileview',
+                'videoquality'
+            ];
+            settingsSections = [
+                'devices'
+            ];
+            break;
+        }
+>>>>>>> letxsoft-1
 
         let interfaceKeys = Object.keys(interfaceConfig);
         let matched = interfaceKeys.filter(function(o){ return o.toLowerCase() == "toolbar_buttons"});

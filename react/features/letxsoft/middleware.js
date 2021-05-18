@@ -38,15 +38,16 @@ MiddlewareRegistry.register(store => next => action => {
 
     switch (action.type) {
     case CLIENT_RESIZED: {
-        const state = store.getState();
-        const layout = getCurrentLayout(state);
+        // const state = store.getState();
+        // const layout = getCurrentLayout(state);
 
-        switch (layout) {
-        case LAYOUTS.TILE_VIEW: {
-            updateLayout();
-            break;
-        }
-        }
+        updateLayout();
+
+        // switch (layout) {
+        // case LAYOUTS.TILE_VIEW: {
+        //     break;
+        // }
+        // }
         break;
     }
     case PARTICIPANT_JOINED:

@@ -10,8 +10,6 @@ import { IconMicDisabled, IconMicrophone } from '../../icons';
 import AbstractButton from './AbstractButton';
 import type { Props } from './AbstractButton';
 
-declare var interfaceConfig: Object;
-
 /**
  * An abstract implementation of a button for toggling audio mute.
  */

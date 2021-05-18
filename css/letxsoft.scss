@@ -51,6 +51,12 @@ body, #react > div {
             pointer-events: none !important;
         }
     }
+    // hide the local video of tier-0 and .tier-3
+    #localVideoContainer {
+        &.tier-0,&.tier-3 {
+            display: none;
+        }
+    }
     .layout-1-1 {
         float: left;
         position: absolute;
@@ -65,6 +71,10 @@ body, #react > div {
 }
 .layout-1, .layout-2, .layout-5, .layout-7, .layout-8, .layout-10, .layout-11, .layout-12, .layout-13, .layout-14, .layout-15 {
     #videoconference_page.tile-view {
+        #filmstripRemoteVideos {
+            height: 100%;
+            margin: 0;
+        }
         #remoteVideos {
             width: 50%;
             margin-left: calc(53vw);
@@ -191,7 +201,7 @@ body, #react > div {
     }
 }
 
-.layout-1, .layout-2, .layout-3, .layout-4, .layout-5, .layout-6, .layout-7, .layout-8, .layout-10, .layout-11, .layout-12, .layout-13, .layout-14, .layout-15 {
+.layout-1, .layout-2, .layout-3, .layout-4, .layout-5, .layout-6, .layout-7, .layout-8, .layout-10, .layout-11, .layout-12, .layout-13, .layout-14, .layout-15, .layout-16 {
     #videoconference_page.tile-view {
         div#filmstripRemoteVideosContainer {
             width: 100%;
@@ -217,8 +227,8 @@ body, #react > div {
             margin: 0;
         }
         #remoteVideos {
-            height: 70% !important;
-            margin-top: calc(30vh);
+            height: 60% !important;
+            margin-top: calc(40vh);
         }
         .tier-1 {
             position: absolute;
@@ -250,6 +260,29 @@ body, #react > div {
         }
     }
 }
+
+.layout-16 {
+    #videoconference_page.tile-view {
+        #filmstripRemoteVideos {
+            height: 100%;
+            margin: 0;
+        }
+        #remoteVideos {
+            height: 20% !important;
+            margin-top: calc(80vh);
+        }
+        .tier-1 {
+            position: absolute;
+            top: 20px;
+            left: 0;
+        }
+        .tier-2 {
+            display: inline-block;
+            float: left;
+        }
+    }
+}
+
 #videoconference_page.tile-view {
     #filmstripRemoteVideosContainer {
         margin: 0 auto;

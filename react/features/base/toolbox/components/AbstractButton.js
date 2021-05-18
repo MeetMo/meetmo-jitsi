@@ -117,13 +117,6 @@ export default class AbstractButton<P: Props, S: *> extends Component<P, S> {
     tooltip: ?string;
 
     /**
-     * This key checks if image is loaded from url.
-     * 
-     * @abstract
-     */
-    iconFromURL: Boolean;
-
-    /**
      * Initializes a new {@code AbstractButton} instance.
      *
      * @param {Props} props - The React {@code Component} props to initialize
@@ -273,7 +266,6 @@ export default class AbstractButton<P: Props, S: *> extends Component<P, S> {
         const props = {
             ...this.props,
             accessibilityLabel: this.accessibilityLabel,
-            iconFromURL: this.iconFromURL,
             disabled: this._isDisabled(),
             elementAfter: this._getElementAfter(),
             icon: this._getIcon(),

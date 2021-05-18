@@ -193,7 +193,10 @@ export default class RemoteVideo extends SmallVideo {
         const currentLayout = getCurrentLayout(APP.store.getState());
         let remoteMenuPosition;
 
-        if (currentLayout === LAYOUTS.TILE_VIEW) {
+        // Add the menu position for the 16th layout to top center
+        if ([ 'layout-3', 'layout-6', 'layout-16' ].includes(APP.store.getState()['features/letxsoft'].layout)) {
+            remoteMenuPosition = 'top right';
+        } else if (currentLayout === LAYOUTS.TILE_VIEW) {
             remoteMenuPosition = 'left top';
         } else if (currentLayout === LAYOUTS.VERTICAL_FILMSTRIP_VIEW) {
             remoteMenuPosition = 'left bottom';
