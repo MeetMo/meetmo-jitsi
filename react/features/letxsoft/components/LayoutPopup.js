@@ -64,7 +64,7 @@ class LayoutPopup extends Component<Props, *> {
     _renderLayouts() {
         const layouts = [];
 
-        for (let index = 1; index < 11; index++) {
+        for (let index = 1; index < 17; index++) {
             const selected = document.body ? document.body.classList.contains(`layout-${index}`) : false;
 
             layouts.push(
@@ -96,8 +96,15 @@ class LayoutPopup extends Component<Props, *> {
     _onLayoutChange(event) {
         event.preventDefault();
         const _tar = event.target,
-            elem = _tar.classList.contains('layout') ? _tar : _tar.closest('.layout'),
-            layout = elem.dataset.layout;
+            elem = _tar.classList.contains('layout') ? _tar : _tar.closest('.layout');
+        let layout = elem.dataset.layout;
+
+
+        // check if the current click layout is already selected.
+        // If it is already selected than unselect the current layout.
+        if (elem.getElementsByClassName('layout-bottom')[0].classList.contains('selected')) {
+            layout = '';
+        }
 
         this.props.dispatch(updateLayoutAPI(layout));
         this.props.dispatch(setLayout(layout));

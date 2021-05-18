@@ -15,7 +15,7 @@ var interfaceConfig = {
      * Note: this mode is experimental and subject to breakage.
      */
     AUTO_PIN_LATEST_SCREEN_SHARE: 'remote-only',
-    BASE_API: 'https://fox-dev.meetmo.io',
+    BASE_API: 'https://app.meetmo.io',
     BRAND_WATERMARK_LINK: '',
     CLOSE_PAGE_GUEST_HINT: false, // A html text to be shown to guests on the close page, false disables it
     /**
@@ -191,7 +191,7 @@ var interfaceConfig = {
      * - 'desktop' controls the "Share your screen" button
      */
     TOOLBAR_BUTTONS: [
-        'microphone', 'camera',
+        'microphone', 'camera', 'fullscreen',
         'fodeviceselection',
         'settings',
         'videoquality', 'filmstrip', 'shortcuts',

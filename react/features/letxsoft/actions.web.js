@@ -191,12 +191,9 @@ export function conferenceWillJoinTier(store: Store<*, *>, next: Dispatch<any>, 
 
         // Focus recognition
         const jid = mucUserItem && mucUserItem.getAttribute('jid');
-	
-	// Mobile fix: Currently we don't have any tier feature in mobile jitsi sdk and all the users from mobile
-	// Connects to the conference and appears in a web app as a hidden domain.
-        // We are making them visible as tier-2 and will remove this fix later .
+
         let userType = type !== undefined && type.childNodes[0] !== undefined
-            ? type.childNodes[0].nodeValue : 'tier-2'; // Replace tier-2 with tier-3
+            ? type.childNodes[0].nodeValue : 'tier-3';
 
         // make the SIP call to tier-2 by checking the jid
         if (jid.includes(`jigasi@auth.${config.hosts.domain}`)) {
@@ -680,6 +677,9 @@ export function setLobbyVideoUrl(lobbyVideoUrl: string) {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
             const data = new FormData();
@@ -692,7 +692,8 @@ export function setLobbyVideoUrl(lobbyVideoUrl: string) {
                 fetch(`${baseApi}/api/v1/lobby/update/`, {
                     method: 'POST',
                     body: data,
-                    cache: false
+                    cache: false,
+                    headers
                 })
                 .then(async _resp => {
                     const response = await _resp.json();
@@ -727,6 +728,8 @@ export function uploadNewBackground(file: Object) {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
 
@@ -739,7 +742,8 @@ export function uploadNewBackground(file: Object) {
 
                 return await fetch(`${baseApi}/api/v1/background/update/`, {
                     method: 'POST',
-                    body: data
+                    body: data,
+                    headers
                 })
                 .then(async _resp => {
                     const response = await _resp.json();
@@ -788,6 +792,8 @@ export function updateUserTier(tier: string) {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
             const data = new FormData();
@@ -799,7 +805,8 @@ export function updateUserTier(tier: string) {
             if (payload.context.user.id && tier && baseApi) {
                 fetch(`${baseApi}/api/v1/tier/update/`, {
                     method: 'POST',
-                    body: data
+                    body: data,
+                    headers
                 })
                 .then(async _resp => {
                     const response = await _resp.json();
@@ -844,6 +851,8 @@ export function updateLayoutAPI(layout: string) {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
             const data = new FormData();
@@ -854,7 +863,8 @@ export function updateLayoutAPI(layout: string) {
             if (payload.context.user.id && baseApi) {
                 fetch(`${baseApi}/api/v1/layout/update/`, {
                     method: 'POST',
-                    body: data
+                    body: data,
+                    headers
                 })
                 .then(async _resp => {
                     const response = await _resp.json();
@@ -899,11 +909,15 @@ export function getBackgrounds() {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
 
             if (payload.context.user.id && baseApi) {
-                fetch(`${baseApi}/api/v1/user/gallery/get?user_id=${payload.context.user.id}`)
+                fetch(`${baseApi}/api/v1/user/gallery/get?user_id=${payload.context.user.id}`, {
+                    headers
+                })
                 .then(async _resp => {
                     const response = await _resp.json();
 
@@ -946,11 +960,15 @@ export function getRoomInfoAndUpdate() {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
 
             if (payload.context.user.id && baseApi) {
-                fetch(`${baseApi}/api/v1/room/info/get?room_slug=${payload.room_slug}`)
+                fetch(`${baseApi}/api/v1/room/info/get?room_slug=${payload.room_slug}`, {
+                    headers
+                })
                 .then(async _resp => {
                     const response = await _resp.json();
 
@@ -987,6 +1005,8 @@ export function setBackgroundToServer(url: string) {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
             const data = new FormData();
@@ -997,7 +1017,8 @@ export function setBackgroundToServer(url: string) {
             if (payload.context.user.id && baseApi) {
                 fetch(`${baseApi}/api/v1/background/change/`, {
                     method: 'POST',
-                    body: data
+                    body: data,
+                    headers
                 })
                 .then(async _resp => {
                     const response = await _resp.json();
@@ -1024,6 +1045,8 @@ export function deleteBackgroundFromServer(url: string) {
         const { jwt } = getState()['features/base/jwt'];
 
         if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
             const payload = new JwtDecode(jwt);
             const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
             const data = new FormData();
@@ -1033,7 +1056,8 @@ export function deleteBackgroundFromServer(url: string) {
             if (payload.context.user.id && baseApi) {
                 fetch(`${baseApi}/api/v1/background/delete/`, {
                     method: 'POST',
-                    body: data
+                    body: data,
+                    headers
                 })
                 .then(async _resp => {
                     const response = await _resp.json();
@@ -1052,4 +1076,19 @@ export function deleteBackgroundFromServer(url: string) {
             }
         }
     };
+}
+
+/**
+ * Function to get the api header with token.
+ *
+ * @param {string} token - The user token for authentication.
+ * @returns {Object}
+ */
+export function getAPIHeader(token: string) {
+    const headers = new Headers();
+
+    // headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', `Bearer ${token}`);
+
+    return headers;
 }
