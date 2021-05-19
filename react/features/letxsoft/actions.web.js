@@ -1078,6 +1078,46 @@ export function deleteBackgroundFromServer(url: string) {
 }
 
 /**
+ * Action to be dispatched when raised hand and down hand
+ * from server.
+ *
+ * @param {string} action - raise_hand and down_hand.
+ * @returns {Promise}
+ */
+export function raisedHandOrDown(action: string) {
+    return async (dispatch: Dispatch<any>, getState: Function) => {
+        const { jwt } = getState()['features/base/jwt'];
+        if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
+            const payload = new JwtDecode(jwt);
+            const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
+            const data = new FormData();
+
+            data.append('user_id', payload.context.user.id);
+            data.append('room_slug', url);
+            data.append('event', action ? 'raise_hand' : 'down_hand');
+
+            if (payload.context.user.id && baseApi) {
+                fetch(`${baseApi}/api/v1/event/update/`, {
+                    method: 'POST',
+                    body: data,
+                    headers
+                })
+                .then(async _resp => {
+                    const response = await _resp.json();
+
+                    console.log('Raise hand & down request sent.', response);
+                })
+                .catch(error => {
+                    console.log(' error =>', error);
+                });
+            }
+        }
+    };
+}
+
+/**
  * Function to get the api header with token.
  *
  * @param {string} token - The user token for authentication.

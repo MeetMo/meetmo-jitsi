@@ -46,8 +46,8 @@ extends AbstractClosedCaptionButton {
     /> : IconClosedCaption;
 
     accessibilityLabel = 'toolbar.accessibilityLabel.cc';
-    icon = iconClosedCaption;
-    iconFromURL = iconCCFromURL;
+    icon = this.iconClosedCaption;
+    iconFromURL = this.iconCCFromURL;
     tooltip = 'transcribing.ccButtonTooltip';
     label = 'toolbar.startSubtitles';
     toggledLabel = 'toolbar.stopSubtitles';

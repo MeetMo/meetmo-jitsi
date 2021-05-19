@@ -302,17 +302,12 @@ function setNewClassDimention(userType, ele, dim) {
 
 
         // Apply top margin to only middle columns
-<<<<<<< HEAD
-        if (Tier2Count > whDivident[1]) {
-            ele.style.marginTop = `${DT_MARGIN}px`;
-=======
         // This will be applied only for layout 5, 14, 15
         if ([ '5', '14', '15' ].includes(layout)) {
             if (Tier2Count > whDivident[1]) {
                 ele.style.marginTop = `${DT_MARGIN}px`;
             }
             ele.style.marginBottom = `${DT_MARGIN}px`;
->>>>>>> letxsoft-1
         }
         ele.style.marginBottom = `${DT_MARGIN}px`;
     } else {
@@ -398,21 +393,14 @@ function getVideoDimentions() {
     }
     const layout = state['features/letxsoft'].layout;
 
-<<<<<<< HEAD
-=======
     if (!layout) {
         return;
     }
 
->>>>>>> letxsoft-1
     // For the layout-5, 14 and 15. We need to keep the videos of tier1
     // tier2 on the same level so we get the height of the tier1 and then
     // set the size of the tier2 parent box for the solution.
     let hei;
-<<<<<<< HEAD
-    const wid = frv.offsetWidth;
-=======
->>>>>>> letxsoft-1
 
     if ([ 'layout-5', 'layout-14', 'layout-15' ].includes(layout)) {
         const { height } = getTier1Dimensions();
@@ -422,8 +410,6 @@ function getVideoDimentions() {
         hei = frv.offsetHeight;
     }
 
-<<<<<<< HEAD
-=======
     // For the layout-6. We need to keep the videos of tier1
     // tier2 on the same level so we get the width of the tier1 and then
     // set the size of the tier2 parent box for the solution.
@@ -436,7 +422,6 @@ function getVideoDimentions() {
 
     // }
 
->>>>>>> letxsoft-1
     const whDivident = getSmallLayoutsNumbers(layout);
 
     // Keep the ratio of video to 16/9
@@ -452,13 +437,8 @@ function getVideoDimentions() {
     console.log('refined width and height', whDivident, [ _w, _h ], _h * whDivident[1], hei, wid);
 
 
-<<<<<<< HEAD
-    if ([ 'layout-1', 'layout-2', undefined, 'layout-5', 'layout-7', 'layout-8', 'layout-11',
-        'layout-12', 'layout-14', 'layout-15' ].includes(layout)) {
-=======
     if ([ 'layout-1', 'layout-2', 'layout-3', undefined, 'layout-5', 'layout-6', 'layout-7', 'layout-8', 'layout-11',
         'layout-12', 'layout-14', 'layout-15', 'layout-16' ].includes(layout)) {
->>>>>>> letxsoft-1
         // Get the top margin.
         const th = (hei - ((_h + 6) * whDivident[1])) / 2;
         const tw = (wid - ((_w + 10) * whDivident[0])) / 2;
@@ -504,23 +484,14 @@ function getVideoDimentions() {
     } else if ([ 'layout-5', 'layout-14', 'layout-15' ].includes(layout)) {
         // For layout 5, 14 and 15 We need to set the height of tier 2 box
         // same as the tier one box, Adding margin dynamically will resolve the issue
-<<<<<<< HEAD
-        frvc.style.width = `${wid}px`;
-        frvc.style.height = `${hei}px`;
-=======
         // frvc.style.width = `${wid}px`;
         frvc.style.width = `${((_w + 10) * whDivident[0]) + 4}px`;
         frvc.style.height = `${hei}px`;
         DT_MARGIN = (frvc.offsetHeight - (whDivident[1] * _h)) / ((whDivident[1] * 2) - 2);
->>>>>>> letxsoft-1
     }
     console.log('width and height of the container ', (_w + 5) * whDivident[0], (_h + 5) * whDivident[1]);
 
     // Set the dynamic margin top for tier 2 users
-<<<<<<< HEAD
-    DT_MARGIN = (frvc.offsetHeight - (whDivident[1] * _h)) / ((whDivident[1] * 2) - 2);
-=======
->>>>>>> letxsoft-1
 
     // alert('Width and Height '+_w+' --- '+_h);
     return [ _w, _h ];
@@ -626,13 +597,10 @@ function getHalfWidthHeight(_layoutNumber, clientWidth, clientHeight) {
         _wMultiplier = 0.3;
         _hMultiplier = 0.5;
         break;
-<<<<<<< HEAD
-=======
     case '16':
         _wMultiplier = 1;
         _hMultiplier = 0.78;
         break;
->>>>>>> letxsoft-1
     case '1':
     case '2':
     case '3':
@@ -715,7 +683,6 @@ export function updateLocalControls() {
         const tierType = getSessionUserType(localId);
 
         switch (tierType) {
-<<<<<<< HEAD
             case 'tier-0':
                 settingsSections = [
                     'devices',
@@ -742,89 +709,6 @@ export function updateLocalControls() {
                 ];
                 break;
             }
-=======
-        case 'tier-0':
-            toolbox = [
-                'fullscreen',
-
-                // 'microphone',
-                'profile',
-
-                // 'hangup',
-                // 'camera',
-                'recording',
-                'desktop',
-                'security',
-                'background',
-                'layout',
-                'videoquality',
-                'livestreaming',
-                'sharedvideo',
-                'settings',
-                'mute-everyone',
-                'shortcuts',
-                'stats',
-                'embedmeeting',
-                'tileview',
-                'invite'
-            ];
-            settingsSections = [
-                'devices',
-                'language',
-                'moderator',
-                'profile',
-                'calendar'
-            ];
-            break;
-        case 'tier-1':
-            toolbox = [
-                'fullscreen',
-                'microphone',
-
-                // 'hangup',
-                'camera',
-                'settings',
-
-                'tileview',
-                'videoquality'
-            ];
-            settingsSections = [
-                'devices'
-            ];
-            break;
-        case 'tier-2':
-            toolbox = [
-                'fullscreen',
-                'microphone',
-
-                // 'hangup',
-                'camera',
-                'settings',
-
-                'tileview',
-                'videoquality'
-            ];
-            settingsSections = [
-                'devices'
-            ];
-            break;
-        case 'tier-3':
-        default:
-            toolbox = [
-                'fullscreen',
-
-                // 'hangup',
-                'settings',
-
-                'tileview',
-                'videoquality'
-            ];
-            settingsSections = [
-                'devices'
-            ];
-            break;
-        }
->>>>>>> letxsoft-1
 
         let interfaceKeys = Object.keys(interfaceConfig);
         let matched = interfaceKeys.filter(function(o){ return o.toLowerCase() == "toolbar_buttons"});

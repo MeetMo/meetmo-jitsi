@@ -33,6 +33,7 @@ import {
     getParticipants,
     participantUpdated
 } from '../../../base/participants';
+import { raisedHandOrDown } from '../../../letxsoft/actions.web';
 import { connect, equals } from '../../../base/redux';
 import { OverflowMenuItem } from '../../../base/toolbox/components';
 import { getLocalVideoTrack, toggleScreensharing } from '../../../base/tracks';
@@ -870,6 +871,7 @@ class Toolbox extends Component<Props, State> {
      * @returns {void}
      */
     _onToolbarToggleRaiseHand() {
+        raisedHandOrDown(!this.props._raisedHand);
         sendAnalytics(createToolbarEvent(
             'raise.hand',
             { enable: !this.props._raisedHand }));
@@ -1312,7 +1314,7 @@ class Toolbox extends Component<Props, State> {
                 case 'desktop':
                     return this._renderDesktopSharingButton(true);
                 case 'raisehand':
-                    // RAISE HAND
+                    // RAISE HAND Icon Changes
                     const iconDataRaisedHand = get(interfaceConfig, ["meetmoIcons", "raise_hand"], {});
                     const iconRaisedHand = !isEmpty(iconDataRaisedHand) ? (
                         <IconFromConfig configuration={iconDataRaisedHand} />

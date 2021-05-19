@@ -55,12 +55,6 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
     /> : IconCameraDisabled;
     iconFromURL = !isEmpty(this.iconData);
 
-<<<<<<< HEAD
-=======
-    icon = IconCamera;
-    toggledIcon = IconCameraDisabled;
->>>>>>> letxsoft-1
-
     /**
      * Handles clicking / pressing the button, and toggles the video mute state
      * accordingly.
