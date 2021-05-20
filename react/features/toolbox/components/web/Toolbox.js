@@ -33,7 +33,7 @@ import {
     getParticipants,
     participantUpdated
 } from '../../../base/participants';
-import { raisedHandOrDown } from '../../../letxsoft/actions.web';
+import { raisedHandOrDown, showEventPanel } from '../../../letxsoft/actions.web';
 import { connect, equals } from '../../../base/redux';
 import { OverflowMenuItem } from '../../../base/toolbox/components';
 import { getLocalVideoTrack, toggleScreensharing } from '../../../base/tracks';
@@ -253,6 +253,7 @@ class Toolbox extends Component<Props, State> {
         this._onShortcutToggleFullScreen = this._onShortcutToggleFullScreen.bind(this);
         this._onShortcutToggleRaiseHand = this._onShortcutToggleRaiseHand.bind(this);
         this._onShortcutToggleScreenshare = this._onShortcutToggleScreenshare.bind(this);
+        this._onControlPanel = this._onControlPanel.bind(this);
         this._onShortcutToggleVideoQuality = this._onShortcutToggleVideoQuality.bind(this);
         this._onToolbarOpenFeedback = this._onToolbarOpenFeedback.bind(this);
         this._onToolbarOpenInvite = this._onToolbarOpenInvite.bind(this);
@@ -701,7 +702,7 @@ class Toolbox extends Component<Props, State> {
     }
 
     _onShortcutToggleScreenshare: () => void;
-
+    
     /**
      * Creates an analytics keyboard shortcut event and dispatches an action for
      * toggling screensharing.
@@ -718,12 +719,24 @@ class Toolbox extends Component<Props, State> {
 
         this._doToggleScreenshare();
     }
+    
+    _onControlPanel: () => void;
+    
+    /**
+     * Creates an API call for the event open control panel even
+     *
+     * @private
+     * @returns {void}
+     */
+    _onControlPanel() {
+        showEventPanel();
+    }
 
     _onToolbarOpenFeedback: () => void;
 
     /**
      * Creates an analytics toolbar event and dispatches an action for toggling
-     * display of feedback.
+     * display of feedback.9
      *
      * @private
      * @returns {void}
@@ -1137,6 +1150,7 @@ class Toolbox extends Component<Props, State> {
                 key='record'
                 showLabel={true} />,
             this._renderLayoutButton(),
+            this._renderControlPanelButton(),
             this._renderBackgroundButton(),
             this._shouldShowButton('sharedvideo')
             && <OverflowMenuItem
@@ -1243,6 +1257,34 @@ class Toolbox extends Component<Props, State> {
                 key='changeLayout'
                 onClick={this._onToggleLayoutPopup}
                 text={t('toolbar.changeLayout')} />
+            : null;
+    }
+    
+    /**
+     * Renders the buttons for the control panel.
+     *
+     * @inheritdoc
+     */
+    _renderControlPanelButton() {
+        const { _isModerator, t } = this.props;
+        // Change Layout
+        const iconDataControlPanel = get(interfaceConfig, ["meetmoIcons", "control_panel"], {});
+        const iconControlPanel = !isEmpty(iconDataControlPanel) ? (
+            <IconFromConfig configuration={iconDataControlPanel} />
+        ) : (
+            IconLayoutChange
+        );
+        let iconControlPanelFromURL = !isEmpty(iconDataControlPanel);
+        
+        return this._shouldShowButton('layout') && _isModerator
+            ? 
+            <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.controlPanel')}
+                icon={iconControlPanel}
+                iconFromURL={iconControlPanelFromURL}
+                key='controlPanel'
+                onClick={this._onToggleLayoutPopup}
+                text={t('toolbar.controlPanel')} />
             : null;
     }
 
