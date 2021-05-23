@@ -28,6 +28,7 @@ import { muteAllParticipants } from '../../react/features/remote-video-menu/acti
 import { toggleTileView } from '../../react/features/video-layout';
 import { setVideoQuality } from '../../react/features/video-quality';
 import { getJitsiMeetTransport } from '../transport';
+import { updateSettings } from "../../react/features/base/settings";
 
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 
@@ -306,6 +307,24 @@ function initCommands() {
                 conference.stopRecording(activeSession.id);
             } else {
                 logger.error('No recording or streaming session found');
+            }
+        },
+
+        /**
+         * Sets volume of self or a specific user.
+         *
+         * @param { number } arg.user - User ID for whom volume needs to be set.
+         * @param { number } arg.volume - Volume level between 1 and 100.
+         * @returns {void}
+         */
+        'volume-update': ({ user, volume }) => {
+            if (user) {
+                // TODO: set volume of the user
+                console.log('TODO: set volume of ', user);
+            } else {
+                APP.store.dispatch(updateSettings({
+                    volumeUpdate: volume / 100
+                }));
             }
         }
     };

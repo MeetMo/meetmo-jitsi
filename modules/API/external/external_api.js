@@ -47,7 +47,8 @@ const commands = {
     toggleFilmStrip: 'toggle-film-strip',
     toggleShareScreen: 'toggle-share-screen',
     toggleTileView: 'toggle-tile-view',
-    toggleVideo: 'toggle-video'
+    toggleVideo: 'toggle-video',
+    volumeUpdate: 'volume-update'
 };
 
 /**
@@ -84,7 +85,8 @@ const events = {
     'dominant-speaker-changed': 'dominantSpeakerChanged',
     'subject-change': 'subjectChange',
     'suspend-detected': 'suspendDetected',
-    'tile-view-changed': 'tileViewChanged'
+    'tile-view-changed': 'tileViewChanged',
+    'volume-updated': 'volumeUpdated'
 };
 
 /**

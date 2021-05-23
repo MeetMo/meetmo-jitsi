@@ -121,6 +121,18 @@ class RemoteVideoMenuTriggerButton extends Component<Props> {
     }
 
     /**
+     * Listen to component update. Used to check if volume is updated in redux and call
+     * appropriate function to set user volume.
+     * 
+     * @param {Object} prevProps - Previous props value to compare against current this.props
+     */
+    componentDidUpdate(prevProps) {
+        if (prevProps.volumeUpdate !== this.props.volumeUpdate) {
+            this.props.onVolumeChange(this.props.volumeUpdate);
+        }
+    }
+
+    /**
      * Implements React's {@link Component#render()}.
      *
      * @inheritdoc
@@ -270,11 +282,13 @@ function _mapStateToProps(state) {
     const participant = getLocalParticipant(state);
     const { remoteVideoMenu = {}, disableRemoteMute } = state['features/base/config'];
     const { disableKick } = remoteVideoMenu;
+    const { volumeUpdate } = state['features/base/settings'];
 
     return {
         _isModerator: Boolean(participant?.role === PARTICIPANT_ROLE.MODERATOR),
         _disableKick: Boolean(disableKick),
-        _disableRemoteMute: Boolean(disableRemoteMute)
+        _disableRemoteMute: Boolean(disableRemoteMute),
+        volumeUpdate
     };
 }
 
