@@ -318,14 +318,12 @@ function initCommands() {
          * @returns {void}
          */
         'volume-update': ({ user, volume }) => {
-            if (user) {
-                // TODO: set volume of the user
-                console.log('TODO: set volume of ', user);
-            } else {
-                APP.store.dispatch(updateSettings({
-                    volumeUpdate: volume / 100
-                }));
-            }
+            APP.store.dispatch(updateSettings({
+                volumeUpdate: {
+                    volume: volume / 100,
+                    user
+                }
+            }));
         }
     };
     transport.on('event', ({ data, name }) => {

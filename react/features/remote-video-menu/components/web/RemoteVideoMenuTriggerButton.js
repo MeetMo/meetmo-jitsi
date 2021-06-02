@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { get, isEqual } from "lodash";
 
 import { Icon, IconMenuThumb } from '../../../base/icons';
 import { getLocalParticipant, PARTICIPANT_ROLE } from '../../../base/participants';
@@ -124,11 +125,17 @@ class RemoteVideoMenuTriggerButton extends Component<Props> {
      * Listen to component update. Used to check if volume is updated in redux and call
      * appropriate function to set user volume.
      * 
+     * This will update only that widget which has the same participant ID as that of the
+     * volume update command's user parameter.
+     * 
      * @param {Object} prevProps - Previous props value to compare against current this.props
      */
     componentDidUpdate(prevProps) {
-        if (prevProps.volumeUpdate !== this.props.volumeUpdate) {
-            this.props.onVolumeChange(this.props.volumeUpdate);
+        if (
+            !isEqual(get(prevProps, ['volumeUpdate', 'volume'], null), get(this, ['props', 'volumeUpdate', 'volume'], null)) &&
+            isEqual(get(this, ['props', 'volumeUpdate', 'user'], null), get(this, ['props', 'participantID'], null))
+        ) {
+            this.props.onVolumeChange(get(this, ['props', 'volumeUpdate', 'volume'], 100));
         }
     }
 
@@ -282,7 +289,7 @@ function _mapStateToProps(state) {
     const participant = getLocalParticipant(state);
     const { remoteVideoMenu = {}, disableRemoteMute } = state['features/base/config'];
     const { disableKick } = remoteVideoMenu;
-    const { volumeUpdate } = state['features/base/settings'];
+    const { volumeUpdate } = state["features/base/settings"];
 
     return {
         _isModerator: Boolean(participant?.role === PARTICIPANT_ROLE.MODERATOR),
