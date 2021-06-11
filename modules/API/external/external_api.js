@@ -48,7 +48,8 @@ const commands = {
     toggleShareScreen: 'toggle-share-screen',
     toggleTileView: 'toggle-tile-view',
     toggleVideo: 'toggle-video',
-    volumeUpdate: 'volume-update'
+    volumeUpdate: 'volume-update',
+    updateTier: 'update-tier'
 };
 
 /**
@@ -441,7 +442,6 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     _setupListeners() {
         this._transport.on('event', ({ name, ...data }) => {
             const userID = data.id;
-
             switch (name) {
             case 'video-conference-joined': {
                 if (typeof this._tmpE2EEKey !== 'undefined') {

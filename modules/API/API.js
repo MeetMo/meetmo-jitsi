@@ -29,6 +29,7 @@ import { toggleTileView } from '../../react/features/video-layout';
 import { setVideoQuality } from '../../react/features/video-quality';
 import { getJitsiMeetTransport } from '../transport';
 import { updateSettings } from "../../react/features/base/settings";
+import { updateUserType } from "../../react/features/letxsoft/actions.web";
 
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 
@@ -309,7 +310,6 @@ function initCommands() {
                 logger.error('No recording or streaming session found');
             }
         },
-
         /**
          * Sets volume of self or a specific user.
          *
@@ -324,6 +324,12 @@ function initCommands() {
                     user
                 }
             }));
+        },
+        'update-tier': ({user, tier}) => {
+            if(!user || !tier) {
+                logger.error('Not enough parameter passed.');
+            }
+            updateUserType(APP.store, user, tier);
         }
     };
     transport.on('event', ({ data, name }) => {
