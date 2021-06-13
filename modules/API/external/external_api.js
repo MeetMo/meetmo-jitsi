@@ -49,7 +49,8 @@ const commands = {
     toggleTileView: 'toggle-tile-view',
     toggleVideo: 'toggle-video',
     volumeUpdate: 'volume-update',
-    updateTier: 'update-tier'
+    updateTier: 'update-tier',
+    updateUserPosition: 'update-user-position'
 };
 
 /**

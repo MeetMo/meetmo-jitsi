@@ -36,6 +36,7 @@ import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 const logger = Logger.getLogger(__filename);
 
 declare var APP: Object;
+declare var $: Function;
 
 /**
  * List of the available commands.
@@ -330,6 +331,23 @@ function initCommands() {
                 logger.error('Not enough parameter passed.');
             }
             updateUserType(APP.store, user, tier);
+        },
+        'update-user-position': ({ room_slug, user_id, position }) => {
+            if (position > 0 || !user_id) {
+                const participants = $(
+                    `#filmstripRemoteVideosContainer > span:not(#participant_${user_id})`
+                );
+                const isPositionValid = position - 1 < participants.length;
+                const beforeId = $(
+                    participants[
+                        isPositionValid ? position - 1 : participants.length - 1
+                    ]
+                ).attr("id");
+
+                if (isPositionValid)
+                    $(`#${beforeId}`).before($(`#participant_${user_id}`));
+                else $(`#participant_${user_id}`).before($(`#${beforeId}`));
+            } else logger.error('Invalid parameters.');
         }
     };
     transport.on('event', ({ data, name }) => {
