@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { get, isEqual } from "lodash";
+import { get, isEqual, includes } from "lodash";
 
 import { Icon, IconMenuThumb } from '../../../base/icons';
 import { getLocalParticipant, PARTICIPANT_ROLE } from '../../../base/participants';
@@ -133,7 +133,7 @@ class RemoteVideoMenuTriggerButton extends Component<Props> {
     componentDidUpdate(prevProps) {
         if (
             !isEqual(get(prevProps, ['volumeUpdate', 'volume'], null), get(this, ['props', 'volumeUpdate', 'volume'], null)) &&
-            isEqual(get(this, ['props', 'volumeUpdate', 'user'], null), get(this, ['props', 'participantID'], null))
+            includes(get(this, ['props', 'volumeUpdate', 'user'], []), get(this, ['props', 'participantID'], null))
         ) {
             this.props.onVolumeChange(get(this, ['props', 'volumeUpdate', 'volume'], 100));
         }

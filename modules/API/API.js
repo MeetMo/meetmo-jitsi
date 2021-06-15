@@ -318,35 +318,39 @@ function initCommands() {
          * @param { number } arg.volume - Volume level between 1 and 100.
          * @returns {void}
          */
-        'volume-update': ({ user, volume }) => {
+        'volume-update': ({ users, volume }) => {
             APP.store.dispatch(updateSettings({
                 volumeUpdate: {
                     volume: volume / 100,
-                    user
+                    user: users
                 }
             }));
         },
-        'update-tier': ({user, tier}) => {
-            if(!user || !tier) {
+        'update-tier': ({ users, tier}) => {
+            if(!users || !tier) {
                 logger.error('Not enough parameter passed.');
             }
-            updateUserType(APP.store, user, tier);
+            users.map(user => {
+                updateUserType(APP.store, user, tier);
+            })
         },
-        'update-user-position': ({ room_slug, user_id, position }) => {
-            if (position > 0 || !user_id) {
-                const participants = $(
-                    `#filmstripRemoteVideosContainer > span:not(#participant_${user_id})`
-                );
-                const isPositionValid = position - 1 < participants.length;
-                const beforeId = $(
-                    participants[
-                        isPositionValid ? position - 1 : participants.length - 1
-                    ]
-                ).attr("id");
-
-                if (isPositionValid)
-                    $(`#${beforeId}`).before($(`#participant_${user_id}`));
-                else $(`#participant_${user_id}`).before($(`#${beforeId}`));
+        'update-user-position': ({ room_slug, users, position }) => {
+            if (position > 0 || !users) {
+                users.map(user => {
+                    const participants = $(
+                        `#filmstripRemoteVideosContainer > span:not(#participant_${user})`
+                    );
+                    const isPositionValid = position - 1 < participants.length;
+                    const beforeId = $(
+                        participants[
+                            isPositionValid ? position - 1 : participants.length - 1
+                        ]
+                    ).attr("id");
+    
+                    if (isPositionValid)
+                        $(`#${beforeId}`).before($(`#participant_${user}`));
+                    else $(`#participant_${user}`).before($(`#${beforeId}`));
+                })
             } else logger.error('Invalid parameters.');
         }
     };
