@@ -4,6 +4,7 @@
 // in this environment (e.g. JitsiMeetJS or interfaceConfig)
 import type { Props } from '../base/toolbox/components/AbstractButton';
 import AbstractVideoMuteButton from '../base/toolbox/components/AbstractVideoMuteButton';
+import { muteUnmuteVideoEvent } from '../letxsoft/actions.web';
 
 const { api } = window.alwaysOnTop;
 
@@ -131,6 +132,7 @@ export default class VideoMuteButton
      * @returns {void}
      */
     _videoAvailabilityListener({ available }) {
+        muteUnmuteVideoEvent(available);
         this.setState({ videoAvailable: available });
     }
 

@@ -24,7 +24,7 @@ let Tier2Count = 0;
  */
 export function changeLayout(layout, dispatch) {
     const _b = document.body;
-
+    console.log("********", layout)
     if (_b) {
         _b.classList.remove('layout-1', 'layout-2', 'layout-3',
         'layout-4', 'layout-5', 'layout-6', 'layout-7', 'layout-8',
@@ -47,7 +47,7 @@ export function changeLayout(layout, dispatch) {
 export function updateLayout() {
     TIER_COUNT = 0;
     Tier2Count = 0;
-
+    console.log("******** HERE");
     // Set class for local video.
     // If the layout is not there, skip the dimension.
     if (!document) {
@@ -55,7 +55,8 @@ export function updateLayout() {
     }
     const state = APP.store.getState();
     const tileView = getCurrentLayout(state) === 'tile-view' ? 1 : 0;
-
+    
+    console.log("******** TEST", tileView);
     if (document.body.classList.value.indexOf('layout-') === -1) {
         updateYoutubeIframe();
         if (tileView) {
@@ -175,11 +176,17 @@ function setNewClassDimention(userType, ele, dim) {
     // console.log('HHHH layout =>>>', layout, userType);
 
     const { clientHeight, clientWidth } = state['features/base/responsive-ui'];
-
+    console.log("********* ", clientHeight, clientWidth);
     if (userType === 'tier-1' && tileView) {
-
+        ele.style.marginTop = `${clientHeight*0.2}px`;
+        ele.style.marginLeft = '';
+    }
+    /*if (userType === 'tier-1' && tileView) {
+        
         const { _halfWidth, _halfHeight, height } = getHalfWidthHeight(_layoutNumber, clientWidth, clientHeight);
-
+        
+        console.log("*********", _halfWidth, _halfHeight, height);
+        
         // console.log('tier-1 calculations =>',
         //     [ clientWidth, clientHeight ],
         //     [ _halfWidth, _halfHeight ],
@@ -313,7 +320,7 @@ function setNewClassDimention(userType, ele, dim) {
     } else {
         ele.style.marginLeft = '';
         ele.style.marginTop = '';
-    }
+    }*/
 
     const __hi = tileView ? `${_dim[1]}px` : '',
         __wi = tileView ? `${_dim[0]}px` : '';

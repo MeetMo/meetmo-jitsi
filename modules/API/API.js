@@ -352,6 +352,16 @@ function initCommands() {
                     else $(`#participant_${user}`).before($(`#${beforeId}`));
                 })
             } else logger.error('Invalid parameters.');
+        },
+        'unmute-audio': () => {
+            $('div[aria-label="Toggle mute audio"]').trigger('click');
+        },
+        'unmute-video': () => {
+            if($('div[aria-label="Toggle mute video"]').find('div.toggled').length) {
+                $('div[aria-label="Toggle mute video"]').find('div.toggled').trigger('click');
+            } else {
+                $('div[aria-label="Toggle mute video"]').trigger('click');
+            }
         }
     };
     transport.on('event', ({ data, name }) => {

@@ -597,12 +597,11 @@ export function getUserTypeFromJwt(store: Object) {
     // For development only
     if (location.origin.includes('localhost:')) {
         const { locationURL } = store.getState()['features/base/connection'];
-        const params1 = parseURLParams(locationURL, true, 'search');
-
-        if (params1.role !== undefined && params1.role !== 'undefined' && params1.role !== '') {
-            return params1.role;
+        const params1 = parseURLParams(locationURL);
+        if (params1['userInfo.role']) {
+            return params1['userInfo.role'];
         }
-
+        
         return 'tier-2';
     }
 
@@ -1108,6 +1107,126 @@ export function raisedHandOrDown(action: string) {
                     const response = await _resp.json();
 
                     console.log('Raise hand & down request sent.', response);
+                })
+                .catch(error => {
+                    console.log(' error =>', error);
+                });
+            }
+        }
+    };
+}
+
+/**
+ * Action to be dispatched when mute and unmute user
+ * from server.
+ *
+ * @param {string} action - true and false.
+ * @returns {Promise}
+ */
+export function muteUnmuteEvent(action: string) {
+    return async (dispatch: Dispatch<any>, getState: Function) => {
+        const { jwt } = getState()['features/base/jwt'];
+        if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
+            const payload = new JwtDecode(jwt);
+            const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
+            const data = new FormData();
+
+            data.append('user_id', payload.context.user.id);
+            data.append('room_slug', url);
+            data.append('value', action ? 100 : 0);
+            data.append('event', 'mute_or_unmute_audio');
+
+            if (payload.context.user.id && baseApi) {
+                fetch(`${baseApi}/api/v1/event/update/`, {
+                    method: 'POST',
+                    body: data,
+                    headers
+                })
+                .then(async _resp => {
+                    const response = await _resp.json();
+                    console.log('Mute & Unmute API Called sent.', response);
+                })
+                .catch(error => {
+                    console.log(' error =>', error);
+                });
+            }
+        }
+    };
+}
+
+/**
+ * Action to be dispatched when mute and unmute user
+ * from server.
+ *
+ * @param {string} action - true and false.
+ * @returns {Promise}
+ */
+export function muteUnmuteAudioEvent(action: string) {
+    return async (dispatch: Dispatch<any>, getState: Function) => {
+        const { jwt } = getState()['features/base/jwt'];
+        if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
+            const payload = new JwtDecode(jwt);
+            const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
+            const data = new FormData();
+
+            data.append('user_id', payload.context.user.id);
+            data.append('room_slug', url);
+            data.append('value', action ? 100 : 0);
+            data.append('event', 'mute_or_unmute_audio');
+
+            if (payload.context.user.id && baseApi) {
+                fetch(`${baseApi}/api/v1/event/update/`, {
+                    method: 'POST',
+                    body: data,
+                    headers
+                })
+                .then(async _resp => {
+                    const response = await _resp.json();
+                    console.log('Mute & Unmute API Called sent.', response);
+                })
+                .catch(error => {
+                    console.log(' error =>', error);
+                });
+            }
+        }
+    };
+}
+
+/**
+ * Action to be dispatched when mute and unmute user
+ * from server.
+ *
+ * @param {string} action - true and false.
+ * @returns {Promise}
+ */
+export function muteUnmuteVideoEvent(action: string) {
+    return async (dispatch: Dispatch<any>, getState: Function) => {
+        const { jwt } = getState()['features/base/jwt'];
+        if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
+            const payload = new JwtDecode(jwt);
+            const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
+            const data = new FormData();
+
+            data.append('user_id', payload.context.user.id);
+            data.append('room_slug', url);
+            data.append('value', action);
+            data.append('event', 'mute_or_unmute_video');
+
+            if (payload.context.user.id && baseApi) {
+                fetch(`${baseApi}/api/v1/event/update/`, {
+                    method: 'POST',
+                    body: data,
+                    headers
+                })
+                .then(async _resp => {
+                    const response = await _resp.json();
+                    console.log('Mute & Unmute API Called sent.', response);
                 })
                 .catch(error => {
                     console.log(' error =>', error);

@@ -50,7 +50,9 @@ const commands = {
     toggleVideo: 'toggle-video',
     volumeUpdate: 'volume-update',
     updateTier: 'update-tier',
-    updateUserPosition: 'update-user-position'
+    updateUserPosition: 'update-user-position',
+    unmuteAudio: 'unmute-audio',
+    unmuteVideo: 'unmute-video'
 };
 
 /**
