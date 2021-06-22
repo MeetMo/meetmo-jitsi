@@ -597,11 +597,12 @@ export function getUserTypeFromJwt(store: Object) {
     // For development only
     if (location.origin.includes('localhost:')) {
         const { locationURL } = store.getState()['features/base/connection'];
-        const params1 = parseURLParams(locationURL);
-        if (params1['userInfo.role']) {
-            return params1['userInfo.role'];
+        const params1 = parseURLParams(locationURL, true, 'search');
+
+        if (params1.role !== undefined && params1.role !== 'undefined' && params1.role !== '') {
+            return params1.role;
         }
-        
+
         return 'tier-2';
     }
 
@@ -1094,7 +1095,7 @@ export function raisedHandOrDown(action: string) {
             const data = new FormData();
 
             data.append('user_id', payload.context.user.id);
-            data.append('room_slug', url);
+            data.append('room_slug', payload.room_slug);
             data.append('event', action ? 'raise_hand' : 'down_hand');
 
             if (payload.context.user.id && baseApi) {
@@ -1134,7 +1135,7 @@ export function muteUnmuteEvent(action: string) {
             const data = new FormData();
 
             data.append('user_id', payload.context.user.id);
-            data.append('room_slug', url);
+            data.append('room_slug', payload.room_slug);
             data.append('value', action ? 100 : 0);
             data.append('event', 'mute_or_unmute_audio');
 
@@ -1174,7 +1175,7 @@ export function toggleAudioEvent(action: string) {
             const data = new FormData();
 
             data.append('user_id', payload.context.user.id);
-            data.append('room_slug', url);
+            data.append('room_slug', payload.room_slug);
             data.append('value', action ? 100 : 0);
             data.append('event', 'mute_or_unmute_audio');
 
@@ -1214,7 +1215,7 @@ export function toggleVideoEvent(action: string) {
             const data = new FormData();
 
             data.append('user_id', payload.context.user.id);
-            data.append('room_slug', url);
+            data.append('room_slug', payload.room_slug);
             data.append('value', action);
             data.append('event', 'mute_or_unmute_video');
 
