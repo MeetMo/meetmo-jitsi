@@ -884,7 +884,7 @@ class Toolbox extends Component<Props, State> {
      * @returns {void}
      */
     _onToolbarToggleRaiseHand() {
-        raisedHandOrDown(!this.props._raisedHand);
+        this.props.dispatch(raisedHandOrDown(!this.props._raisedHand));
         sendAnalytics(createToolbarEvent(
             'raise.hand',
             { enable: !this.props._raisedHand }));

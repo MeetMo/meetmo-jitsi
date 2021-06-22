@@ -1163,8 +1163,8 @@ export function muteUnmuteEvent(action: string) {
  * @param {string} action - true and false.
  * @returns {Promise}
  */
-export function muteUnmuteAudioEvent(action: string) {
-    return async (dispatch: Dispatch<any>, getState: Function) => {
+export function toggleAudioEvent(action: string) {
+    return async (disatch: Dispatch<any>, getState: Function) => {
         const { jwt } = getState()['features/base/jwt'];
         if (jwt) {
             // get the api header
@@ -1203,7 +1203,7 @@ export function muteUnmuteAudioEvent(action: string) {
  * @param {string} action - true and false.
  * @returns {Promise}
  */
-export function muteUnmuteVideoEvent(action: string) {
+export function toggleVideoEvent(action: string) {
     return async (dispatch: Dispatch<any>, getState: Function) => {
         const { jwt } = getState()['features/base/jwt'];
         if (jwt) {

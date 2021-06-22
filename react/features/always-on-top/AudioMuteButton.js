@@ -4,7 +4,6 @@
 // in this environment (e.g. JitsiMeetJS or interfaceConfig)
 import AbstractAudioMuteButton from '../base/toolbox/components/AbstractAudioMuteButton';
 import type { Props } from '../base/toolbox/components/AbstractButton';
-import { muteUnmuteAudioEvent } from '../letxsoft/actions.web';
 
 const { api } = window.alwaysOnTop;
 
@@ -110,7 +109,6 @@ export default class AudioMuteButton
      * @returns {void}
      */
     _audioMutedListener({ muted }) {
-        muteUnmuteVideoEvent(muted);
         this.setState({ audioMuted: muted });
     }
 

@@ -4,7 +4,7 @@
 // in this environment (e.g. JitsiMeetJS or interfaceConfig)
 import type { Props } from '../base/toolbox/components/AbstractButton';
 import AbstractVideoMuteButton from '../base/toolbox/components/AbstractVideoMuteButton';
-import { muteUnmuteVideoEvent } from '../letxsoft/actions.web';
+import { toggleVideoEvent } from "../letxsoft/actions.web";
 
 const { api } = window.alwaysOnTop;
 
@@ -120,6 +120,7 @@ export default class VideoMuteButton
      * @returns {void}
      */
     _setVideoMuted(videoMuted: boolean) { // eslint-disable-line no-unused-vars
+        this.props.dispatch(toggleVideoEvent(videoMuted));
         this.state.videoAvailable && api.executeCommand('toggleVideo');
     }
 
@@ -132,7 +133,6 @@ export default class VideoMuteButton
      * @returns {void}
      */
     _videoAvailabilityListener({ available }) {
-        muteUnmuteVideoEvent(available);
         this.setState({ videoAvailable: available });
     }
 
