@@ -29,8 +29,7 @@ import { toggleTileView } from '../../react/features/video-layout';
 import { setVideoQuality } from '../../react/features/video-quality';
 import { getJitsiMeetTransport } from '../transport';
 import { updateSettings } from "../../react/features/base/settings";
-import { updateUserType } from "../../react/features/letxsoft/actions.web";
-
+import { updateUserType, updateBackground } from "../../react/features/letxsoft/actions.web";
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 
 const logger = Logger.getLogger(__filename);
@@ -362,6 +361,9 @@ function initCommands() {
             } else {
                 $('div[aria-label="Toggle mute video"]').trigger('click');
             }
+        },
+        'update-bg-img': ({ src }) => {
+            updateBackground(src);
         }
     };
     transport.on('event', ({ data, name }) => {

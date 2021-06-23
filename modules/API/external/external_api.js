@@ -7,6 +7,7 @@ import {
 } from '../../transport';
 
 import electronPopupsConfig from './electronPopupsConfig.json';
+
 import {
     getAvailableDevices,
     getCurrentDevices,
@@ -52,7 +53,8 @@ const commands = {
     updateTier: 'update-tier',
     updateUserPosition: 'update-user-position',
     unmuteAudio: 'unmute-audio',
-    unmuteVideo: 'unmute-video'
+    unmuteVideo: 'unmute-video',
+    updateBgImg: 'update-bg-img'
 };
 
 /**
