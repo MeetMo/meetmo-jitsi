@@ -388,6 +388,18 @@ function initCommands() {
                 );
                 sendAnalytics(createSharedVideoEvent('started'));
             } else logger.error('Invalid video URL.');
+        },
+        'stop-video': () => {
+            eventEmitter.emit(
+                UIEvents.UPDATE_SHARED_VIDEO,
+                null,
+                "stop",
+                null,
+                null,
+                null,
+                "youtube"
+            );
+            sendAnalytics(createEvent('stopped'));
         }
     };
     transport.on('event', ({ data, name }) => {

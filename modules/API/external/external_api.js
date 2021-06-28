@@ -55,7 +55,8 @@ const commands = {
     unmuteAudio: 'unmute-audio',
     unmuteVideo: 'unmute-video',
     updateBgImg: 'update-bg-img',
-    shareVideo: 'share-video'
+    shareVideo: 'share-video',
+    stopVideo: 'stop-video'
 };
 
 /**

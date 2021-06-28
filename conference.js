@@ -478,6 +478,14 @@ export default {
     localVideo: null,
 
     /**
+     * YouTube or Vimeo video url and type.
+     */
+    externalVideo : {
+        url: null,
+        type: null
+    },
+
+    /**
      * Returns an object containing a promise which resolves with the created tracks &
      * the errors resulting from that process.
      *
@@ -2448,14 +2456,14 @@ export default {
 
                     room.removeCommand(this.commands.defaults.SHARED_VIDEO);
                     room.sendCommandOnce(this.commands.defaults.SHARED_VIDEO, {
-                        value: url,
+                        value: state === 'stop' && this.externalVideo.url ? this.externalVideo.url : url,
                         attributes: {
                             state,
                             time,
                             muted: isMuted,
                             volume,
                             from: localParticipant.id,
-                            type
+                            type: state === 'stop' && this.externalVideo.type ? this.externalVideo.type : type
                         }
                     });
                 } else {
@@ -2477,6 +2485,14 @@ export default {
                     APP.store.dispatch(setSharedVimeoVideoStatus(state));
                 } else {
                     APP.store.dispatch(setSharedVideoStatus(state));
+                }
+
+                if (state === 'start') this.externalVideo = { url, type };
+                else if (state === 'stop' || state === 'removed') {
+                    this.externalVideo = {
+                        url: null,
+                        type: null,
+                    };
                 }
             });
         room.addCommandListener(
