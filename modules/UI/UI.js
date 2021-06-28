@@ -30,7 +30,7 @@ const logger = Logger.getLogger(__filename);
 
 UI.messageHandler = messageHandler;
 
-const eventEmitter = new EventEmitter();
+export const eventEmitter = new EventEmitter();
 
 UI.eventEmitter = eventEmitter;
 

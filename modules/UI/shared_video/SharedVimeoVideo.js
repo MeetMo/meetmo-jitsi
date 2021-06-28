@@ -731,7 +731,7 @@ class SharedVideoContainer extends LargeContainer {
  * @param {string} url string to check.
  * @returns {boolean}
  */
-function getVimeoLink(url) {
+export function getVimeoLink(url) {
     const p = /^(?:https?:\/\/)?(?:www\.)?(?:vimeo\.com\/)(\d+)?$/;// eslint-disable-line max-len
 
 
