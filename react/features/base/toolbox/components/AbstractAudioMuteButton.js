@@ -12,6 +12,17 @@ import type { Props } from './AbstractButton';
 
 declare var interfaceConfig: Object;
 
+interfaceConfig['meetmoIcons'] = {
+    microphone: {
+        active_svg: 'https://localhost:8080/images/microphone.svg',
+        inactive_svg: 'https://localhost:8080/images/mic-disabled.svg',
+       svg_active_color: 'white',
+       svg_inactive_color: 'white',
+       button_active_color: 'Tomato',
+       button_inactive_color: 'DodgerBlue',
+       hover_effect: 'darker'
+   }
+}
 /**
  * An abstract implementation of a button for toggling audio mute.
  */
@@ -22,10 +33,10 @@ export default class AbstractAudioMuteButton<P: Props, S: *>
         <IconFromConfig
             configuration={this.iconData}
             style={{
-                width: "50px",
-                height: "50px",
-                svgWidth: "50",
-                svgHeight: "50",
+                width: "32px",
+                height: "32px",
+                svgWidth: "32",
+                svgHeight: "32",
             }}
         />
     ) : (
@@ -36,10 +47,10 @@ export default class AbstractAudioMuteButton<P: Props, S: *>
             configuration={this.iconData}
             iconKey="inactive_svg"
             style={{
-                width: "50px",
-                height: "50px",
-                svgWidth: "50",
-                svgHeight: "50",
+                width: "32px",
+                height: "32px",
+                svgWidth: "32",
+                svgHeight: "32",
             }}
         />
     ) : (

@@ -17,10 +17,10 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
     extends AbstractButton<P, S> {
     
     iconData = get(interfaceConfig, ["meetmoIcons", "camera"], {});
-    icon = !isEmpty(this.iconData) ? < ReactSVG style = {
+    icon = !isEmpty(this.iconData) ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_active_color,'padding': '5px','borderRadius': '100px'}}>< ReactSVG style = {
         {
-            width: '50px',
-            height: '50px'
+            width: '32px',
+            height: '32px'
         }
     }
     src = {
@@ -30,15 +30,19 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
         (svg) => {
             svg.classList.add('mic-icon-active')
             svg.classList.add(this.iconData.hover_effect)
-            svg.setAttribute('fill', this.iconData.button_active_color)
-            svg.setAttribute('stroke', this.iconData.button_active_color)
+            svg.setAttribute('fill', this.iconData.svg_active_color)
+            svg.setAttribute('stroke', this.iconData.svg_active_color)
+            svg.setAttribute("width", '32');
+            svg.setAttribute("height", '32');
+            svg.style.pointerEvents = "none";
         }
     }
-    /> : IconCamera;
-    toggledIcon = !isEmpty(this.iconData) ? < ReactSVG style = {
+    /></div> : IconCamera;
+    toggledIcon = !isEmpty(this.iconData) ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_inactive_color,'padding': '5px','borderRadius': '100px'}}>
+    < ReactSVG style = {
         {
-            width: '50px',
-            height: '50px'
+            width: '32px',
+            height: '32px'
         }
     }
     src = {
@@ -48,11 +52,14 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
         (svg) => {
             svg.classList.add('mic-icon-inactive')
             svg.classList.add(this.iconData.hover_effect)
-            svg.setAttribute('fill', this.iconData.button_active_color)
-            svg.setAttribute('stroke', this.iconData.button_active_color)
+            svg.setAttribute('fill', this.iconData.svg_inactive_color)
+            svg.setAttribute('stroke', this.iconData.svg_inactive_color)
+            svg.setAttribute("width", '32');
+            svg.setAttribute("height", '32');
+            svg.style.pointerEvents = "none";
         }
     }
-    /> : IconCameraDisabled;
+    /></div> : IconCameraDisabled;
     iconFromURL = !isEmpty(this.iconData);
 
     /**

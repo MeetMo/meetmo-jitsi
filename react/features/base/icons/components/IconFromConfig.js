@@ -45,27 +45,29 @@ type Props = {
 export default function IconFromConfig(props: Props) {
     const { configuration, iconKey, className, style } = props;
     const {
-        svgWidth = "24",
-        svgHeight = "24",
+        svgWidth = "32",
+        svgHeight = "32",
         ...restStyle
     } = styleTypeToObject(style ?? {});
 
     if (isEmpty(configuration)) return null;
-
+    
     return (
-        <ReactSVG
-            className={className}
-            style={restStyle}
-            src={configuration[iconKey]}
-            beforeInjection={(svg) => {
-                svg.classList.add(configuration.hover_effect);
-                svg.setAttribute("fill", configuration.button_active_color);
-                svg.setAttribute("stroke", configuration.svg_active_color);
-                svg.setAttribute("width", svgWidth);
-                svg.setAttribute("height", svgHeight);
-                svg.style.pointerEvents = "none";
-            }}
-        />
+        <div className={configuration.hover_effect} style={{'backgroundColor': (iconKey != 'inactive_svg' ? configuration.button_active_color : configuration.button_inactive_color),'padding': '5px','borderRadius': '100px'}}>
+            <ReactSVG
+                className={className}
+                style={restStyle}
+                src={configuration[iconKey]}
+                beforeInjection={(svg) => {
+                    svg.classList.add(configuration.hover_effect);
+                    svg.setAttribute("fill", configuration.svg_active_color);
+                    svg.setAttribute("stroke", configuration.svg_active_color);
+                    svg.setAttribute("width", svgWidth);
+                    svg.setAttribute("height", svgHeight);
+                    svg.style.pointerEvents = "none";
+                }}
+            />
+        </div>
     );
 }
 
