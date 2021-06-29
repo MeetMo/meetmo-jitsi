@@ -28,10 +28,10 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
     }
     beforeInjection = {
         (svg) => {
-            svg.classList.add('mic-icon-active')
-            svg.classList.add(this.iconData.hover_effect)
-            svg.setAttribute('fill', this.iconData.svg_active_color)
-            svg.setAttribute('stroke', this.iconData.svg_active_color)
+            svg.classList.add('mic-icon-active');
+            svg.classList.add(this.iconData.hover_effect);
+            svg.setAttribute("fill", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+            svg.setAttribute("stroke", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
             svg.setAttribute("width", '32');
             svg.setAttribute("height", '32');
             svg.style.pointerEvents = "none";

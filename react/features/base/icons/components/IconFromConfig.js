@@ -60,8 +60,8 @@ export default function IconFromConfig(props: Props) {
                 src={configuration[iconKey]}
                 beforeInjection={(svg) => {
                     svg.classList.add(configuration.hover_effect);
-                    svg.setAttribute("fill", configuration.svg_active_color);
-                    svg.setAttribute("stroke", configuration.svg_active_color);
+                    svg.setAttribute("fill", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+                    svg.setAttribute("stroke", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
                     svg.setAttribute("width", svgWidth);
                     svg.setAttribute("height", svgHeight);
                     svg.style.pointerEvents = "none";
