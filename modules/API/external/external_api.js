@@ -54,7 +54,9 @@ const commands = {
     updateUserPosition: 'update-user-position',
     unmuteAudio: 'unmute-audio',
     unmuteVideo: 'unmute-video',
-    updateBgImg: 'update-bg-img'
+    updateBgImg: 'update-bg-img',
+    shareVideo: 'share-video',
+    stopVideo: 'stop-video'
 };
 
 /**

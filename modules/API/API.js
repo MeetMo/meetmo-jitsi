@@ -5,6 +5,7 @@ import Logger from 'jitsi-meet-logger';
 import * as JitsiMeetConferenceEvents from '../../ConferenceEvents';
 import {
     createApiEvent,
+    createSharedVideoEvent,
     sendAnalytics
 } from '../../react/features/analytics';
 import {
@@ -31,6 +32,11 @@ import { getJitsiMeetTransport } from '../transport';
 import { updateSettings } from "../../react/features/base/settings";
 import { updateUserType, updateBackground } from "../../react/features/letxsoft/actions.web";
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
+import UIUtil from '../../modules/UI/util/UIUtil';
+import { getYoutubeLink } from '../../modules/UI/shared_video/SharedVideo';
+import { getVimeoLink } from '../../modules/UI/shared_video/SharedVimeoVideo';
+import { eventEmitter } from "../../modules/UI/UI";
+import UIEvents from '../../service/UI/UIEvents';
 
 const logger = Logger.getLogger(__filename);
 
@@ -364,6 +370,36 @@ function initCommands() {
         },
         'update-bg-img': ({ src }) => {
             updateBackground(src);
+        },
+        'share-video': ({ video_url }) => {
+            const urlValue = encodeURI(UIUtil.escapeHtml(video_url));
+            const yVideoId = getYoutubeLink(urlValue);
+            const vVideoId = getVimeoLink(urlValue);
+
+            if (urlValue && (yVideoId || vVideoId)) {
+                eventEmitter.emit(
+                    UIEvents.UPDATE_SHARED_VIDEO,
+                    yVideoId || vVideoId,
+                    "start",
+                    null,
+                    null,
+                    null,
+                    yVideoId ? "youtube" : "vimeo"
+                );
+                sendAnalytics(createSharedVideoEvent('started'));
+            } else logger.error('Invalid video URL.');
+        },
+        'stop-video': () => {
+            eventEmitter.emit(
+                UIEvents.UPDATE_SHARED_VIDEO,
+                null,
+                "stop",
+                null,
+                null,
+                null,
+                "youtube"
+            );
+            sendAnalytics(createEvent('stopped'));
         }
     };
     transport.on('event', ({ data, name }) => {

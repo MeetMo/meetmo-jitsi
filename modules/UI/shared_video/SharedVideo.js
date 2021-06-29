@@ -682,7 +682,7 @@ class SharedVideoContainer extends LargeContainer {
  * @param {string} url string to check.
  * @returns {boolean}
  */
-function getYoutubeLink(url) {
+export function getYoutubeLink(url) {
     const p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;// eslint-disable-line max-len
 
 
