@@ -31,6 +31,7 @@ import { setVideoQuality } from '../../react/features/video-quality';
 import { getJitsiMeetTransport } from '../transport';
 import { updateSettings } from "../../react/features/base/settings";
 import { updateUserType, updateBackground } from "../../react/features/letxsoft/actions.web";
+import { updateLayout, changeLayout } from "../../react/features/letxsoft/functions";
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 import UIUtil from '../../modules/UI/util/UIUtil';
 import { getYoutubeLink } from '../../modules/UI/shared_video/SharedVideo';
@@ -400,6 +401,54 @@ function initCommands() {
                 "youtube"
             );
             sendAnalytics(createEvent('stopped'));
+        },
+        'update-layout': ({ layout, size }) => {
+            if(layout && size) {
+                size = +size;
+                if(!$('.tier1User').length) {
+                    $('.remote-videos-container').append('<div class="tier1User"></div>')
+                    $('.remote-videos-container').append('<div class="tier2User"></div>')
+                    
+                    $('.remote-videos-container').find('span.tier-2').appendTo('.tier2User');
+                    $('.remote-videos-container').find('span.tier-1').appendTo('.tier1User');
+                }
+
+                if(layout == 'horizontal') {
+                    $('.tier1User').css('width', size+"%");
+                    $('.tier2User').css('width', (100-size)+"%");
+
+                    var tier1CSS = $('.tier1User span.videocontainer').attr('style').split(";").slice(0,2).join(";")+";";
+                    $('.tier1User span.videocontainer').attr('style', tier1CSS);
+
+                    var tier2CSS = $('.tier2User span.videocontainer').attr('style').split(";").slice(0,2).join(";")+";";
+                    $('.tier2User span.videocontainer').attr('style', tier2CSS);
+                } else {
+                    let clientHeight = $(document).find('body').height();
+                    let clientWidth = $(document).find('body').width();
+
+                    // $('.tier1User').css('min-height', (*size/100)+"px;");
+                    $('.tier1User').css('width', "50%");
+
+                    let height = (+clientHeight*size/100);
+                    var tier1CSS = $('.tier1User span.videocontainer').attr('style')+ `height:${height}px;min-height:${height}px;`;
+                    $('.tier1User span.videocontainer').attr('style', tier1CSS);
+                    
+                    var tier2Count = $('.tier2User span.videocontainer').length;
+                    if(tier2Count <= 4) {
+                        var newHeight = (height - 200) * (100-size)/100;
+                        var width = (clientWidth/tier2Count)-40;
+                        var tier2CSS = `height:${newHeight}px;min-height:${newHeight}px;width:${width}px;min-width:${width}px;`;
+                        $('.tier2User span.videocontainer').attr('style', tier2CSS);
+                    }
+                    $('.tier2User').attr('style', 'display: flex;');
+                }
+                
+                // if(layout == "vertical") {
+                //     return changeLayout('layout-3', APP.store.dispatch, size);
+                // }
+                // changeLayout('layout-1', APP.store.dispatch, size);
+                // // updateLayout(layout, size);
+            } else logger.error('Invalid Update Layout Command.');
         }
     };
     transport.on('event', ({ data, name }) => {
