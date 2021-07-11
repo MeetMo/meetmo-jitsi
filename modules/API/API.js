@@ -411,6 +411,13 @@ function initCommands() {
                     
                     $('.remote-videos-container').find('span.tier-2').appendTo('.tier2User');
                     $('.remote-videos-container').find('span.tier-1').appendTo('.tier1User');
+                } else {
+                    if($('.remote-videos-container > span.tier-1').length) {
+                        $('.remote-videos-container > span.tier-1').appendTo('.tier1User');
+                    }
+                    if($('.remote-videos-container > span.tier-2').length) {
+                        $('.remote-videos-container > span.tier-2').appendTo('.tier2User');
+                    }
                 }
 
                 if(layout == 'horizontal') {
