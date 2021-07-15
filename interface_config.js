@@ -195,7 +195,7 @@ var interfaceConfig = {
         'fodeviceselection',
         'settings',
         'videoquality', 'filmstrip', 'shortcuts',
-        'tileview', 'mute-everyone'
+        'tileview', 'mute-everyone', 'controlPanel'
     ],
 
     TOOLBAR_TIMEOUT: 2000,

@@ -35,7 +35,7 @@
                 'fodeviceselection', 'hangup', 'profile', 'chat',
                 'sharedvideo', 'settings',
                 'videoquality', 'filmstrip', 'invite', 'shortcuts',
-                'tileview', 'download', 'help', 'mute-everyone', 'security'
+                'tileview', 'download', 'help', 'mute-everyone', 'security', 'controlPanel'
         },
   
     "meetmoIcons":{

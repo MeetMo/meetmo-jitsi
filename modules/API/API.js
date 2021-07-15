@@ -12,7 +12,9 @@ import {
     getCurrentConference,
     sendTones,
     setPassword,
-    setSubject
+    setSubject,
+    setFollowMe, 
+    setStartMutedPolicy
 } from '../../react/features/base/conference';
 import { parseJWTFromURLParams } from '../../react/features/base/jwt';
 import { JitsiRecordingConstants } from '../../react/features/base/lib-jitsi-meet';
@@ -331,6 +333,12 @@ function initCommands() {
                     user: users
                 }
             }));
+        },
+        'follow-me-enabled': (isEnabled) => {
+            APP.store.dispatch(setFollowMe(isEnabled == true ? true : false));
+        },
+        'start-audioNvideo-muted': ({ audio, video }) => {
+            APP.store.dispatch(setStartMutedPolicy(audio == true ? true : false, video == true ? true : false));
         },
         'update-tier': ({ users, tier}) => {
             if(!users || !tier) {

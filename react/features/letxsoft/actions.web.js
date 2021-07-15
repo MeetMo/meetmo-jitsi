@@ -597,10 +597,10 @@ export function getUserTypeFromJwt(store: Object) {
     // For development only
     if (location.origin.includes('localhost:')) {
         const { locationURL } = store.getState()['features/base/connection'];
-        const params1 = parseURLParams(locationURL, true, 'search');
-
-        if (params1.role !== undefined && params1.role !== 'undefined' && params1.role !== '') {
-            return params1.role;
+        const params1 = parseURLParams(locationURL);
+        if (params1['userInfo.role']) {
+            return params1['userInfo.role'];
+            // return params1.role;
         }
 
         return 'tier-2';
@@ -1068,6 +1068,44 @@ export function deleteBackgroundFromServer(url: string) {
 
                         dispatch(updateBackgroundList(_backgroundList));
                     }
+                })
+                .catch(error => {
+                    console.log(' error =>', error);
+                });
+            }
+        }
+    };
+}
+
+/**
+ * Action to be dispatched when control penl trigger
+ * from server.
+ *
+ * @returns {Promise}
+ */
+export function openControlPanel() {
+    return async (dispatch: Dispatch<any>, getState: Function) => {
+        const { jwt } = getState()['features/base/jwt'];
+        if (jwt) {
+            // get the api header
+            const headers = getAPIHeader(jwt);
+            const payload = new JwtDecode(jwt);
+            const baseApi = payload.baseApi ?? interfaceConfig.BASE_API;
+            const data = new FormData();
+
+            data.append('user_id', payload.context.user.id);
+            data.append('room_slug', payload.room_slug);
+            data.append('event', 'show_panel');
+
+            if (payload.context.user.id && baseApi) {
+                fetch(`${baseApi}/api/v1/event/update/`, {
+                    method: 'POST',
+                    body: data,
+                    headers
+                })
+                .then(async _resp => {
+                    const response = await _resp.json();
+                    console.log('Open Control Panel Request raised!', response);
                 })
                 .catch(error => {
                     console.log(' error =>', error);

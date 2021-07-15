@@ -58,5 +58,7 @@ export default [
     'filmStripOnly',
     'microphone_button',
     'video_button',
-    'meetmoIcons'
+    'meetmoIcons',
+    'displayNameFormat',
+    'DEFAULT_USERNAME_DISPLAYNAME'
 ];

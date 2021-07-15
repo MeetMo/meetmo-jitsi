@@ -57,7 +57,9 @@ const commands = {
     updateBgImg: 'update-bg-img',
     shareVideo: 'share-video',
     stopVideo: 'stop-video',
-    updateLayout: 'update-layout'
+    updateLayout: 'update-layout',
+    followMeEnabled: 'follow-me-enabled',
+    startAudioVideoMuted: 'start-audioNvideo-muted'
 };
 
 /**

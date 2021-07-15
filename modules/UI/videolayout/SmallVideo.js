@@ -30,7 +30,6 @@ import {
     shouldDisplayTileView
 } from '../../../react/features/video-layout';
 /* eslint-enable no-unused-vars */
-
 const logger = Logger.getLogger(__filename);
 
 /**
@@ -455,10 +454,16 @@ export default class SmallVideo {
             return input.isVideoPlayable && !input.isAudioOnly ? DISPLAY_BLACKNESS_WITH_NAME : DISPLAY_AVATAR_WITH_NAME;
         } else if (input.isVideoPlayable && input.hasVideo && !input.isAudioOnly) {
             // check hovering and change state to video with name
+            if(interfaceConfig.DEFAULT_USERNAME_DISPLAYNAME == 'ON') {
+                return DISPLAY_VIDEO_WITH_NAME;
+            }
             return input.isHovered ? DISPLAY_VIDEO_WITH_NAME : DISPLAY_VIDEO;
         }
 
         // check hovering and change state to avatar with name
+        if(interfaceConfig.DEFAULT_USERNAME_DISPLAYNAME == 'ON') {
+            return DISPLAY_AVATAR_WITH_NAME;
+        }
         return input.isHovered ? DISPLAY_AVATAR_WITH_NAME : DISPLAY_AVATAR;
     }
 
@@ -535,6 +540,24 @@ export default class SmallVideo {
 
         if (this.displayMode !== oldDisplayMode) {
             logger.debug(`Displaying ${displayModeString} for ${this.id}, data: [${JSON.stringify(displayModeInput)}]`);
+        }
+        let nameCss = interfaceConfig.displayNameFormat;
+        if(nameCss && interfaceConfig.DEFAULT_USERNAME_DISPLAYNAME == "ON") {
+            $('.videocontainer __hoverOverlay').css('background', 'none');
+            $('.videocontainer .displayname').attr('style', 'top: 92%;text-align: center;align-items: center;width: 25%;');
+            $('.videocontainer .editdisplayname').attr('style', 'top: 92%;text-align: center;align-items: center;width: 25%;');
+            
+            nameCss.fontSize ? $('div.displayNameContainer span').css('font-size', (+nameCss.fontSize * 2)+'%') : null;
+            nameCss.fontUpperCase ? $('div.displayNameContainer span').css('text-transform', 'uppercase') : null;
+            nameCss.fontColor ? $('div.displayNameContainer span').css('color', nameCss.fontColor) : null;
+            nameCss.bgColor ? $('div.displayNameContainer span').css('background-color', nameCss.bgColor) : null;
+            nameCss.fontBold ? $('div.displayNameContainer span').css('font-weight', 'bold') : null; 
+
+            nameCss.fontSize ? $('div.displayNameContainer input').css('font-size', (+nameCss.fontSize * 2)+'%') : null;
+            nameCss.fontUpperCase ? $('div.displayNameContainer input').css('text-transform', 'uppercase') : null;
+            nameCss.fontColor ? $('div.displayNameContainer input').css('color', nameCss.fontColor) : null;
+            nameCss.bgColor ? $('div.displayNameContainer input').css('background-color', nameCss.bgColor) : null;
+            nameCss.fontBold ? $('div.displayNameContainer input').css('font-weight', 'bold') : null; 
         }
     }
 

@@ -26,14 +26,15 @@ import {
     IconShareDesktop,
     IconShareVideo,
     IconLayoutChange,
-    IconBackgroundChange
+    IconBackgroundChange,
+    IconSettings
 } from '../../../base/icons';
 import {
     getLocalParticipant,
     getParticipants,
     participantUpdated
 } from '../../../base/participants';
-import { raisedHandOrDown, showEventPanel } from '../../../letxsoft/actions.web';
+import { raisedHandOrDown, showEventPanel, openControlPanel } from '../../../letxsoft/actions.web';
 import { connect, equals } from '../../../base/redux';
 import { OverflowMenuItem } from '../../../base/toolbox/components';
 import { getLocalVideoTrack, toggleScreensharing } from '../../../base/tracks';
@@ -268,6 +269,7 @@ class Toolbox extends Component<Props, State> {
         this._onToolbarToggleScreenshare = this._onToolbarToggleScreenshare.bind(this);
         this._onToolbarToggleSharedVideo = this._onToolbarToggleSharedVideo.bind(this);
         this._onToolbarToggleVimeoSharedVideo = this._onToolbarToggleVimeoSharedVideo.bind(this);
+        this._onToolbarOpenControlPanel = this._onToolbarOpenControlPanel.bind(this);
         this._onToolbarOpenLocalRecordingInfoDialog = this._onToolbarOpenLocalRecordingInfoDialog.bind(this);
         this._onShortcutToggleTileView = this._onShortcutToggleTileView.bind(this);
 
@@ -529,6 +531,16 @@ class Toolbox extends Component<Props, State> {
      */
     _doToggleSharedVimeoVideo() {
         this.props.dispatch(toggleSharedVimeoVideo());
+    }
+
+    /**
+     * Dispatches an action to open control panel.
+     *
+     * @private
+     * @returns {void}
+     */
+    _doToggleOpenControlPanel() {
+        this.props.dispatch(openControlPanel());
     }
 
     /**
@@ -950,6 +962,20 @@ class Toolbox extends Component<Props, State> {
         this._doToggleSharedVimeoVideo();
     }
 
+    
+    _onToolbarOpenControlPanel: () => void;
+
+    /**
+     * Creates an analytics toolbar event and dispatches an action for opening
+     * the control panel.
+     *
+     * @private
+     * @returns {void}
+     */
+    _onToolbarOpenControlPanel() {
+        this.props.dispatch(openControlPanel());
+    }
+
     _onToolbarOpenLocalRecordingInfoDialog: () => void;
 
     /**
@@ -1172,6 +1198,13 @@ class Toolbox extends Component<Props, State> {
                 text={_sharingVimeoVideo
                     ? t('toolbar.stopVimeoSharedVideo')
                     : t('toolbar.vimeoSharedvideo')} />,
+            this._shouldShowButton('controlPanel')
+            && <OverflowMenuItem
+                accessibilityLabel={t('toolbar.accessibilityLabel.openControlPanel')}
+                icon={IconSettings}
+                key='openControlPanel'
+                onClick={this._onToolbarOpenControlPanel}
+                text={ t('toolbar.openControlPanel') } />,
             this._shouldShowButton('etherpad')
             && <SharedDocumentButton
                 key='etherpad'
