@@ -420,8 +420,14 @@ function initCommands() {
                     $('.remote-videos-container').find('span.tier-2').appendTo('.tier2User');
                     $('.remote-videos-container').find('span.tier-1').appendTo('.tier1User');
                 } else {
+                    if($('.remote-videos-container > div > span.tier-1').length) {
+                        $('.remote-videos-container > div > span.tier-1').appendTo('.tier1User');
+                    }
                     if($('.remote-videos-container > span.tier-1').length) {
                         $('.remote-videos-container > span.tier-1').appendTo('.tier1User');
+                    }
+                    if($('.remote-videos-container > div > span.tier-2').length) {
+                        $('.remote-videos-container > div > span.tier-2').appendTo('.tier2User');
                     }
                     if($('.remote-videos-container > span.tier-2').length) {
                         $('.remote-videos-container > span.tier-2').appendTo('.tier2User');
@@ -437,6 +443,27 @@ function initCommands() {
 
                     var tier2CSS = $('.tier2User span.videocontainer').attr('style').split(";").slice(0,2).join(";")+";";
                     $('.tier2User span.videocontainer').attr('style', tier2CSS);
+
+                    if(size <= 50) {
+                        var widthFor1 = $('.tier1User span').width();
+                        var heightFor2 = $('.tier2User span').height();
+    
+                        var heightForTier1 = widthFor1 * (9/16);
+                        var widthForTier2 = heightFor2 * (16/9);
+    
+                        $('.tier1User span.videocontainer').attr('style', tier1CSS+"height: "+heightForTier1+"px;min-height: "+heightForTier1+"px;");
+                        $('.tier2User span.videocontainer').attr('style', tier2CSS+"width: "+widthForTier2+"px;min-width: "+widthForTier2+"px;");
+                    } else {
+                        var heightFor1 = $('.tier1User span').height();
+                        var widthFor2 = $('.tier2User span').width();
+    
+                        var widthForTier1 = heightFor1 * (16/9);
+                        var heightForTier2 = widthFor2 * (9/16);
+    
+                        $('.tier1User span.videocontainer').attr('style', tier1CSS+"width: "+widthForTier1+"px;min-width: "+widthForTier1+"px;");
+                        $('.tier2User span.videocontainer').attr('style', tier2CSS+"height: "+heightForTier2+"px;min-height: "+heightForTier2+"px;");
+                    }
+
                 } else {
                     let clientHeight = $(document).find('body').height();
                     let clientWidth = $(document).find('body').width();
@@ -450,12 +477,32 @@ function initCommands() {
                     
                     var tier2Count = $('.tier2User span.videocontainer').length;
                     if(tier2Count <= 4) {
-                        var newHeight = (height - 200) * (100-size)/100;
+                        var newHeight = clientHeight - height - 200;
                         var width = (clientWidth/tier2Count)-40;
                         var tier2CSS = `height:${newHeight}px;min-height:${newHeight}px;width:${width}px;min-width:${width}px;`;
                         $('.tier2User span.videocontainer').attr('style', tier2CSS);
                     }
                     $('.tier2User').attr('style', 'display: flex;');
+                    
+                    if(size <= 50) {
+                        var heigthFor1 = $('.tier1User span').height();
+                        var widthFor2 = $('.tier2User span').width();
+    
+                        var widthForTier1 = heigthFor1 * (16/9);
+                        var heightForTier2 = widthFor2 * (9/16);
+    
+                        $('.tier1User span.videocontainer').attr('style', tier1CSS+"width: "+widthForTier1+"px;min-width: "+widthForTier1+"px;");
+                        $('.tier2User span.videocontainer').attr('style', tier2CSS+"height: "+heightForTier2+"px;min-height: "+heightForTier2+"px;");
+                    } else {
+                        var widthFor1 = $('.tier1User span').width();
+                        var heightFor2 = $('.tier2User span').height();
+    
+                        var heightForTier1 = widthFor1 * (9/16);
+                        var widthForTier2 = heightFor2 * (16/9);
+    
+                        $('.tier1User span.videocontainer').attr('style', tier1CSS+"height: "+heightForTier1+"px;min-height: "+heightForTier1+"px;");
+                        $('.tier2User span.videocontainer').attr('style', tier2CSS+"width: "+widthForTier2+"px;min-width: "+widthForTier2+"px;");
+                    }
                 }
                 
                 // if(layout == "vertical") {
