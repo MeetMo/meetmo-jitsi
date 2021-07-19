@@ -408,7 +408,7 @@ function initCommands() {
                 null,
                 "youtube"
             );
-            sendAnalytics(createEvent('stopped'));
+            sendAnalytics(createSharedVideoEvent('stopped'));
         },
         'update-layout': ({ layout, size }) => {
             if(layout && size) {
@@ -469,16 +469,22 @@ function initCommands() {
                     let clientWidth = $(document).find('body').width();
 
                     // $('.tier1User').css('min-height', (*size/100)+"px;");
-                    $('.tier1User').css('width', "50%");
+                    //$('.tier1User').css('width', "50%");
 
                     let height = (+clientHeight*size/100);
                     var tier1CSS = $('.tier1User span.videocontainer').attr('style')+ `height:${height}px;min-height:${height}px;`;
                     $('.tier1User span.videocontainer').attr('style', tier1CSS);
-                    
+                    var tier2CSS = "";
                     var tier2Count = $('.tier2User span.videocontainer').length;
                     if(tier2Count <= 4) {
-                        var newHeight = clientHeight - height - 200;
-                        var width = (clientWidth/tier2Count)-40;
+                        var newHeight = clientHeight - height;
+                        var width = (clientWidth/tier2Count);
+                        var tier2CSS = `height:${newHeight}px;min-height:${newHeight}px;width:${width}px;min-width:${width}px;`;
+                        $('.tier2User span.videocontainer').attr('style', tier2CSS);
+                    } else {
+                        var numberOfRows = Math.ceil(tier2Count/4); 
+                        var newHeight = (clientHeight - height)/4;
+                        var width = (clientWidth/4);
                         var tier2CSS = `height:${newHeight}px;min-height:${newHeight}px;width:${width}px;min-width:${width}px;`;
                         $('.tier2User span.videocontainer').attr('style', tier2CSS);
                     }
