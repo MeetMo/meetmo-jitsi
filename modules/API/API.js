@@ -370,11 +370,14 @@ function initCommands() {
         'unmute-audio': () => {
             $('div[aria-label="Toggle mute audio"]').trigger('click');
         },
+        'mute-video': () => {
+            if(!$('div[aria-label="Toggle mute video"]').find('div.toggled').length) {
+                $('div[aria-label="Toggle mute video"]').find('div.toggled').trigger('click');
+            }
+        },
         'unmute-video': () => {
             if($('div[aria-label="Toggle mute video"]').find('div.toggled').length) {
                 $('div[aria-label="Toggle mute video"]').find('div.toggled').trigger('click');
-            } else {
-                $('div[aria-label="Toggle mute video"]').trigger('click');
             }
         },
         'update-bg-img': ({ src }) => {

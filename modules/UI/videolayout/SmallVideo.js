@@ -542,7 +542,7 @@ export default class SmallVideo {
             logger.debug(`Displaying ${displayModeString} for ${this.id}, data: [${JSON.stringify(displayModeInput)}]`);
         }
         let nameCss = interfaceConfig.displayNameFormat;
-        if(nameCss && interfaceConfig.DEFAULT_USERNAME_DISPLAYNAME == "ON") {
+        if(nameCss && interfaceConfig.DEFAULT_USERNAME_DISPLAYNAME == "OFF") {
             $('.videocontainer __hoverOverlay').css('background', 'none');
             $('.videocontainer .displayname').attr('style', 'top: 92%;text-align: center;align-items: center;width: 25%;');
             $('.videocontainer .editdisplayname').attr('style', 'top: 92%;text-align: center;align-items: center;width: 25%;');

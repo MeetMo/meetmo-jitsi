@@ -53,6 +53,7 @@ const commands = {
     updateTier: 'update-tier',
     updateUserPosition: 'update-user-position',
     unmuteAudio: 'unmute-audio',
+    muteVideo: 'mute-video',
     unmuteVideo: 'unmute-video',
     updateBgImg: 'update-bg-img',
     shareVideo: 'share-video',
