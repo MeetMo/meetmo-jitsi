@@ -372,7 +372,7 @@ function initCommands() {
         },
         'mute-video': () => {
             if(!$('div[aria-label="Toggle mute video"]').find('div.toggled').length) {
-                $('div[aria-label="Toggle mute video"]').find('div.toggled').trigger('click');
+                $('div[aria-label="Toggle mute video"]').trigger('click');
             }
         },
         'unmute-video': () => {
@@ -414,9 +414,10 @@ function initCommands() {
             sendAnalytics(createSharedVideoEvent('stopped'));
         },
         'update-layout': ({ layout, size }) => {
-            if(layout && size) {
+            if((layout == "horizontal" || layout == "vertical") && size) {
                 size = +size;
-                if(!$('.tier1User').length) {
+                changeLayout(layout, APP.store.dispatch, size);
+                /*if(!$('.tier1User').length) {
                     $('.remote-videos-container').append('<div class="tier1User"></div>')
                     $('.remote-videos-container').append('<div class="tier2User"></div>')
                     
@@ -512,7 +513,7 @@ function initCommands() {
                         $('.tier1User span.videocontainer').attr('style', tier1CSS+"height: "+heightForTier1+"px;min-height: "+heightForTier1+"px;");
                         $('.tier2User span.videocontainer').attr('style', tier2CSS+"width: "+widthForTier2+"px;min-width: "+widthForTier2+"px;");
                     }
-                }
+                }*/
                 
                 // if(layout == "vertical") {
                 //     return changeLayout('layout-3', APP.store.dispatch, size);
