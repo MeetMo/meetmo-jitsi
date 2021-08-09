@@ -32,7 +32,7 @@ import { toggleTileView } from '../../react/features/video-layout';
 import { setVideoQuality } from '../../react/features/video-quality';
 import { getJitsiMeetTransport } from '../transport';
 import { updateSettings } from "../../react/features/base/settings";
-import { updateUserType, updateBackground } from "../../react/features/letxsoft/actions.web";
+import { updateUserType, updateBackground, updateLayoutAPI, setLayout } from "../../react/features/letxsoft/actions.web";
 import { updateLayout, changeLayout } from "../../react/features/letxsoft/functions";
 import { API_ID, ENDPOINT_TEXT_MESSAGE_NAME } from './constants';
 import UIUtil from '../../modules/UI/util/UIUtil';
@@ -412,6 +412,20 @@ function initCommands() {
                 "youtube"
             );
             sendAnalytics(createSharedVideoEvent('stopped'));
+        },
+        'change-layout': (layout) => {
+            let layoutValues = ['layout-1', 'layout-2', 'layout-3',
+            'layout-4', 'layout-5', 'layout-6', 'layout-7', 'layout-8',
+            'layout-9', 'layout-10', 'layout-11', 'layout-12', 'layout-13',
+            'layout-14', 'layout-15', 'layout-16'];
+            if(layoutValues.includes(layout)){
+                // changeLayout(layout, APP.store.dispatch);
+                
+                APP.store.dispatch(updateLayoutAPI(layout));
+                APP.store.dispatch(setLayout(layout));
+            } else {
+                console.warn("Warning! Passed layout not available kindly check it.");
+            }
         },
         'update-layout': ({ layout, size }) => {
             if((layout == "horizontal" || layout == "vertical") && size) {

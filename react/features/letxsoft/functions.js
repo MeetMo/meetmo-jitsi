@@ -24,7 +24,6 @@ let Tier2Count = 0;
  */
 export function changeLayout(layout, dispatch) {
     const _b = document.body;
-    console.log("********", layout)
     if (_b) {
         _b.classList.remove('layout-1', 'layout-2', 'layout-3',
         'layout-4', 'layout-5', 'layout-6', 'layout-7', 'layout-8',
@@ -173,19 +172,10 @@ function setNewClassDimention(userType, ele, dim) {
     const _layoutNumber = layout.replace('layout-', '');
     const tileView = getCurrentLayout(state) === 'tile-view' ? 1 : 0;
 
-    // console.log('HHHH layout =>>>', layout, userType);
-
     const { clientHeight, clientWidth } = state['features/base/responsive-ui'];
-    console.log("********* ", clientHeight, clientWidth);
     if (userType === 'tier-1' && tileView) {
-        ele.style.marginTop = `${clientHeight*0.2}px`;
-        ele.style.marginLeft = '';
-    }
-    /*if (userType === 'tier-1' && tileView) {
         
         const { _halfWidth, _halfHeight, height } = getHalfWidthHeight(_layoutNumber, clientWidth, clientHeight);
-        
-        console.log("*********", _halfWidth, _halfHeight, height);
         
         // console.log('tier-1 calculations =>',
         //     [ clientWidth, clientHeight ],
@@ -320,7 +310,7 @@ function setNewClassDimention(userType, ele, dim) {
     } else {
         ele.style.marginLeft = '';
         ele.style.marginTop = '';
-    }*/
+    }
 
     const __hi = tileView ? `${_dim[1]}px` : '',
         __wi = tileView ? `${_dim[0]}px` : '';
@@ -723,7 +713,7 @@ export function updateLocalControls() {
                                 interfaceConfig[matched[0]] : [
                                     'microphone', 'camera', 'hangup', 'closedcaptions',
                                     'chat', 'tileview', 'invite', 'security', 'fullscreen', 'fodeviceselection', 
-                                    'recording', 'desktop', 'profile', 'livestreaming', 'sharedvideo', 'etherpad',
+                                    'recording', 'desktop', 'profile', 'livestreaming', 'customlivestreaming', 'sharedvideo', 'etherpad',
                                     'background', 'layout', 'videoquality', 'settings', 'mute-everyone', 'raisehand',
                                     'shortcuts', 'stats', 'embedmeeting', 'filmstrip', 'feedback', 'stats', 'mute-video-everyone'
                                 ];

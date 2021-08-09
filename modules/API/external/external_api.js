@@ -60,7 +60,8 @@ const commands = {
     stopVideo: 'stop-video',
     updateLayout: 'update-layout',
     followMeEnabled: 'follow-me-enabled',
-    startAudioVideoMuted: 'start-audioNvideo-muted'
+    startAudioVideoMuted: 'start-audioNvideo-muted',
+    changeLayout: 'change-layout'
 };
 
 /**
