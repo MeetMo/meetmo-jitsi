@@ -46,7 +46,6 @@ export function changeLayout(layout, dispatch) {
 export function updateLayout() {
     TIER_COUNT = 0;
     Tier2Count = 0;
-    console.log("******** HERE");
     // Set class for local video.
     // If the layout is not there, skip the dimension.
     if (!document) {
@@ -54,8 +53,6 @@ export function updateLayout() {
     }
     const state = APP.store.getState();
     const tileView = getCurrentLayout(state) === 'tile-view' ? 1 : 0;
-    
-    console.log("******** TEST", tileView);
     if (document.body.classList.value.indexOf('layout-') === -1) {
         updateYoutubeIframe();
         if (tileView) {
@@ -147,7 +144,6 @@ function setNewClassDimention(userType, ele, dim) {
     if (!ele) {
         return;
     }
-    console.log('BOOOOOOO', userType);
     let _dim = dim;
     const state = APP.store.getState();
 
@@ -426,21 +422,16 @@ function getVideoDimentions() {
     let _h = parseInt(_w * (9 / 16), 10);
 
     // Check if the height of the screen can fit the tier-2 videos
-    console.log('desired width and height', whDivident, [ _w, _h ], _h * whDivident[1], hei, wid);
     if ((_h + 10) * whDivident[1] > hei) {
         _h = parseInt((hei / whDivident[1]) - 6, 10);
         _w = parseInt(_h * (16 / 9), 10);
     }
-    console.log('refined width and height', whDivident, [ _w, _h ], _h * whDivident[1], hei, wid);
-
 
     if ([ 'layout-1', 'layout-2', 'layout-3', undefined, 'layout-5', 'layout-6', 'layout-7', 'layout-8', 'layout-11',
         'layout-12', 'layout-14', 'layout-15', 'layout-16' ].includes(layout)) {
         // Get the top margin.
         const th = (hei - ((_h + 6) * whDivident[1])) / 2;
         const tw = (wid - ((_w + 10) * whDivident[0])) / 2;
-
-        console.log(' Layout 1', wid, hei, _w, _h, th, tw, whDivident[1]);
 
         // Done' apply margin top to layout-16
         if (![ 'layout-16' ].includes(layout)) {
@@ -486,7 +477,6 @@ function getVideoDimentions() {
         frvc.style.height = `${hei}px`;
         DT_MARGIN = (frvc.offsetHeight - (whDivident[1] * _h)) / ((whDivident[1] * 2) - 2);
     }
-    console.log('width and height of the container ', (_w + 5) * whDivident[0], (_h + 5) * whDivident[1]);
 
     // Set the dynamic margin top for tier 2 users
 
@@ -714,8 +704,8 @@ export function updateLocalControls() {
                                     'microphone', 'camera', 'hangup', 'closedcaptions',
                                     'chat', 'tileview', 'invite', 'security', 'fullscreen', 'fodeviceselection', 
                                     'recording', 'desktop', 'profile', 'livestreaming', 'customlivestreaming', 'sharedvideo', 'etherpad',
-                                    'background', 'layout', 'videoquality', 'settings', 'mute-everyone', 'raisehand',
-                                    'shortcuts', 'stats', 'embedmeeting', 'filmstrip', 'feedback', 'stats', 'mute-video-everyone'
+                                    'background', 'changelayout', 'videoquality', 'settings', 'mute-everyone', 'raisehand',
+                                    'shortcuts', 'stats', 'embedmeeting', 'filmstrip', 'feedback', 'stats', 'mute-video-everyone', 'controlpanel', 'sharedvideo', 'sharevimeovideo'
                                 ];
         interfaceConfig.SETTINGS_SECTIONS = settingsSections;
     }

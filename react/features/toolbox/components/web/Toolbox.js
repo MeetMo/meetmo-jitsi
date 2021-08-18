@@ -1189,13 +1189,13 @@ class Toolbox extends Component<Props, State> {
                 key='sharedvideo'
                 onClick={this._onToolbarToggleSharedVideo}
                 text={_sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo')} />,
-            this._shouldShowButton('sharedvideo')
+            this._shouldShowButton('sharevimeovideo')
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.vimeoSharedvideo')}
                 disabled={_sharingVideo}
                 icon={iconShareVideo}
                 iconFromURL={iconShareVideoFromURL}
-                key='vimeoSharedvideo'
+                key='sharevimeovideo'
                 onClick={this._onToolbarToggleVimeoSharedVideo}
                 text={_sharingVimeoVideo
                     ? t('toolbar.stopVimeoSharedVideo')
@@ -1283,7 +1283,7 @@ class Toolbox extends Component<Props, State> {
         );
         let iconLayoutFromURL = !isEmpty(iconDataChangeLayout);
         
-        return this._shouldShowButton('layout') && _isModerator
+        return this._shouldShowButton('changelayout') && _isModerator
             ? 
             <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.changeLayout')}
@@ -1311,7 +1311,7 @@ class Toolbox extends Component<Props, State> {
         );
         let iconControlPanelFromURL = !isEmpty(iconDataControlPanel);
         
-        return this._shouldShowButton('layout') && _isModerator
+        return this._shouldShowButton('controlpanel') && _isModerator
             ? 
             <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.controlPanel')}

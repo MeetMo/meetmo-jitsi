@@ -417,10 +417,10 @@ function initCommands() {
             let layoutValues = ['layout-1', 'layout-2', 'layout-3',
             'layout-4', 'layout-5', 'layout-6', 'layout-7', 'layout-8',
             'layout-9', 'layout-10', 'layout-11', 'layout-12', 'layout-13',
-            'layout-14', 'layout-15', 'layout-16'];
+            'layout-14', 'layout-15', 'layout-16', 'default'];
             if(layoutValues.includes(layout)){
                 // changeLayout(layout, APP.store.dispatch);
-                
+                layout = layout == 'default' ? '' : layout;
                 APP.store.dispatch(updateLayoutAPI(layout));
                 APP.store.dispatch(setLayout(layout));
             } else {
