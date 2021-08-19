@@ -1178,7 +1178,7 @@ class Toolbox extends Component<Props, State> {
                 key='record'
                 showLabel={true} />,
             this._renderLayoutButton(),
-            this._renderControlPanelButton(),
+            // this._renderControlPanelButton(),
             this._renderBackgroundButton(),
             this._shouldShowButton('sharedvideo')
             && <OverflowMenuItem
@@ -1200,7 +1200,7 @@ class Toolbox extends Component<Props, State> {
                 text={_sharingVimeoVideo
                     ? t('toolbar.stopVimeoSharedVideo')
                     : t('toolbar.vimeoSharedvideo')} />,
-            this._shouldShowButton('controlPanel')
+            this._shouldShowButton('controlpanel')
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.openControlPanel')}
                 icon={IconSettings}
