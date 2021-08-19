@@ -107,7 +107,7 @@ function _mapStateToProps(state: Object, ownProps: Props) {
     let { visible } = ownProps;
 
     if (typeof visible === 'undefined') {
-        visible = interfaceConfig.TOOLBAR_BUTTONS.includes('livestreaming') && abstractProps.visible;
+        visible = interfaceConfig.TOOLBAR_BUTTONS.includes('customlivestreaming') && abstractProps.visible;
     }
 
     return {

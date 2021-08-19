@@ -703,7 +703,7 @@ export function updateLocalControls() {
                                 interfaceConfig[matched[0]] : [
                                     'microphone', 'camera', 'hangup', 'closedcaptions',
                                     'chat', 'tileview', 'invite', 'security', 'fullscreen', 'fodeviceselection', 
-                                    'recording', 'desktop', 'profile', 'livestreaming', 'sharedvideo', 'etherpad',
+                                    'recording', 'desktop', 'profile', 'livestreaming', 'customlivestreaming', 'sharedvideo', 'etherpad',
                                     'background', 'changelayout', 'videoquality', 'settings', 'mute-everyone', 'raisehand',
                                     'shortcuts', 'stats', 'embedmeeting', 'filmstrip', 'feedback', 'stats', 'mute-video-everyone', 'controlpanel', 'sharedvideo', 'sharevimeovideo'
                                 ];
