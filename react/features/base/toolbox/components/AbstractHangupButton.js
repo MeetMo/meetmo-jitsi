@@ -16,7 +16,7 @@ export default class AbstractHangupButton<P : Props, S: *>
 
     // icon = IconHangup;
     iconData = get(interfaceConfig, ["meetmoIcons", "hangup"], {})
-    icon = !isEmpty(this.iconData) ? < ReactSVG style = {
+    icon = !isEmpty(this.iconData) && this.iconData.active_svg ? < ReactSVG style = {
         {
             width: '50px',
             height: '50px'
