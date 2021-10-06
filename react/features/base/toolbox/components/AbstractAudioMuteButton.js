@@ -18,7 +18,7 @@ declare var interfaceConfig: Object;
 export default class AbstractAudioMuteButton<P: Props, S: *>
     extends AbstractButton<P, S> {
     iconData = get(interfaceConfig, ["meetmoIcons", "microphone"], {});
-    icon = !isEmpty(this.iconData) ? (
+    icon = !isEmpty(this.iconData) && this.iconData.active_svg ? (
         <IconFromConfig
             configuration={this.iconData}
             style={{
@@ -31,7 +31,7 @@ export default class AbstractAudioMuteButton<P: Props, S: *>
     ) : (
         IconMicrophone
     );
-    toggledIcon = !isEmpty(this.iconData) ? (
+    toggledIcon = !isEmpty(this.iconData) && this.iconData.inactive_svg ? (
         <IconFromConfig
             configuration={this.iconData}
             iconKey="inactive_svg"

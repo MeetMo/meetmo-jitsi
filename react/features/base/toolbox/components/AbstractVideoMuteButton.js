@@ -10,6 +10,16 @@ import { IconCamera, IconCameraDisabled } from '../../icons';
 import AbstractButton from './AbstractButton';
 import type { Props } from './AbstractButton';
 
+// interfaceConfig['meetmoIcons'] = {
+//     "camera":{
+//         "active_svg":"https://meetmo-fox-dev.s3.amazonaws.com/uploads/e92ad5a8-6da9-4fe4-ae9f-d276cb3b1c5d.svg",
+//         "svg_active_color":"rgba(112,166,166,1)",
+//         "svg_inactive_color":"rgba(255,255,255,1)",
+//         "button_active_color":"rgba(27,57,68,1)",
+//         "button_inactive_color":"rgba(255,23,89,1)",
+//         "hover_effect":"lighter",       
+//     }
+// }
 /**
  * An abstract implementation of a button for toggling video mute.
  */
@@ -17,7 +27,7 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
     extends AbstractButton<P, S> {
     
     iconData = get(interfaceConfig, ["meetmoIcons", "camera"], {});
-    icon = !isEmpty(this.iconData) ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_active_color,'padding': '5px','borderRadius': '100px'}}>< ReactSVG style = {
+    icon = !isEmpty(this.iconData) && this.iconData.active_svg ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_active_color,'padding': '5px','borderRadius': '100px'}}>< ReactSVG style = {
         {
             width: '32px',
             height: '32px'
@@ -38,7 +48,7 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
         }
     }
     /></div> : IconCamera;
-    toggledIcon = !isEmpty(this.iconData) ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_inactive_color,'padding': '5px','borderRadius': '100px'}}>
+    toggledIcon = !isEmpty(this.iconData) && this.iconData.inactive_svg ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_inactive_color,'padding': '5px','borderRadius': '100px'}}>
     < ReactSVG style = {
         {
             width: '32px',
