@@ -27,7 +27,7 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
     extends AbstractButton<P, S> {
     
     iconData = get(interfaceConfig, ["meetmoIcons", "camera"], {});
-    icon = !isEmpty(this.iconData) && this.iconData.active_svg ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_active_color,'padding': '5px','borderRadius': '100px'}}>< ReactSVG style = {
+    icon = !isEmpty(this.iconData) && this.iconData.active_svg ? <div className={this.iconData.hover_effect} style={{'backgroundColor': this.iconData.button_active_color,'padding': '5px','borderRadius': '100px'}}>< ReactSVG style = {
         {
             width: '32px',
             height: '32px'
@@ -40,15 +40,15 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
         (svg) => {
             svg.classList.add('mic-icon-active');
             svg.classList.add(this.iconData.hover_effect);
-            svg.setAttribute("fill", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
-            svg.setAttribute("stroke", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+            svg.setAttribute("fill", iconKey != 'inactive_svg' ? this.iconData.svg_active_color : this.iconData.svg_inactive_color);
+            svg.setAttribute("stroke", iconKey != 'inactive_svg' ? this.iconData.svg_active_color : this.iconData.svg_inactive_color);
             svg.setAttribute("width", '32');
             svg.setAttribute("height", '32');
             svg.style.pointerEvents = "none";
         }
     }
     /></div> : IconCamera;
-    toggledIcon = !isEmpty(this.iconData) && this.iconData.inactive_svg ? <div className={configuration.hover_effect} style={{'backgroundColor': configuration.button_inactive_color,'padding': '5px','borderRadius': '100px'}}>
+    toggledIcon = !isEmpty(this.iconData) && this.iconData.inactive_svg ? <div className={this.iconData.hover_effect} style={{'backgroundColor': this.iconData.button_inactive_color,'padding': '5px','borderRadius': '100px'}}>
     < ReactSVG style = {
         {
             width: '32px',
