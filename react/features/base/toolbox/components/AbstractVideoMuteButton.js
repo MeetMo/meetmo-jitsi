@@ -40,8 +40,8 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
         (svg) => {
             svg.classList.add('mic-icon-active');
             svg.classList.add(this.iconData.hover_effect);
-            svg.setAttribute("fill", iconKey != 'inactive_svg' ? this.iconData.svg_active_color : this.iconData.svg_inactive_color);
-            svg.setAttribute("stroke", iconKey != 'inactive_svg' ? this.iconData.svg_active_color : this.iconData.svg_inactive_color);
+            svg.setAttribute("fill", this.iconData.svg_active_color);
+            // svg.setAttribute("stroke", this.iconData.svg_active_color);
             svg.setAttribute("width", '32');
             svg.setAttribute("height", '32');
             svg.style.pointerEvents = "none";
@@ -63,7 +63,7 @@ export default class AbstractVideoMuteButton<P : Props, S : *>
             svg.classList.add('mic-icon-inactive')
             svg.classList.add(this.iconData.hover_effect)
             svg.setAttribute('fill', this.iconData.svg_inactive_color)
-            svg.setAttribute('stroke', this.iconData.svg_inactive_color)
+            // svg.setAttribute('stroke', this.iconData.svg_inactive_color)
             svg.setAttribute("width", '32');
             svg.setAttribute("height", '32');
             svg.style.pointerEvents = "none";

@@ -18,33 +18,50 @@ declare var interfaceConfig: Object;
 export default class AbstractAudioMuteButton<P: Props, S: *>
     extends AbstractButton<P, S> {
     iconData = get(interfaceConfig, ["meetmoIcons", "microphone"], {});
-    icon = !isEmpty(this.iconData) && this.iconData.active_svg ? (
-        <IconFromConfig
-            configuration={this.iconData}
-            style={{
-                width: "32px",
-                height: "32px",
-                svgWidth: "32",
-                svgHeight: "32",
-            }}
-        />
-    ) : (
-        IconMicrophone
-    );
-    toggledIcon = !isEmpty(this.iconData) && this.iconData.inactive_svg ? (
-        <IconFromConfig
-            configuration={this.iconData}
-            iconKey="inactive_svg"
-            style={{
-                width: "32px",
-                height: "32px",
-                svgWidth: "32",
-                svgHeight: "32",
-            }}
-        />
-    ) : (
-        IconMicDisabled
-    );
+    
+    icon = !isEmpty(this.iconData) ? <div className={this.iconData.hover_effect} style={{'backgroundColor': this.iconData.button_active_color,'padding': '5px','borderRadius': '100px'}}>< ReactSVG style = {
+        {
+            width: '32px',
+            height: '32px'
+        }
+    }
+    src = {
+        this.iconData.active_svg
+    }
+    beforeInjection = {
+        (svg) => {
+            svg.classList.add('mic-icon-active');
+            svg.classList.add(this.iconData.hover_effect);
+            svg.setAttribute("fill", this.iconData.svg_active_color);
+            // svg.setAttribute("stroke", this.iconData.svg_active_color);
+            svg.setAttribute("width", '32');
+            svg.setAttribute("height", '32');
+            svg.style.pointerEvents = "none";
+        }
+    }
+    /></div> : IconMicrophone;
+    toggledIcon = !isEmpty(this.iconData) ? <div className={this.iconData.hover_effect} style={{'backgroundColor': this.iconData.button_inactive_color,'padding': '5px','borderRadius': '100px'}}>
+    <ReactSVG style = {
+        {
+            width: '32px',
+            height: '32px'
+        }
+    }
+    src = {
+        this.iconData.inactive_svg
+    }
+    beforeInjection = {
+        (svg) => {
+            svg.classList.add('mic-icon-inactive');
+            svg.classList.add(this.iconData.hover_effect);
+            svg.setAttribute('fill', this.iconData.svg_inactive_color);
+            // svg.setAttribute('stroke', this.iconData.svg_inactive_color);
+            svg.setAttribute("width", '32');
+            svg.setAttribute("height", '32');
+            svg.style.pointerEvents = "none";
+        }
+    }
+    /></div> : IconMicDisabled;
     iconFromURL = !isEmpty(this.iconData);
 
 
