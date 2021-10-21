@@ -93,6 +93,8 @@ import OverflowMenuProfileItem from './OverflowMenuProfileItem';
 import ToolbarButton from './ToolbarButton';
 import VideoSettingsButton from './VideoSettingsButton';
 
+
+
 /**
  * The type of the React {@code Component} props of {@link Toolbox}.
  */
@@ -224,6 +226,57 @@ type State = {
 
 declare var APP: Object;
 declare var interfaceConfig: Object;
+
+interfaceConfig['meetmoIcons'] = {
+    "control_panel": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "share_video": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "change_layout": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "livestreaming": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "speaker-stats": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "embed_meeting": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "short_cuts": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    },
+    "feedback": {
+        "active_svg": "https://meetmo-fox-dev.s3.amazonaws.com/uploads/521589e4-78aa-4874-8420-0a2060c066c6.svg",
+        "svg_active_color": "#ff9900",           
+        "button_active_color": "#ff9900",
+        "hover_effect": "darker"
+    }
+}
 
 // XXX: We are not currently using state here, but in the future, when
 // interfaceConfig is part of redux we will. This will have to be retrieved from the store.
@@ -1111,7 +1164,7 @@ class Toolbox extends Component<Props, State> {
         // Share Video
         const iconDataShareVideo = get(interfaceConfig, ["meetmoIcons", "share_video"], {});
         const iconShareVideo = !isEmpty(iconDataShareVideo) ? (
-            <IconFromConfig configuration={iconDataShareVideo} />
+            <IconFromConfig configuration={iconDataShareVideo} isMoreBtn={true} />
         ) : (
             IconShareVideo
         );
@@ -1119,7 +1172,7 @@ class Toolbox extends Component<Props, State> {
         // Embeded Meeting : Code block
         const iconDataEmbedMeeting = get(interfaceConfig, ["meetmoIcons", "embed_meeting"], {});
         const iconEmbedMeeting = !isEmpty(iconDataEmbedMeeting) ? (
-            <IconFromConfig configuration={iconDataEmbedMeeting} />
+            <IconFromConfig configuration={iconDataEmbedMeeting} isMoreBtn={true}/>
         ) : (
             IconCodeBlock
         );
@@ -1127,7 +1180,7 @@ class Toolbox extends Component<Props, State> {
         // Feedback
         const iconDataFeedback = get(interfaceConfig, ["meetmoIcons", "feedback"], {});
         const iconFeedback = !isEmpty(iconDataFeedback) ? (
-            <IconFromConfig configuration={iconDataFeedback} />
+            <IconFromConfig configuration={iconDataFeedback} isMoreBtn={true}/>
         ) : (
             IconFeedback
         );
@@ -1135,7 +1188,7 @@ class Toolbox extends Component<Props, State> {
         // Short cuts
         const iconDataShortcuts = get(interfaceConfig, ["meetmoIcons", "short_cuts"], {});
         const iconShortcuts = !isEmpty(iconDataShortcuts) ? (
-            <IconFromConfig configuration={iconDataShortcuts} />
+            <IconFromConfig configuration={iconDataShortcuts} isMoreBtn={true}/>
         ) : (
             IconOpenInNew
         );
@@ -1143,11 +1196,20 @@ class Toolbox extends Component<Props, State> {
         // Short cuts
         const iconDataSpeakerstat = get(interfaceConfig, ["meetmoIcons", "speaker_stats"], {});
         const iconSpeakerStat = !isEmpty(iconDataSpeakerstat) ? (
-            <IconFromConfig configuration={iconDataSpeakerstat} />
+            <IconFromConfig configuration={iconDataSpeakerstat} isMoreBtn={true}/>
         ) : (
             IconOpenInNew
         );
         let iconSpeakerStatFromURL = !isEmpty(iconDataSpeakerstat);
+        
+        // Short cuts
+        const iconDataControlPanel = get(interfaceConfig, ["meetmoIcons", "control_panel"], {});
+        const iconControlPanel = !isEmpty(iconDataControlPanel) ? (
+            <IconFromConfig configuration={iconDataControlPanel} isMoreBtn={true}/>
+        ) : (
+            IconSettings
+        );
+        let iconControlPanelFromURL = !isEmpty(iconDataControlPanel);
         
         return [
             this._isProfileVisible()
@@ -1203,7 +1265,8 @@ class Toolbox extends Component<Props, State> {
             this._shouldShowButton('controlpanel')
             && <OverflowMenuItem
                 accessibilityLabel={t('toolbar.accessibilityLabel.openControlPanel')}
-                icon={IconSettings}
+                icon={iconControlPanel}
+                iconFromURL={iconControlPanelFromURL}
                 key='openControlPanel'
                 onClick={this._onToolbarOpenControlPanel}
                 text={ t('toolbar.openControlPanel') } />,
@@ -1277,7 +1340,7 @@ class Toolbox extends Component<Props, State> {
         // Change Layout
         const iconDataChangeLayout = get(interfaceConfig, ["meetmoIcons", "change_layout"], {});
         const iconLayoutChange = !isEmpty(iconDataChangeLayout) ? (
-            <IconFromConfig configuration={iconDataChangeLayout} />
+            <IconFromConfig configuration={iconDataChangeLayout} isMoreBtn={true}/>
         ) : (
             IconLayoutChange
         );
@@ -1305,7 +1368,7 @@ class Toolbox extends Component<Props, State> {
         // Change Layout
         const iconDataControlPanel = get(interfaceConfig, ["meetmoIcons", "control_panel"], {});
         const iconControlPanel = !isEmpty(iconDataControlPanel) ? (
-            <IconFromConfig configuration={iconDataControlPanel} />
+            <IconFromConfig configuration={iconDataControlPanel} isMoreBtn={true}/>
         ) : (
             IconLayoutChange
         );
@@ -1333,7 +1396,7 @@ class Toolbox extends Component<Props, State> {
         // Background Image
         const iconDataBgChange = get(interfaceConfig, ["meetmoIcons", "background_change"], {});
         const iconBackgroundChange = !isEmpty(iconDataBgChange) ? (
-            <IconFromConfig configuration={iconDataBgChange} />
+            <IconFromConfig configuration={iconDataBgChange} isMoreBtn={true}/>
         ) : (
             IconBackgroundChange
         );
@@ -1473,7 +1536,7 @@ class Toolbox extends Component<Props, State> {
                     // Local Recording
                     const iconDataLocalRec = get(interfaceConfig, ["meetmoIcons", "local_record"], {});
                     const iconRec = !isEmpty(iconDataLocalRec) ? (
-                        <IconFromConfig configuration={iconDataLocalRec} />
+                        <IconFromConfig configuration={iconDataLocalRec} isMoreBtn={true}/>
                     ) : (
                         IconRec
                     );

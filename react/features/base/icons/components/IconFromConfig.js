@@ -43,7 +43,7 @@ type Props = {
  * @returns {Reactelement}
  */
 export default function IconFromConfig(props: Props) {
-    const { configuration, iconKey, className, style } = props;
+    const { configuration, iconKey, className, style, isMoreBtn } = props;
     const {
         svgWidth = "32",
         svgHeight = "32",
@@ -53,20 +53,41 @@ export default function IconFromConfig(props: Props) {
     if (isEmpty(configuration)) return null;
     
     return (
-        <div className={configuration.hover_effect} style={{'backgroundColor': (iconKey != 'inactive_svg' ? configuration.button_active_color : configuration.button_inactive_color),'padding': '5px','borderRadius': '100px'}}>
-            <ReactSVG
-                className={className}
-                style={restStyle}
-                src={configuration[iconKey]}
-                beforeInjection={(svg) => {
-                    svg.classList.add(configuration.hover_effect);
-                    svg.setAttribute("fill", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
-                    svg.setAttribute("stroke", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
-                    svg.setAttribute("width", svgWidth);
-                    svg.setAttribute("height", svgHeight);
-                    svg.style.pointerEvents = "none";
-                }}
-            />
+        <div>
+            { 
+                isMoreBtn ?
+                    <div className={configuration.hover_effect}>
+                        <ReactSVG
+                            className={className}
+                            style={restStyle}
+                            src={configuration[iconKey]}
+                            beforeInjection={(svg) => {
+                                svg.classList.add(configuration.hover_effect);
+                                svg.setAttribute("fill", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+                                svg.setAttribute("stroke", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+                                svg.setAttribute("width", svgWidth);
+                                svg.setAttribute("height", svgHeight);
+                                svg.style.pointerEvents = "none";
+                            }}
+                        />
+                    </div>
+                :
+                <div className={configuration.hover_effect} style={{'backgroundColor': (iconKey != 'inactive_svg' ? configuration.button_active_color : configuration.button_inactive_color),'padding': '5px','borderRadius': '100px'}}>
+                    <ReactSVG
+                        className={className}
+                        style={restStyle}
+                        src={configuration[iconKey]}
+                        beforeInjection={(svg) => {
+                            svg.classList.add(configuration.hover_effect);
+                            svg.setAttribute("fill", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+                            svg.setAttribute("stroke", iconKey != 'inactive_svg' ? configuration.svg_active_color : configuration.svg_inactive_color);
+                            svg.setAttribute("width", svgWidth);
+                            svg.setAttribute("height", svgHeight);
+                            svg.style.pointerEvents = "none";
+                        }}
+                    />
+                </div>
+            }
         </div>
     );
 }

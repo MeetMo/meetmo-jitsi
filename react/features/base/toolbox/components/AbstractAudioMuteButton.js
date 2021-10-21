@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { get, isEmpty } from 'lodash';
+import { ReactSVG } from 'react-svg';
 
 import { IconFromConfig } from "../../../base/icons";
 
