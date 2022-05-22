@@ -42,6 +42,7 @@ var config = {
     // focusUserJid: 'focus@auth.jitsi-meet.example.com',
 
 
+    enableUnifiedOnChrome:true,
     // Testing / experimental features.
     //
 
@@ -400,7 +401,7 @@ var config = {
         // 3rd participant joins the conference will be moved back to the JVB
         // connection.
         enabled: true,
-
+        enableUnifiedOnChrome:true,
         // Use XEP-0215 to fetch STUN and TURN servers.
         // useStunTurn: true,
 
